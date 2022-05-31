@@ -9,7 +9,8 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 * **Agustín Murseli** - [amurseli](https://github.com/amurseli)
 * **Julio Mateo Fernandéz** - [MateoF01](https://github.com/MateoF01)
 * **Leticia Isabel Aab** - [LetiAab](https://github.com/LetiAab)
-* **Integrante 4** - [integrante4](https://github.com/integrante4)
+* **Santiago Nicolás Penalva** - [spenalva1](https://github.com/Spenalva1)
+* **Integrante 5** - [integrante4](https://github.com/integrante4)
 
 Corrector: **{Corrector}**
 
