@@ -10,7 +10,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 * **Julio Mateo Fernandéz** - [MateoF01](https://github.com/MateoF01)
 * **Leticia Isabel Aab** - [LetiAab](https://github.com/LetiAab)
 * **Santiago Nicolás Penalva** - [spenalva1](https://github.com/Spenalva1)
-* **Integrante 5** - [integrante4](https://github.com/integrante4)
+* **Jackson Puentes** - [JacksonPuentes](https://github.com/JacksonPuentes)
 
 Corrector: **{Corrector}**
 
