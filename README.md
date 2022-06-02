@@ -4,7 +4,7 @@
 
 Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUBA
 
-## Grupo {N}
+## Grupo 11
 
 * **Agustín Murseli** - [amurseli](https://github.com/amurseli)
 * **Julio Mateo Fernandéz** - [MateoF01](https://github.com/MateoF01)
