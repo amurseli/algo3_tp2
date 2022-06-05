@@ -6,10 +6,9 @@ public class CasosDeUso {
 
     @Test
     public void Test01MotoPasaPorUnPozoYEsPenalizadaEnTresMovimientos(){
-        //Juego juego = new Juego();
-        Ciudad c = new Ciudad();
+        Juego juego = new Juego();
 
-
+        juego.moverDerecha();
 
         //assertEquals();
 
