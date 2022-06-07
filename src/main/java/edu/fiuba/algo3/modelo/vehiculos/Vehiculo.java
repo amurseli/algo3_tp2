@@ -45,11 +45,11 @@ public abstract class Vehiculo {
         this.sumarMovimientos(1);
         this.asignarPosicion(e);
     }
-    public abstract Vehiculo aplicarEfecto(Pozo e);
-    public abstract Vehiculo aplicarEfecto(Piquete e);
-    public abstract Vehiculo aplicarEfecto(ControlPolicial e);
-    public abstract Vehiculo aplicarEfecto(SorpresaFavorable e);
-    public abstract Vehiculo aplicarEfecto(SorpresaDesfavorable e);
+    public abstract void aplicarEfecto(Pozo e);
+    public abstract void aplicarEfecto(Piquete e);
+    public abstract void aplicarEfecto(ControlPolicial e);
+    public abstract void aplicarEfecto(SorpresaFavorable e);
+    public abstract void aplicarEfecto(SorpresaDesfavorable e);
     public abstract Vehiculo aplicarEfecto(CambioDeVehiculo e);
     private void asignarPosicion(Esquina p) {
         this.posicionAnterior = this.posicion;

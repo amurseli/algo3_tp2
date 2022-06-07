@@ -17,6 +17,15 @@ public class Juego {
     public void moverDerecha() {
         ciudad.moverDerecha();
     }
+    public void moverIzquierda() {
+        ciudad.moverIzquierda();
+    }
+    public void moverArriba() {
+        ciudad.moverArriba();
+    }
+    public void moverAbajo() {
+        ciudad.moverAbajo();
+    }
 
 
     public int obtenerMovimientosRealizados() {

@@ -19,35 +19,38 @@ public class Auto extends Vehiculo {
     }
 
     @Override
-    public Vehiculo aplicarEfecto(Pozo e) {
+    public void aplicarEfecto(Pozo e) {
         this.sumarMovimientos(3);
-        return this;
+
     }
 
     @Override
-    public Vehiculo aplicarEfecto(Piquete e) {
-        return this;
+    public void aplicarEfecto(Piquete e) {
+
+
     }
 
     @Override
-    public Vehiculo aplicarEfecto(ControlPolicial e) {
+    public void aplicarEfecto(ControlPolicial e) {
         int maximo = 10;
         int numero = (int) (Math.random() * maximo +1);
 
         if (numero <= 3){
             this.sumarMovimientos(3);
         }
-        return this;
+
     }
 
     @Override
-    public Vehiculo aplicarEfecto(SorpresaFavorable e) {
-        return this;
+    public void aplicarEfecto(SorpresaFavorable e) {
+
+
     }
 
     @Override
-    public Vehiculo aplicarEfecto(SorpresaDesfavorable e) {
-        return this;
+    public void aplicarEfecto(SorpresaDesfavorable e) {
+
+
     }
 
     @Override

@@ -13,9 +13,13 @@ public class Jugador {
         return this.vehiculo.obtenerMovimientosRealizados();
     }
     public void aplicarEfecto(Pozo pozo) {
-        this.vehiculo = this.vehiculo.aplicarEfecto(pozo);
+
+        this.vehiculo.aplicarEfecto(pozo);
     }
-    public void aplicarEfecto(ControlPolicial control) {this.vehiculo = this.vehiculo.aplicarEfecto(control);}
+    public void aplicarEfecto(ControlPolicial control) {
+
+        this.vehiculo.aplicarEfecto(control);
+    }
 
     public void moverDerecha() {
         vehiculo.moverDerecha();
