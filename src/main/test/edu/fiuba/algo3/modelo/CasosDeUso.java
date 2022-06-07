@@ -46,6 +46,7 @@ public class CasosDeUso {
     public void Test04Un4x4PasaPor3PozosYEsPenalizado(){
         Juego juego = new Juego();
         juego.crearCiudad(10,10, new Esquina(1,10), new CuatroPorCuatro(new Esquina(1,5)));
+
         juego.agregarEfecto(new Pozo(new Camino(new Esquina(1,5),new Esquina(1,6))));
         juego.agregarEfecto(new Pozo(new Camino(new Esquina(1,6),new Esquina(1,7))));
         juego.agregarEfecto(new Pozo(new Camino(new Esquina(1,7),new Esquina(1,8))));
@@ -102,6 +103,7 @@ public class CasosDeUso {
             juego.agregarEfecto(new ControlPolicial(new Camino(new Esquina(1,i),new Esquina(1,i+1))));
             juego.moverDerecha();
         }
+
         int movimientosHechos = 9899;
         double controlesEsperados = movimientosHechos * 0.8 * 3;
         double esperado = movimientosHechos + controlesEsperados;
@@ -110,4 +112,6 @@ public class CasosDeUso {
         Assertions.assertTrue(juego.obtenerMovimientosRealizados() < (esperado + esperado*5/100)
                 && juego.obtenerMovimientosRealizados() > (esperado - esperado*5/100));
     }
+
+
 }
