@@ -17,11 +17,13 @@ public abstract class Vehiculo {
         this.posicion = posicion;
         this.movimientos = 0;
     }
+    /*
     public Vehiculo(Esquina posicion, Esquina posicionAnterior, int movimientos) {
         this.posicion = posicion;
         this.posicionAnterior = posicionAnterior;
         this.movimientos = movimientos;
-    }
+    }*/
+
     public int obtenerMovimientosRealizados() {
         return this.movimientos;
     }
@@ -58,7 +60,10 @@ public abstract class Vehiculo {
     protected void sumarMovimientos(int m) {
         this.movimientos += m;
     }
+
+    //TODO: noc q es esto asi q lo comento pq no se usa
+    /*
     protected void sumarMovimientosPorcentaje(int p) {
         this.movimientos = (int)Math.floor(this.movimientos * (p / 100 + 1));
-    }
+    }*/
 }

@@ -15,9 +15,11 @@ public class CuatroPorCuatro extends Vehiculo {
         super(e);
     }
 
+//TODO: Para cuando tengamos las sorpresas hechas
+    /*
     public CuatroPorCuatro(Esquina posicion, Esquina posicionAnterior, int movimientos) {
         super(posicion, posicionAnterior, movimientos);
-    }
+    }*/
 
     @Override
     public void aplicarEfecto(Pozo e) {
