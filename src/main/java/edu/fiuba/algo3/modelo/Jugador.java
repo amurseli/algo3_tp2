@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.Vehiculo;
+import edu.fiuba.algo3.modelo.efectos.obstaculos.ControlPolicial;
+import edu.fiuba.algo3.modelo.efectos.obstaculos.Pozo;
+import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 
 public class Jugador {
     Vehiculo vehiculo;
@@ -13,6 +15,8 @@ public class Jugador {
     public void aplicarEfecto(Pozo pozo) {
         this.vehiculo = this.vehiculo.aplicarEfecto(pozo);
     }
+    public void aplicarEfecto(ControlPolicial control) {this.vehiculo = this.vehiculo.aplicarEfecto(control);}
+
     public void moverDerecha() {
         vehiculo.moverDerecha();
     }

@@ -1,6 +1,8 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.efectos.obstaculos;
 
-import edu.fiuba.algo3.modelo.Efecto;
+import edu.fiuba.algo3.modelo.Camino;
+import edu.fiuba.algo3.modelo.efectos.Efecto;
+import edu.fiuba.algo3.modelo.Jugador;
 
 public class Obstaculo extends Efecto {
 
