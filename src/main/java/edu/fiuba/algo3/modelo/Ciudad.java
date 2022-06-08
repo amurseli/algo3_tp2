@@ -23,7 +23,7 @@ public class Ciudad {
     }
     public void moverDerecha() {
         p1.moverDerecha();
-        this.aplicarEfectos();
+        p1.aplicarEfectos(efectos);
     }
     public void moverIzquierda() {
         p1.moverIzquierda();
@@ -44,15 +44,4 @@ public class Ciudad {
     }
     */
 
-
-    private void aplicarEfectos() {
-        //TODO: ESTO ESTA MAL, LA COMPARACION DE ESTOY PASANDO POR UN EFECTO DEBERIA SER EN OTRO LADO. REFACTOR
-        Camino camino = new Camino(p1.vehiculo.posicionAnterior, p1.vehiculo.posicion);
-
-        for (Efecto efecto: efectos) {
-            if (camino.equals(efecto.obtenerPosicion())) {
-                efecto.aplicarEfecto(this.p1);
-            }
-        }
-    }
 }
