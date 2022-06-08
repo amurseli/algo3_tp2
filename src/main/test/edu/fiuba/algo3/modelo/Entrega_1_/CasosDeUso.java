@@ -1,5 +1,8 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Entrega_1_;
 
+import edu.fiuba.algo3.modelo.Camino;
+import edu.fiuba.algo3.modelo.Esquina;
+import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.ControlPolicial;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.Pozo;
 import edu.fiuba.algo3.modelo.vehiculos.Auto;
