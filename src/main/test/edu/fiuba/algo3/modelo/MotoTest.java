@@ -9,10 +9,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MotoTest {
     @Test
-    public void Test01CreoUnVehiculoCorrectamente(){
-        Moto v = new Moto(new Esquina(1,1));
-        Esquina e = new Esquina(1,1);
-        Assertions.assertEquals(v.posicion,e);
+    public void Test01CreoUnVehiculoCorrectamenteSeLeAsignaUnaPosicionYseSolicitaLaPosicion(){
+        Moto moto = new Moto(new Esquina(1,1));
+        Esquina esquinaDeMoto = new Esquina(1,1);
+        Assertions.assertEquals(moto.posicion,esquinaDeMoto);
     }
     @Test
     public void Test02MotoPasaPorPozoYSeRetornaCorrectamente(){

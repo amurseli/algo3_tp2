@@ -7,4 +7,5 @@ public class CambioDeVehiculo extends Sorpresa {
     protected CambioDeVehiculo(Camino c) {
         super(c);
     }
+
 }
