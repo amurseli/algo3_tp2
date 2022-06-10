@@ -11,8 +11,8 @@ public class Juego {
         this.ciudad = new Ciudad(tamanioFilas,tamanioColumnas, meta, vehiculo);
     }
 
-    public void agregarEfecto(Efecto efecto){
-        ciudad.agregarEfecto(efecto);
+    public void agregarCaminoConEfecto(Camino nuevoCamino, Efecto nuevoEfecto){
+        ciudad.agregarCaminoConEfecto(nuevoCamino, nuevoEfecto);
     }
     public void moverDerecha() {
         ciudad.moverDerecha();

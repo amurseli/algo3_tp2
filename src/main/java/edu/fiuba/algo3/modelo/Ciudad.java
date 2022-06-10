@@ -10,36 +10,33 @@ public class Ciudad {
     //TODO Meter tamaños de ciudad :)
     Jugador jugador;
     Esquina meta;
-    List<Efecto> efectos;
+    //List<Efecto> efectos;
+
+    ListadoCaminos caminos;
 
     Ciudad(int tamanioFilas, int tamanioColumnas, Esquina meta, Vehiculo v){
         this.jugador = new Jugador(v);
         this.meta = meta;
-        this.efectos = new ArrayList<>();
-        //this.generarEfectos();
+        this.caminos = new ListadoCaminos();
     }
     public int obtenerMovimientosRealizados() {
         return this.jugador.obtenerMovimientosRealizados();
     }
     public void moverDerecha() {
-        jugador.moverDerecha();
-        jugador.aplicarEfectos(efectos);
+        jugador.moverDerecha(caminos);
     }
     public void moverIzquierda() {
         jugador.moverIzquierda();
-        jugador.aplicarEfectos(efectos);
     }
     public void moverArriba() {
         jugador.moverArriba();
-        jugador.aplicarEfectos(efectos);
     }
     public void moverAbajo() {
         jugador.moverAbajo();
-        jugador.aplicarEfectos(efectos);
     }
 
-    public void agregarEfecto(Efecto efecto){
-        efectos.add(efecto);
+    public void agregarCaminoConEfecto(Camino camino, Efecto efecto){
+        caminos.agregarCaminoConEfecto(camino,efecto);
     }
 
     /*private void generarEfectos() {

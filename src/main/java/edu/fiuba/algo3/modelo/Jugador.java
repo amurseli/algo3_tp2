@@ -10,6 +10,9 @@ import java.util.List;
 
 public class Jugador {
     Vehiculo vehiculo;
+
+
+
     Jugador(Vehiculo v){
         this.vehiculo = v;
     }
@@ -17,8 +20,10 @@ public class Jugador {
         return this.vehiculo.obtenerMovimientosRealizados();
     }
 
-    public void moverDerecha() {
-        vehiculo.moverDerecha();
+    public void moverDerecha(ListadoCaminos caminos) {
+        Camino caminoRecorrido = vehiculo.moverDerecha();
+        Camino unCamino = caminos.obtenerCaminoRecorrido(caminoRecorrido);
+        unCamino.aplicarEfecto(vehiculo);
     }
     public void moverIzquierda() {
         vehiculo.moverIzquierda();
@@ -30,7 +35,4 @@ public class Jugador {
         vehiculo.moverAbajo();
     }
 
-    public void aplicarEfectos(List<Efecto> efectos) {
-        vehiculo.aplicarEfectos(efectos,this);
-    }
 }
