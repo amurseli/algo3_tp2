@@ -8,31 +8,34 @@ import java.util.List;
 
 public class Ciudad {
     //TODO Meter tamaños de ciudad :)
-    Jugador p1;
+    Jugador jugador;
     Esquina meta;
     List<Efecto> efectos;
 
     Ciudad(int tamanioFilas, int tamanioColumnas, Esquina meta, Vehiculo v){
-        this.p1 = new Jugador(v);
+        this.jugador = new Jugador(v);
         this.meta = meta;
         this.efectos = new ArrayList<>();
         //this.generarEfectos();
     }
     public int obtenerMovimientosRealizados() {
-        return this.p1.obtenerMovimientosRealizados();
+        return this.jugador.obtenerMovimientosRealizados();
     }
     public void moverDerecha() {
-        p1.moverDerecha();
-        p1.aplicarEfectos(efectos);
+        jugador.moverDerecha();
+        jugador.aplicarEfectos(efectos);
     }
     public void moverIzquierda() {
-        p1.moverIzquierda();
+        jugador.moverIzquierda();
+        jugador.aplicarEfectos(efectos);
     }
     public void moverArriba() {
-        p1.moverArriba();
+        jugador.moverArriba();
+        jugador.aplicarEfectos(efectos);
     }
     public void moverAbajo() {
-        p1.moverAbajo();
+        jugador.moverAbajo();
+        jugador.aplicarEfectos(efectos);
     }
 
     public void agregarEfecto(Efecto efecto){
