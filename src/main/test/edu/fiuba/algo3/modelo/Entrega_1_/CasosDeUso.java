@@ -17,6 +17,15 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class CasosDeUso {
 
     @Test
+    public void Test00MotoPasaPorUnCaminoVacioYNoEsPenalizada(){
+        Juego juego = new Juego();
+        juego.crearCiudad(10, 10, new Esquina(1, 10), new Moto(new Esquina(1,6)));
+        juego.agregarCaminoConEfecto(new Camino(new Esquina(1,5), new Esquina(1,6)), new Pozo());
+        juego.moverDerecha();
+        assertEquals(juego.obtenerMovimientosRealizados(), 1);
+    }
+
+    @Test
     public void Test01MotoPasaPorUnPozoYEsPenalizadaEnTresMovimientos(){
         Juego juego = new Juego();
         juego.crearCiudad(10, 10, new Esquina(1, 10), new Moto(new Esquina(1,5)));

@@ -3,15 +3,14 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.efectos.Efecto;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ListadoCaminos {
 
     //creo que seria mas apropiado que se llame listado de camions CON EFECTOS
-    ArrayList<Camino> todosLosCaminos;
+    private ArrayList<Camino> todosLosCaminos;
 
     public ListadoCaminos(){
-        todosLosCaminos = new ArrayList<Camino>();
+        todosLosCaminos = new ArrayList<>();
     }
 
     public void agregarCaminoConEfecto(Camino nuevoCamino, Efecto nuevoEfecto){
@@ -25,6 +24,9 @@ public class ListadoCaminos {
                 caminoConEfecto = camino;
             }
         }
-        return caminoConEfecto;
+        if (caminoConEfecto != null) {
+            return caminoConEfecto;
+        }
+        return caminoRecorrido;
     }
 }
