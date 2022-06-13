@@ -18,7 +18,7 @@ public class Pozo extends Obstaculo {
 
     public void aplicarEfecto(CuatroPorCuatro cuatroPorCuatro) {
         cuatroPorCuatro.sumarPozoPisado();
-        if(cuatroPorCuatro.getPozosPisados() == 3){ //violo el tell dont ask pidiendole cuantos pozos piso?si. simplifico las cosas? si
+        if(cuatroPorCuatro.elProximoPozoEsPenalizable()){ //violo el tell dont ask pidiendole cuantos pozos piso?si. simplifico las cosas? si
             cuatroPorCuatro.sumarMovimientos(2);
             cuatroPorCuatro.reinciarPozosPizados();
         }

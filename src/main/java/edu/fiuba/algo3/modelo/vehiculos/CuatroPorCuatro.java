@@ -34,4 +34,15 @@ public class CuatroPorCuatro extends Vehiculo {
         return pozosPisados;
     }
 
+    public boolean elProximoPozoEsPenalizable(){
+        boolean esPenalizable;
+
+
+        //Forma rara de hacer el if
+        esPenalizable = pozosPisados > 2;
+
+
+        return esPenalizable;
+    }
+
 }
