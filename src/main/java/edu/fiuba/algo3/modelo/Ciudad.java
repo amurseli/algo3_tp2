@@ -29,13 +29,13 @@ public class Ciudad {
         jugador.moverDerecha(caminos);
     }
     public void moverIzquierda() {
-        jugador.moverIzquierda();
+        jugador.moverIzquierda(caminos);
     }
     public void moverArriba() {
-        jugador.moverArriba();
+        jugador.moverArriba(caminos);
     }
     public void moverAbajo() {
-        jugador.moverAbajo();
+        jugador.moverAbajo(caminos);
     }
 
     public void agregarCaminoConEfecto(Camino camino, Efecto efecto){

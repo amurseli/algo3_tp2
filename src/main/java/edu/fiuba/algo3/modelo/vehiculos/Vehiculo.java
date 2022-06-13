@@ -27,20 +27,23 @@ public abstract class Vehiculo {
         asignarPosicion(nuevaEsquina);
         return new Camino(posicionAnterior,posicion);
     }
-    public void moverIzquierda() {
+    public Camino moverIzquierda() {
         Esquina nuevaEsquina = posicion.obtenerEsquinaIzquierda();
         sumarMovimientos(1);
         asignarPosicion(nuevaEsquina);
+        return new Camino(posicionAnterior,posicion);
     }
-    public void moverArriba() {
+    public Camino moverArriba() {
         Esquina nuevaEsquina = posicion.obtenerEsquinaArriba();
         sumarMovimientos(1);
         asignarPosicion(nuevaEsquina);
+        return new Camino(posicionAnterior,posicion);
     }
-    public void moverAbajo() {
+    public Camino moverAbajo() {
         Esquina nuevaEsquina = posicion.obtenerEsquinaAbajo();
         sumarMovimientos(1);
         asignarPosicion(nuevaEsquina);
+        return new Camino(posicionAnterior,posicion);
     }
 
     public void asignarPosicion(Esquina nuevaPosicion) {

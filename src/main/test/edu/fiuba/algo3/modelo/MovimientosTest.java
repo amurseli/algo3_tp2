@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.efectos.obstaculos.Piquete;
+import edu.fiuba.algo3.modelo.efectos.obstaculos.Pozo;
+import edu.fiuba.algo3.modelo.efectos.sorpresas.SorpresaDesfavorable;
 import edu.fiuba.algo3.modelo.vehiculos.Auto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -39,5 +42,41 @@ public class MovimientosTest {
         juego.crearCiudad(10,10,new Esquina(10,10),new Auto(new Esquina(2,2)));
         juego.moverIzquierda();
         Assertions.assertEquals(juego.obtenerMovimientosRealizados(), 1);
+    }
+    @Test
+    public void Test06MuevoAbajoYSeAplicaEfectoPozo(){
+        Juego juego = new Juego();
+        juego.crearCiudad(10,10,new Esquina(10,10),new Auto(new Esquina(1,5)));
+        juego.agregarCaminoConEfecto(new Camino(new Esquina(1,5), new Esquina(2,5)), new Pozo());
+        juego.moverAbajo();
+        Assertions.assertEquals(juego.obtenerMovimientosRealizados(), 4);
+    }
+    @Test
+    public void Test07MuevoArribaYSeAplicaEfectoPiquete(){
+        Juego juego = new Juego();
+        juego.crearCiudad(10,10,new Esquina(10,10),new Auto(new Esquina(2,5)));
+        juego.agregarCaminoConEfecto(new Camino(new Esquina(1,5), new Esquina(2,5)), new Piquete());
+        juego.moverArriba();
+        Assertions.assertEquals(juego.obtenerVehiculo().obtenerPosicion(), new Esquina(2, 5));
+
+    }
+    @Test
+    public void Test08MuevoIzquierdaYSeAplicaEfectoSorpresaDesfavorable(){
+        Juego juego = new Juego();
+        juego.crearCiudad(10,10,new Esquina(10,10),new Auto(new Esquina(1,5)));
+        juego.agregarCaminoConEfecto(new Camino(new Esquina(1,5), new Esquina(2,5)), new SorpresaDesfavorable());
+        juego.moverDerecha();
+        juego.moverIzquierda();
+        juego.moverDerecha();
+        juego.moverIzquierda();
+        juego.moverDerecha();
+        juego.moverIzquierda();
+        juego.moverDerecha();
+        juego.moverIzquierda();
+        juego.moverDerecha();
+        juego.moverIzquierda();
+        juego.moverAbajo();
+
+        Assertions.assertEquals(juego.obtenerMovimientosRealizados(), 13);
     }
 }

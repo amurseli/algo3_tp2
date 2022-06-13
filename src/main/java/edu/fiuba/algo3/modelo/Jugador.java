@@ -22,15 +22,21 @@ public class Jugador {
         Camino unCamino = caminos.obtenerCaminoRecorrido(caminoRecorrido);
         unCamino.aplicarEfecto(this, vehiculo);
     }
-    public void moverIzquierda() {
-        vehiculo.moverIzquierda();
+    public void moverIzquierda(ListadoCaminos caminos) {
+        Camino caminoRecorrido = vehiculo.moverIzquierda();
+        Camino unCamino = caminos.obtenerCaminoRecorrido(caminoRecorrido);
+        unCamino.aplicarEfecto(this, vehiculo);
     }
 
-    public void moverArriba() {
-        vehiculo.moverArriba();
+    public void moverArriba(ListadoCaminos caminos) {
+        Camino caminoRecorrido = vehiculo.moverArriba();
+        Camino unCamino = caminos.obtenerCaminoRecorrido(caminoRecorrido);
+        unCamino.aplicarEfecto(this, vehiculo);
     }
-    public void moverAbajo() {
-        vehiculo.moverAbajo();
+    public void moverAbajo(ListadoCaminos caminos) {
+        Camino caminoRecorrido = vehiculo.moverAbajo();
+        Camino unCamino = caminos.obtenerCaminoRecorrido(caminoRecorrido);
+        unCamino.aplicarEfecto(this, vehiculo);
     }
     public void setVehiculo(Vehiculo v){
         vehiculo = v;
