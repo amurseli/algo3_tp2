@@ -12,7 +12,7 @@ public class CuatroPorCuatro extends Vehiculo {
 
     @Override
     public void aplicarEfecto(Jugador jugador, Efecto efecto) {
-        efecto.aplicarEfecto(this);
+        efecto.aplicarEfecto(jugador,this);
     }
 
 

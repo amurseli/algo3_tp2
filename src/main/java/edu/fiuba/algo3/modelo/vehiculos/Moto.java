@@ -10,7 +10,7 @@ public class Moto extends Vehiculo {
 
     @Override
     public void aplicarEfecto(Jugador jugador, Efecto efecto) {
-        efecto.aplicarEfecto(this);
+        efecto.aplicarEfecto(jugador, this);
     }
 
     //TODO: Constructor 2, lo comento para cuando lo usemos

@@ -9,8 +9,8 @@ import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 
 public interface Efecto {
 
-    public void aplicarEfecto(Auto auto);
-    public void aplicarEfecto(Moto moto);
-    public void aplicarEfecto(CuatroPorCuatro cuatroPorCuatro);
+    public void aplicarEfecto(Jugador jugador,Auto auto);
+    public void aplicarEfecto(Jugador jugador,Moto moto);
+    public void aplicarEfecto(Jugador jugador,CuatroPorCuatro cuatroPorCuatro);
 
 }

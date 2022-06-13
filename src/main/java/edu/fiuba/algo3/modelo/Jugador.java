@@ -6,14 +6,15 @@ import java.util.List;
 
 public class Jugador {
     Vehiculo vehiculo;
-
-
-
     Jugador(Vehiculo v){
         this.vehiculo = v;
     }
     public int obtenerMovimientosRealizados() {
         return this.vehiculo.obtenerMovimientosRealizados();
+    }
+
+    public Vehiculo obtenerVehiculo(){
+        return vehiculo;
     }
 
     public void moverDerecha(ListadoCaminos caminos) {
@@ -24,11 +25,15 @@ public class Jugador {
     public void moverIzquierda() {
         vehiculo.moverIzquierda();
     }
+
     public void moverArriba() {
         vehiculo.moverArriba();
     }
     public void moverAbajo() {
         vehiculo.moverAbajo();
+    }
+    public void setVehiculo(Vehiculo v){
+        vehiculo = v;
     }
 
 }

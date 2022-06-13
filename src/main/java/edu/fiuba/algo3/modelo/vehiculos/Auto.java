@@ -10,7 +10,7 @@ public class Auto extends Vehiculo {
 
     @Override
     public void aplicarEfecto(Jugador jugador, Efecto efecto) {
-        efecto.aplicarEfecto(this);
+        efecto.aplicarEfecto(jugador,this);
     }
 
     //TODO: Para cuando tengamos las sorpresas hechas

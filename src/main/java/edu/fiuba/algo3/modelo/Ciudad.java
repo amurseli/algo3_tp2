@@ -22,6 +22,9 @@ public class Ciudad {
     public int obtenerMovimientosRealizados() {
         return this.jugador.obtenerMovimientosRealizados();
     }
+    public Vehiculo obtenerVehiculo(){
+        return jugador.obtenerVehiculo();
+    }
     public void moverDerecha() {
         jugador.moverDerecha(caminos);
     }
