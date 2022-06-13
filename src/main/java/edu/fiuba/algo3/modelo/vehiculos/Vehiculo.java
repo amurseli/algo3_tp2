@@ -2,14 +2,6 @@ package edu.fiuba.algo3.modelo.vehiculos;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.efectos.Efecto;
-import edu.fiuba.algo3.modelo.efectos.obstaculos.ControlPolicial;
-import edu.fiuba.algo3.modelo.efectos.obstaculos.Piquete;
-import edu.fiuba.algo3.modelo.efectos.obstaculos.Pozo;
-import edu.fiuba.algo3.modelo.efectos.sorpresas.CambioDeVehiculo;
-import edu.fiuba.algo3.modelo.efectos.sorpresas.SorpresaDesfavorable;
-import edu.fiuba.algo3.modelo.efectos.sorpresas.SorpresaFavorable;
-
-import java.util.List;
 
 public abstract class Vehiculo {
     public Esquina posicion;
@@ -57,5 +49,5 @@ public abstract class Vehiculo {
         this.movimientos += m;
     }
 
-
+    public abstract void aplicarEfecto(Jugador jugador, Efecto efecto);
 }
