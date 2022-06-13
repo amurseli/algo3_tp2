@@ -16,6 +16,11 @@ public abstract class Vehiculo {
     public int obtenerMovimientosRealizados() {
         return this.movimientos;
     }
+
+    public Esquina obtenerPosicion(){
+        return posicion;
+    }
+
     public Camino moverDerecha() {
         Esquina nuevaEsquina = posicion.obtenerEsquinaDerecha();
         sumarMovimientos(1);
@@ -38,11 +43,15 @@ public abstract class Vehiculo {
         asignarPosicion(nuevaEsquina);
     }
 
-    private void asignarPosicion(Esquina nuevaPosicion) {
+    public void asignarPosicion(Esquina nuevaPosicion) {
 
         posicionAnterior = posicion;
         posicion = nuevaPosicion;
 
+    }
+
+    public void darLaVuelta(){
+        posicion = posicionAnterior;
     }
 
     public void sumarMovimientos(int m) {
