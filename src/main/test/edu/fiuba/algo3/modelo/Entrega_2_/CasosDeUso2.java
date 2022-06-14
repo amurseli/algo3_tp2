@@ -18,7 +18,7 @@ public class CasosDeUso2 {
     @Test
     public void Test01UnVehiculoAtraviesaLaCiudadYEncuentraUnaSorpresaFavorable(){
         Juego juego = new Juego();
-        juego.crearCiudad(10, 10, new Esquina(1, 10), new Moto(new Esquina(1,1)));
+        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Moto(new Esquina(1,1)));
         juego.agregarCaminoConEfecto(new Camino(new Esquina(1,5), new Esquina(1,6)), new SorpresaFavorable());
         juego.moverDerecha();
         juego.moverDerecha();
@@ -33,7 +33,7 @@ public class CasosDeUso2 {
     @Test
     public void Test02UnVehículoAtraviesaLaCiudadYEncuentraUnaSorpresaDesfavorable(){
         Juego juego = new Juego();
-        juego.crearCiudad(10, 10, new Esquina(1, 10), new Moto(new Esquina(1,1)));
+        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Moto(new Esquina(1,1)));
         juego.agregarCaminoConEfecto(new Camino(new Esquina(1,5), new Esquina(1,6)), new SorpresaDesfavorable());
         juego.moverDerecha();
         juego.moverDerecha();
@@ -47,7 +47,7 @@ public class CasosDeUso2 {
     @Test
     public void Test03UnVehiculoAtraviesaLaCiudadYEncuentraUnaSorpresaDeCambioDeVehiculo(){
         Juego juego = new Juego();
-        juego.crearCiudad(10, 10, new Esquina(1, 10), new Moto(new Esquina(1,5)));
+        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Moto(new Esquina(1,5)));
         juego.agregarCaminoConEfecto(new Camino(new Esquina(1,5), new Esquina(1,6)), new CambioDeVehiculo());
         //TODO falta probar el cambio de los otros vehiculos (pero en otro lado) ((porque aguante las pruebas unitarias)) (((xd me olvide q iba a poner aca)))
         juego.moverDerecha();
@@ -57,7 +57,7 @@ public class CasosDeUso2 {
     @Test
     public void Test04AutoSeEncuentraConPiqueteYPegaLaVuelta(){
         Juego juego = new Juego();
-        juego.crearCiudad(10, 10, new Esquina(1, 10), new Auto(new Esquina(1,5)));
+        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Auto(new Esquina(1,5)));
         juego.agregarCaminoConEfecto(new Camino(new Esquina(1,5), new Esquina(1,6)), new Piquete());
         juego.moverDerecha();
         Assertions.assertEquals(juego.obtenerVehiculo().obtenerPosicion(), new Esquina(1, 5));
@@ -67,7 +67,7 @@ public class CasosDeUso2 {
     @Test
     public void Test05MotoSeEncuentraConPiqueteYNoPegaLaVueltaYSePenaliza(){
         Juego juego = new Juego();
-        juego.crearCiudad(10, 10, new Esquina(1, 10), new Moto(new Esquina(1,5)));
+        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Moto(new Esquina(1,5)));
         juego.agregarCaminoConEfecto(new Camino(new Esquina(1,5), new Esquina(1,6)), new Piquete());
         juego.moverDerecha();
         Assertions.assertEquals(juego.obtenerVehiculo().obtenerPosicion(), new Esquina(1, 6));
@@ -77,7 +77,7 @@ public class CasosDeUso2 {
     @Test
     public void Test06CuatroPorCuatroSeEncuentraConPiqueteYPegaLaVuelta(){
         Juego juego = new Juego();
-        juego.crearCiudad(10, 10, new Esquina(1, 10), new CuatroPorCuatro(new Esquina(1,5)));
+        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new CuatroPorCuatro(new Esquina(1,5)));
         juego.agregarCaminoConEfecto(new Camino(new Esquina(1,5), new Esquina(1,6)), new Piquete());
         juego.moverDerecha();
         Assertions.assertEquals(juego.obtenerVehiculo().obtenerPosicion(), new Esquina(1, 5));

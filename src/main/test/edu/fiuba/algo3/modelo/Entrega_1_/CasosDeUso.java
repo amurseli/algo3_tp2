@@ -19,7 +19,7 @@ public class CasosDeUso {
     @Test
     public void Test00MotoPasaPorUnCaminoVacioYNoEsPenalizada(){
         Juego juego = new Juego();
-        juego.crearCiudad(10, 10, new Esquina(1, 10), new Moto(new Esquina(1,6)));
+        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Moto(new Esquina(1,6)));
         juego.agregarCaminoConEfecto(new Camino(new Esquina(1,5), new Esquina(1,6)), new Pozo());
         juego.moverDerecha();
         assertEquals(juego.obtenerMovimientosRealizados(), 1);
@@ -28,7 +28,7 @@ public class CasosDeUso {
     @Test
     public void Test01MotoPasaPorUnPozoYEsPenalizadaEnTresMovimientos(){
         Juego juego = new Juego();
-        juego.crearCiudad(10, 10, new Esquina(1, 10), new Moto(new Esquina(1,5)));
+        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Moto(new Esquina(1,5)));
         juego.agregarCaminoConEfecto(new Camino(new Esquina(1,5), new Esquina(1,6)), new Pozo());
         juego.moverDerecha();
         assertEquals(juego.obtenerMovimientosRealizados(), 4);
@@ -38,7 +38,7 @@ public class CasosDeUso {
     @Test
     public void Test02UnAutoPasaPorUnPozoYEsPenalizadoEnTresMovimientos(){
         Juego juego = new Juego();
-        juego.crearCiudad(10, 10, new Esquina(1, 10), new Auto(new Esquina(1,5)));
+        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Auto(new Esquina(1,5)));
         juego.agregarCaminoConEfecto(new Camino(new Esquina(1,5), new Esquina(1,6)), new Pozo());
         juego.moverDerecha();
         assertEquals(juego.obtenerMovimientosRealizados(), 4);
@@ -47,7 +47,7 @@ public class CasosDeUso {
     @Test
     public void Test03Un4x4PasaPorUnPozoYNoEsPenalizado(){
         Juego juego = new Juego();
-        juego.crearCiudad(10, 10, new Esquina(1, 10), new CuatroPorCuatro(new Esquina(1,5)));
+        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new CuatroPorCuatro(new Esquina(1,5)));
         juego.agregarCaminoConEfecto(new Camino(new Esquina(1,5), new Esquina(1,6)), new Pozo());
         juego.moverDerecha();
         assertEquals(juego.obtenerMovimientosRealizados(), 1);
@@ -57,7 +57,7 @@ public class CasosDeUso {
     @Test
     public void Test04Un4x4PasaPor3PozosYEsPenalizado(){
         Juego juego = new Juego();
-        juego.crearCiudad(10,10, new Esquina(1,10), new CuatroPorCuatro(new Esquina(1,5)));
+        juego.crearCiudad(new Esquina(10, 10), new Esquina(1,10), new CuatroPorCuatro(new Esquina(1,5)));
 
         juego.agregarCaminoConEfecto(new Camino(new Esquina(1,5), new Esquina(1,6)), new Pozo());
         juego.agregarCaminoConEfecto(new Camino(new Esquina(1,6), new Esquina(1,7)), new Pozo());
@@ -74,7 +74,7 @@ public class CasosDeUso {
     @Test
     public void Test05AutoAtraviesaMuchosControlesPolicialesYLoParanEl30PorcientoDeLasVeces (){
         Juego juego = new Juego();
-        juego.crearCiudad(10000,10000, new Esquina(1,10000), new Auto(new Esquina(1,1)));
+        juego.crearCiudad(new Esquina(10000, 10000), new Esquina(1,10000), new Auto(new Esquina(1,1)));
 
         for (int i = 1; i<9990; i++){
             juego.agregarCaminoConEfecto(new Camino(new Esquina(1,i), new Esquina(1,i+1)), new ControlPolicial());
@@ -92,7 +92,7 @@ public class CasosDeUso {
     @Test
     public void Test064x4AtraviesaMuchosControlesPolicialesYLoParanEl50PorcientoDeLasVeces (){
         Juego juego = new Juego();
-        juego.crearCiudad(10000,10000, new Esquina(1,10000), new CuatroPorCuatro(new Esquina(1,1)));
+        juego.crearCiudad(new Esquina(10000, 10000), new Esquina(1,10000), new CuatroPorCuatro(new Esquina(1,1)));
 
         for (int i = 1; i<9990; i++){
             juego.agregarCaminoConEfecto(new Camino(new Esquina(1,i), new Esquina(1,i+1)), new ControlPolicial());
@@ -110,7 +110,7 @@ public class CasosDeUso {
     @Test
     public void Test07MotoAtraviesaMuchosControlesPolicialesYLoParanEl80PorcientoDeLasVeces (){
         Juego juego = new Juego();
-        juego.crearCiudad(10000,10000, new Esquina(1,10000), new Moto(new Esquina(1,1)));
+        juego.crearCiudad(new Esquina(10000, 10000), new Esquina(1,10000), new Moto(new Esquina(1,1)));
 
         for (int i = 1; i<9990; i++){
             juego.agregarCaminoConEfecto(new Camino(new Esquina(1,i), new Esquina(1,i+1)), new ControlPolicial());

@@ -7,15 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ciudad {
-    //TODO Meter tamaños de ciudad :)
     Jugador jugador;
     Esquina meta;
-    //List<Efecto> efectos;
-
+    Esquina limite;
     ListadoCaminos caminos;
 
-    Ciudad(int tamanioFilas, int tamanioColumnas, Esquina meta, Vehiculo v){
+    Ciudad(Esquina limite, Esquina meta, Vehiculo v){
         this.jugador = new Jugador(v);
+        this.limite = limite;
         this.meta = meta;
         this.caminos = new ListadoCaminos();
     }
@@ -41,10 +40,4 @@ public class Ciudad {
     public void agregarCaminoConEfecto(Camino camino, Efecto efecto){
         caminos.agregarCaminoConEfecto(camino,efecto);
     }
-
-    /*private void generarEfectos() {
-        efectos.add(new Pozo(new Camino(new Esquina(1,5),new Esquina(1,6))));
-    }
-    */
-
 }

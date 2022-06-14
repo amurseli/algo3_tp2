@@ -7,8 +7,8 @@ public class Juego {
     Ciudad ciudad;
     public Juego(){}
 
-    public void crearCiudad(int tamanioFilas,int tamanioColumnas, Esquina meta, Vehiculo vehiculo) {
-        this.ciudad = new Ciudad(tamanioFilas,tamanioColumnas, meta, vehiculo);
+    public void crearCiudad(Esquina limite, Esquina meta, Vehiculo vehiculo) {
+        this.ciudad = new Ciudad(limite, meta, vehiculo);
     }
 
     public void agregarCaminoConEfecto(Camino nuevoCamino, Efecto nuevoEfecto){
