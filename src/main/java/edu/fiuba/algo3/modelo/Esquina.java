@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 public class Esquina {
-    private int fila, columna;
+    public int fila, columna;
 
     public Esquina(int fila, int columna) {
         this.fila = fila;

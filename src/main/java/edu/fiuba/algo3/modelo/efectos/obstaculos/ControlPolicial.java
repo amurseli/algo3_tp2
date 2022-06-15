@@ -1,19 +1,33 @@
 package edu.fiuba.algo3.modelo.efectos.obstaculos;
 
-import edu.fiuba.algo3.modelo.Camino;
-import edu.fiuba.algo3.modelo.efectos.Efecto;
 import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
+import edu.fiuba.algo3.modelo.vehiculos.Auto;
+import edu.fiuba.algo3.modelo.vehiculos.CuatroPorCuatro;
+import edu.fiuba.algo3.modelo.vehiculos.Moto;
+public class ControlPolicial extends Obstaculo {
 
-public class ControlPolicial extends Efecto {
-
-    public ControlPolicial(Camino c) {
-        super(c);
-    }
-
-    public void aplicarEfecto(Camino caminoRecorrido,Jugador jugador,Vehiculo vehiculo) {
-        if(posicion.equals(caminoRecorrido)){
-            vehiculo.aplicarEfecto(this);
+    public void aplicarEfecto(Jugador jugador,  Auto auto) {
+        if (generarRandom() <= 3){
+            auto.sumarMovimientos(3);
         }
     }
+
+    public void aplicarEfecto(Jugador jugador, Moto moto) {
+        if (generarRandom() <= 8){
+            moto.sumarMovimientos(3);
+        }
+
+    }
+
+    public void aplicarEfecto(Jugador jugador, CuatroPorCuatro cuatroPorCuatro) {
+        if (generarRandom() <= 5){
+            cuatroPorCuatro.sumarMovimientos(3);
+        }
+    }
+    public int generarRandom(){
+        int maximo = 10;
+        return ((int) (Math.random() * maximo +1));
+    }
+
 }
+
