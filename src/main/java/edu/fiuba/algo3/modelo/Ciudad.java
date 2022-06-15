@@ -1,10 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Movimientos.Direccion;
 import edu.fiuba.algo3.modelo.efectos.Efecto;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Ciudad {
     Jugador jugador;
@@ -24,20 +22,12 @@ public class Ciudad {
     public Vehiculo obtenerVehiculo(){
         return jugador.obtenerVehiculo();
     }
-    public void moverDerecha() {
-        jugador.moverDerecha(caminos);
-    }
-    public void moverIzquierda() {
-        jugador.moverIzquierda(caminos);
-    }
-    public void moverArriba() {
-        jugador.moverArriba(caminos);
-    }
-    public void moverAbajo() {
-        jugador.moverAbajo(caminos);
-    }
+
+    public void mover(Direccion unaDireccion) { jugador.mover(unaDireccion,caminos); }
 
     public void agregarCaminoConEfecto(Camino camino, Efecto efecto){
         caminos.agregarCaminoConEfecto(camino,efecto);
     }
+
+
 }

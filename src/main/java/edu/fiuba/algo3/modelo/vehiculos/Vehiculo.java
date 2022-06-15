@@ -1,11 +1,13 @@
 package edu.fiuba.algo3.modelo.vehiculos;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Movimientos.Direccion;
 import edu.fiuba.algo3.modelo.efectos.Efecto;
 
 public abstract class Vehiculo {
     public Esquina posicion;
     public Esquina posicionAnterior;
+    public Camino caminoRealizado;
     private int movimientos;
 
     public Vehiculo(Esquina posicion) {
@@ -21,36 +23,17 @@ public abstract class Vehiculo {
         return posicion;
     }
 
-    public Camino moverDerecha() {
-        Esquina nuevaEsquina = posicion.obtenerEsquinaDerecha();
+    public Camino mover(Direccion unaDireccion) {
+        Esquina nuevaEsquina = unaDireccion.siguiente(posicion);
+        caminoRealizado = new Camino(posicion, unaDireccion);
         sumarMovimientos(1);
         asignarPosicion(nuevaEsquina);
-        return new Camino(posicionAnterior,posicion);
-    }
-    public Camino moverIzquierda() {
-        Esquina nuevaEsquina = posicion.obtenerEsquinaIzquierda();
-        sumarMovimientos(1);
-        asignarPosicion(nuevaEsquina);
-        return new Camino(posicionAnterior,posicion);
-    }
-    public Camino moverArriba() {
-        Esquina nuevaEsquina = posicion.obtenerEsquinaArriba();
-        sumarMovimientos(1);
-        asignarPosicion(nuevaEsquina);
-        return new Camino(posicionAnterior,posicion);
-    }
-    public Camino moverAbajo() {
-        Esquina nuevaEsquina = posicion.obtenerEsquinaAbajo();
-        sumarMovimientos(1);
-        asignarPosicion(nuevaEsquina);
-        return new Camino(posicionAnterior,posicion);
+        return caminoRealizado;
     }
 
     public void asignarPosicion(Esquina nuevaPosicion) {
-
         posicionAnterior = posicion;
         posicion = nuevaPosicion;
-
     }
 
     public void darLaVuelta(){

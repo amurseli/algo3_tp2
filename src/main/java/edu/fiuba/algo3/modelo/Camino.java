@@ -1,22 +1,18 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Movimientos.Direccion;
 import edu.fiuba.algo3.modelo.efectos.Efecto;
-import edu.fiuba.algo3.modelo.efectos.obstaculos.Obstaculo;
-import edu.fiuba.algo3.modelo.efectos.sorpresas.Sorpresa;
-import edu.fiuba.algo3.modelo.vehiculos.Auto;
-import edu.fiuba.algo3.modelo.vehiculos.CuatroPorCuatro;
-import edu.fiuba.algo3.modelo.vehiculos.Moto;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 
 import java.util.ArrayList;
 
 public class Camino {
-    public Esquina esquina1, esquina2;
+    public Esquina esquinaInicial, esquinaFinal;
     private ArrayList<Efecto> efectos;
 
-    public Camino(Esquina esquinaSalida, Esquina esquinaLlegada) {
-        esquina1 = esquinaSalida;
-        esquina2 = esquinaLlegada;
+    public Camino(Esquina esquinaInicial, Direccion unaDireccion) {
+        this.esquinaInicial = esquinaInicial;
+        esquinaFinal = unaDireccion.siguiente(esquinaInicial);
         efectos = new ArrayList<>();
     }
     public void agregrarEfecto(Efecto nuevoEfecto){
@@ -34,8 +30,8 @@ public class Camino {
     @Override
     public boolean equals(Object o) {
         Camino c = (Camino) o;
-        if (this.esquina1.equals(c.esquina1) && this.esquina2.equals(c.esquina2)) return true;
-        return this.esquina1.equals(c.esquina2) && this.esquina2.equals(c.esquina1);
+        if (this.esquinaInicial.equals(c.esquinaInicial) && this.esquinaFinal.equals(c.esquinaFinal)) return true;
+        return this.esquinaInicial.equals(c.esquinaFinal) && this.esquinaFinal.equals(c.esquinaInicial);
     }
 
     public void aplicarEfecto(Jugador jugador, Vehiculo vehiculo){
@@ -43,5 +39,13 @@ public class Camino {
             vehiculo.aplicarEfecto(jugador, efecto);
         }
     }
+
+    //TODO: UNA VEZ ESTE CLARO COMO USAR EXEPCION SE ACTIVA
+    /*public boolean validarEntradaDeEfecto(Efecto efecto) throws LimiteAlcanzado{
+        if (efectos.size() == 1 && efectos.get(0).getClass().equals(efecto.getClass())) {
+            throw new LimiteAlcanzado();
+        }
+        return false;
+    }*/
 
 }

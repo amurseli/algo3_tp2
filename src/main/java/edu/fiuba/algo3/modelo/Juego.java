@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Movimientos.Direccion;
 import edu.fiuba.algo3.modelo.efectos.Efecto;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 
@@ -14,18 +15,7 @@ public class Juego {
     public void agregarCaminoConEfecto(Camino nuevoCamino, Efecto nuevoEfecto){
         ciudad.agregarCaminoConEfecto(nuevoCamino, nuevoEfecto);
     }
-    public void moverDerecha() {
-        ciudad.moverDerecha();
-    }
-    public void moverIzquierda() {
-        ciudad.moverIzquierda();
-    }
-    public void moverArriba() {
-        ciudad.moverArriba();
-    }
-    public void moverAbajo() {
-        ciudad.moverAbajo();
-    }
+    public void mover(Direccion unaDireccion) { ciudad.mover(unaDireccion);}
 
     public Vehiculo obtenerVehiculo(){
         return ciudad.obtenerVehiculo();
@@ -34,4 +24,5 @@ public class Juego {
     public int obtenerMovimientosRealizados() {
         return this.ciudad.obtenerMovimientosRealizados();
     }
+
 }
