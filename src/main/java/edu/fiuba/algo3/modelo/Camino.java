@@ -39,13 +39,4 @@ public class Camino {
             vehiculo.aplicarEfecto(jugador, efecto);
         }
     }
-
-    //TODO: UNA VEZ ESTE CLARO COMO USAR EXEPCION SE ACTIVA
-    /*public boolean validarEntradaDeEfecto(Efecto efecto) throws LimiteAlcanzado{
-        if (efectos.size() == 1 && efectos.get(0).getClass().equals(efecto.getClass())) {
-            throw new LimiteAlcanzado();
-        }
-        return false;
-    }*/
-
 }

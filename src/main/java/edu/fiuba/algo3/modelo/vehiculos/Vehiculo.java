@@ -44,10 +44,6 @@ public abstract class Vehiculo {
         this.movimientos += m;
     }
 
-    public void setMovimientos(int nuevosMovimientos){
-        movimientos = nuevosMovimientos;
-    }
-
     public void aplicarPorcentaje(double porcentaje){
         movimientos = movimientos + (int)(movimientos * porcentaje);
     }

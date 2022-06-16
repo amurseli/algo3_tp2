@@ -8,7 +8,6 @@ public class Moto extends Vehiculo {
         super(posicion);
     }
 
-    @Override
     public void aplicarEfecto(Jugador jugador, Efecto efecto) {
         efecto.aplicarEfecto(jugador, this);
     }
