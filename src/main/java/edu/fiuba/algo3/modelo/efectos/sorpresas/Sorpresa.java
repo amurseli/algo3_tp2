@@ -1,17 +1,15 @@
 package edu.fiuba.algo3.modelo.efectos.sorpresas;
 
-import edu.fiuba.algo3.modelo.Camino;
-import edu.fiuba.algo3.modelo.efectos.Efecto;
 import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
+import edu.fiuba.algo3.modelo.efectos.Efecto;
+import edu.fiuba.algo3.modelo.vehiculos.Auto;
+import edu.fiuba.algo3.modelo.vehiculos.CuatroPorCuatro;
+import edu.fiuba.algo3.modelo.vehiculos.Moto;
 
-public class Sorpresa extends Efecto {
-    protected Sorpresa(Camino c) {
-        super(c);
-    }
+public abstract class Sorpresa implements Efecto {
 
-    public void aplicarEfecto(Camino caminoRecorrido, Jugador jugador, Vehiculo vehiculo) {
-        int estoEsParaSalirDelPaso = 5;
-    }
+    public abstract void aplicarEfecto(Jugador jugador, Auto auto);
+    public abstract void aplicarEfecto(Jugador jugador, Moto moto);
+    public abstract void aplicarEfecto(Jugador jugador, CuatroPorCuatro cuatroPorCuatro);
 
 }

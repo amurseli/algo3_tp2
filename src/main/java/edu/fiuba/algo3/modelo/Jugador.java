@@ -1,12 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.efectos.Efecto;
-import edu.fiuba.algo3.modelo.efectos.obstaculos.ControlPolicial;
-import edu.fiuba.algo3.modelo.efectos.obstaculos.Pozo;
-import edu.fiuba.algo3.modelo.efectos.sorpresas.CambioDeVehiculo;
+import edu.fiuba.algo3.modelo.Movimientos.Direccion;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
-
-import java.util.List;
 
 public class Jugador {
     Vehiculo vehiculo;
@@ -17,20 +12,17 @@ public class Jugador {
         return this.vehiculo.obtenerMovimientosRealizados();
     }
 
-    public void moverDerecha() {
-        vehiculo.moverDerecha();
-    }
-    public void moverIzquierda() {
-        vehiculo.moverIzquierda();
-    }
-    public void moverArriba() {
-        vehiculo.moverArriba();
-    }
-    public void moverAbajo() {
-        vehiculo.moverAbajo();
+    public Vehiculo obtenerVehiculo(){
+        return vehiculo;
     }
 
-    public void aplicarEfectos(List<Efecto> efectos) {
-        vehiculo.aplicarEfectos(efectos,this);
+    public void mover(Direccion unaDireccion, ListadoCaminos caminos) {
+        Camino caminoRecorrido = vehiculo.mover(unaDireccion);
+        Camino unCamino = caminos.obtenerCaminoRecorrido(caminoRecorrido);
+        unCamino.aplicarEfecto(this, vehiculo);
     }
+    public void setVehiculo(Vehiculo v){
+        vehiculo = v;
+    }
+
 }
