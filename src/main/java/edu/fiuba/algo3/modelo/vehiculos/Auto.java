@@ -14,9 +14,13 @@ public class Auto extends Vehiculo {
     }
 
     //TODO: Para cuando tengamos las sorpresas hechas
-    /*
+
     public Auto(Esquina posicion, Esquina posicionAnterior, int movimientos) {
         super(posicion, posicionAnterior, movimientos);
-    }*/
+    }
+
+    public Vehiculo cambiarVehiculo(){
+        return new CuatroPorCuatro(posicion,posicionAnterior,movimientos);
+    }
 
 }

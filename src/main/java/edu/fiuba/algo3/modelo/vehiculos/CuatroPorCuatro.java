@@ -15,12 +15,9 @@ public class CuatroPorCuatro extends Vehiculo {
         efecto.aplicarEfecto(jugador,this);
     }
 
-
-//TODO: Para cuando tengamos las sorpresas hechas
-    /*
     public CuatroPorCuatro(Esquina posicion, Esquina posicionAnterior, int movimientos) {
         super(posicion, posicionAnterior, movimientos);
-    }*/
+    }
 
     public void sumarPozoPisado(){
         pozosPisados += 1;
@@ -43,6 +40,10 @@ public class CuatroPorCuatro extends Vehiculo {
 
 
         return esPenalizable;
+    }
+
+    public Vehiculo cambiarVehiculo(){
+        return new Moto(posicion,posicionAnterior,movimientos);
     }
 
 }

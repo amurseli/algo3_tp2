@@ -9,14 +9,14 @@ import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 public class CambioDeVehiculo extends Sorpresa {
 
     public void aplicarEfecto(Jugador jugador, Auto auto) {
-        jugador.setVehiculo(new CuatroPorCuatro(auto.posicion));
+        jugador.setVehiculo(auto.cambiarVehiculo());
     }
 
     public void aplicarEfecto(Jugador jugador, Moto moto) {
-        jugador.setVehiculo(new Auto(moto.posicion));
+        jugador.setVehiculo(moto.cambiarVehiculo());
     }
 
     public void aplicarEfecto(Jugador jugador, CuatroPorCuatro cuatroPorCuatro){
-        jugador.setVehiculo(new Moto(cuatroPorCuatro.posicion));
+        jugador.setVehiculo(cuatroPorCuatro.cambiarVehiculo());
     }
 }

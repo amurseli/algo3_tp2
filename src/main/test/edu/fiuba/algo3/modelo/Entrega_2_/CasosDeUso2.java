@@ -51,9 +51,10 @@ public class CasosDeUso2 {
         Juego juego = new Juego();
         juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Moto(new Esquina(1,5)));
         juego.agregarCaminoConEfecto(new Camino(new Esquina(1,5), new Derecha()), new CambioDeVehiculo());
-        //TODO falta probar el cambio de los otros vehiculos (pero en otro lado) ((porque aguante las pruebas unitarias)) (((xd me olvide q iba a poner aca)))
         juego.mover(new Derecha());
         Assertions.assertEquals(juego.obtenerVehiculo().getClass(), Auto.class);
+        Assertions.assertEquals(juego.obtenerMovimientosRealizados(),1);
+        Assertions.assertEquals(juego.obtenerVehiculo().obtenerPosicion(),new Esquina(1,6));
     }
 
     @Test
