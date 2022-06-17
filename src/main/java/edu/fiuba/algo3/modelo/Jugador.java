@@ -17,9 +17,8 @@ public class Jugador {
     }
 
     public void mover(Direccion unaDireccion, ListadoCaminos caminos) {
-        Camino caminoRecorrido = vehiculo.mover(unaDireccion);
-        Camino unCamino = caminos.obtenerCaminoRecorrido(caminoRecorrido);
-        unCamino.aplicarEfecto(this, vehiculo);
+        Camino caminoRecorrido = vehiculo.mover(unaDireccion, caminos);
+        caminoRecorrido.aplicarEfecto(this, vehiculo);
     }
     public void setVehiculo(Vehiculo v){
         vehiculo = v;

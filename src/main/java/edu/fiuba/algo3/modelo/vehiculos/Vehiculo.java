@@ -29,11 +29,12 @@ public abstract class Vehiculo {
         return posicion;
     }
 
-    public Camino mover(Direccion unaDireccion) {
+    public Camino mover(Direccion unaDireccion, ListadoCaminos caminos) {
         Esquina nuevaEsquina = unaDireccion.siguiente(posicion);
         sumarMovimientos(1);
         asignarPosicion(nuevaEsquina);
-        return (new Camino(posicionAnterior, unaDireccion));
+        Camino caminoRecorrido = caminos.obtenerCaminoRecorrido(new Camino(posicionAnterior, unaDireccion));
+        return caminoRecorrido;
     }
 
     public void asignarPosicion(Esquina nuevaPosicion) {
