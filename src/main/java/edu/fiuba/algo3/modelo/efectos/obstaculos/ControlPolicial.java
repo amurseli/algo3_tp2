@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.efectos.obstaculos;
 
+import edu.fiuba.algo3.modelo.GeneradorNumeros;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.vehiculos.Auto;
 import edu.fiuba.algo3.modelo.vehiculos.CuatroPorCuatro;

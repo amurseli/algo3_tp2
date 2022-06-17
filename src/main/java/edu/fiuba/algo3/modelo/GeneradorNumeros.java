@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.efectos.obstaculos;
+package edu.fiuba.algo3.modelo;
 
 public class GeneradorNumeros {
 
