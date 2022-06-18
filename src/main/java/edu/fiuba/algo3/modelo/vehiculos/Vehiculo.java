@@ -7,12 +7,18 @@ import edu.fiuba.algo3.modelo.efectos.Efecto;
 public abstract class Vehiculo {
     public Esquina posicion;
     public Esquina posicionAnterior;
-    public Camino caminoRealizado;
-    private int movimientos;
+
+    protected int movimientos;
 
     public Vehiculo(Esquina posicion) {
         this.posicion = posicion;
         movimientos = 0;
+    }
+
+    public Vehiculo(Esquina posicion, Esquina posicionAnterior, int movimientos){
+        this.posicion = posicion;
+        this.posicionAnterior = posicionAnterior;
+        this.movimientos = movimientos;
     }
 
     public int obtenerMovimientosRealizados() {
@@ -23,12 +29,12 @@ public abstract class Vehiculo {
         return posicion;
     }
 
-    public Camino mover(Direccion unaDireccion) {
+    public Camino mover(Direccion unaDireccion, ListadoCaminos caminos) {
         Esquina nuevaEsquina = unaDireccion.siguiente(posicion);
-        caminoRealizado = new Camino(posicion, unaDireccion);
         sumarMovimientos(1);
         asignarPosicion(nuevaEsquina);
-        return caminoRealizado;
+        Camino caminoRecorrido = caminos.obtenerCaminoRecorrido(new Camino(posicionAnterior, unaDireccion));
+        return caminoRecorrido;
     }
 
     public void asignarPosicion(Esquina nuevaPosicion) {
@@ -49,4 +55,6 @@ public abstract class Vehiculo {
     }
 
     public abstract void aplicarEfecto(Jugador jugador, Efecto efecto);
+
+    public abstract Vehiculo cambiarVehiculo();
 }

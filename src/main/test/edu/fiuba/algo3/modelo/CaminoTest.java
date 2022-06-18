@@ -21,7 +21,7 @@ public class CaminoTest {
     @Test
     public void Test02dosCaminosConEsquinasInvertidasSonIguales() {
         Camino camino1 = new Camino(new Esquina(1, 3), new Derecha());
-        Camino camino2 = new Camino(new Esquina(1, 4), new Derecha());
+        Camino camino2 = new Camino(new Esquina(1, 4), new Izquierda());
 
         assertEquals(camino1, camino2);
     }

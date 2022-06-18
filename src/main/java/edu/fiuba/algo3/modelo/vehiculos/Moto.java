@@ -12,9 +12,12 @@ public class Moto extends Vehiculo {
         efecto.aplicarEfecto(jugador, this);
     }
 
-    //TODO: Constructor 2, lo comento para cuando lo usemos
-    /*public Moto(Esquina posicion, Esquina posicionAnterior, int movimientos) {
+    public Moto(Esquina posicion, Esquina posicionAnterior, int movimientos) {
         super(posicion, posicionAnterior, movimientos);
-    }*/
+    }
+
+    public Vehiculo cambiarVehiculo(){
+        return new Auto(posicion,posicionAnterior,movimientos);
+    }
 
 }
