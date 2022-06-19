@@ -1,16 +1,16 @@
 package edu.fiuba.algo3.modelo.Entrega_1_;
 
-import com.tngtech.archunit.lang.ArchRule;
 import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Esquina;
 import edu.fiuba.algo3.modelo.GeneradorNumeros;
 import edu.fiuba.algo3.modelo.Juego;
-import edu.fiuba.algo3.modelo.Movimientos.Derecha;
+import edu.fiuba.algo3.modelo.Direcciones.Derecha;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.ControlPolicial;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.Pozo;
 import edu.fiuba.algo3.modelo.vehiculos.Auto;
 import edu.fiuba.algo3.modelo.vehiculos.CuatroPorCuatro;
 import edu.fiuba.algo3.modelo.vehiculos.Moto;
+import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -23,7 +23,7 @@ public class CasosDeUso {
     @Test
     public void Test00MotoPasaPorUnCaminoVacioYNoEsPenalizada() {
         Juego juego = new Juego();
-        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Moto(new Esquina(1, 6)));
+        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Vehiculo(new Moto(), new Esquina(1, 6)));
         juego.agregarCaminoConEfecto(new Camino(new Esquina(1, 5), new Derecha()), new Pozo());
         juego.mover(new Derecha());
         assertEquals(juego.obtenerMovimientosRealizados(), 1);
@@ -32,7 +32,7 @@ public class CasosDeUso {
     @Test
     public void Test01MotoPasaPorUnPozoYEsPenalizadaEnTresMovimientos() {
         Juego juego = new Juego();
-        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Moto(new Esquina(1, 5)));
+        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Vehiculo(new Moto(), new Esquina(1, 5)));
         juego.agregarCaminoConEfecto(new Camino(new Esquina(1, 5), new Derecha()), new Pozo());
         juego.mover(new Derecha());
         assertEquals(juego.obtenerMovimientosRealizados(), 4);
@@ -42,7 +42,7 @@ public class CasosDeUso {
     @Test
     public void Test02UnAutoPasaPorUnPozoYEsPenalizadoEnTresMovimientos() {
         Juego juego = new Juego();
-        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Auto(new Esquina(1, 5)));
+        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Vehiculo(new Auto(),new Esquina(1, 5)));
         juego.agregarCaminoConEfecto(new Camino(new Esquina(1, 5), new Derecha()), new Pozo());
         juego.mover(new Derecha());
         assertEquals(juego.obtenerMovimientosRealizados(), 4);
@@ -51,7 +51,7 @@ public class CasosDeUso {
     @Test
     public void Test03Un4x4PasaPorUnPozoYNoEsPenalizado() {
         Juego juego = new Juego();
-        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new CuatroPorCuatro(new Esquina(1, 5)));
+        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Vehiculo(new CuatroPorCuatro(), new Esquina(1, 5)));
         juego.agregarCaminoConEfecto(new Camino(new Esquina(1, 5), new Derecha()), new Pozo());
         juego.mover(new Derecha());
         assertEquals(juego.obtenerMovimientosRealizados(), 1);
@@ -61,7 +61,7 @@ public class CasosDeUso {
     @Test
     public void Test04Un4x4PasaPor3PozosYEsPenalizado() {
         Juego juego = new Juego();
-        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new CuatroPorCuatro(new Esquina(1, 5)));
+        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Vehiculo(new CuatroPorCuatro(), new Esquina(1, 5)));
 
         juego.agregarCaminoConEfecto(new Camino(new Esquina(1, 5), new Derecha()), new Pozo());
         juego.agregarCaminoConEfecto(new Camino(new Esquina(1, 6), new Derecha()), new Pozo());
@@ -79,7 +79,7 @@ public class CasosDeUso {
     public void Test05AutoAtraviesaControlPolicialYLoParan() {
 
         Juego juego = new Juego();
-        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Auto(new Esquina(1, 1)));
+        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Vehiculo(new Auto(), new Esquina(1, 1)));
 
         GeneradorNumeros stubGeneradorNumeros = Mockito.mock(GeneradorNumeros.class);
         Mockito.when(stubGeneradorNumeros.generarRandom()).thenReturn(2);
@@ -93,7 +93,7 @@ public class CasosDeUso {
     @Test
     public void Test064x4AtraviesaControlPolicialYLoParan() {
         Juego juego = new Juego();
-        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new CuatroPorCuatro(new Esquina(1, 1)));
+        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Vehiculo(new CuatroPorCuatro(), new Esquina(1, 1)));
 
         GeneradorNumeros stubGeneradorNumeros = Mockito.mock(GeneradorNumeros.class);
         Mockito.when(stubGeneradorNumeros.generarRandom()).thenReturn(2);
@@ -107,7 +107,7 @@ public class CasosDeUso {
     @Test
     public void Test074x4AtraviesaControlPolicialYNoLoParan() {
         Juego juego = new Juego();
-        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new CuatroPorCuatro(new Esquina(1, 1)));
+        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Vehiculo(new CuatroPorCuatro(), new Esquina(1, 1)));
 
         GeneradorNumeros stubGeneradorNumeros = Mockito.mock(GeneradorNumeros.class);
         Mockito.when(stubGeneradorNumeros.generarRandom()).thenReturn(6);
@@ -122,7 +122,7 @@ public class CasosDeUso {
     public void Test08MotoAtraviesaControlPolicialYNoLaParan() {
 
         Juego juego = new Juego();
-        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Moto(new Esquina(1, 1)));
+        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Vehiculo(new Moto(), new Esquina(1, 1)));
 
         GeneradorNumeros stubGeneradorNumeros = Mockito.mock(GeneradorNumeros.class);
         Mockito.when(stubGeneradorNumeros.generarRandom()).thenReturn(9);
@@ -131,7 +131,5 @@ public class CasosDeUso {
         juego.mover(new Derecha());
 
         Assertions.assertEquals(juego.obtenerMovimientosRealizados(), 1);
-
-
     }
 }

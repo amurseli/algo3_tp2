@@ -3,24 +3,14 @@ package edu.fiuba.algo3.modelo.vehiculos;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.efectos.Efecto;
 
-public class Auto extends Vehiculo {
-    public Auto(Esquina posicion) {
-        super(posicion);
+public class Auto implements TipoVehiculo {
+    @Override
+    public TipoVehiculo cambiarVehiculo(){
+        return new CuatroPorCuatro();
     }
 
     @Override
-    public void aplicarEfecto(Jugador jugador, Efecto efecto) {
-        efecto.aplicarEfecto(jugador,this);
+    public void aplicarEfecto(Vehiculo vehiculo, Efecto efecto) {
+        efecto.aplicarEfecto(vehiculo, this);
     }
-
-    //TODO: Para cuando tengamos las sorpresas hechas
-
-    public Auto(Esquina posicion, Esquina posicionAnterior, int movimientos) {
-        super(posicion, posicionAnterior, movimientos);
-    }
-
-    public Vehiculo cambiarVehiculo(){
-        return new CuatroPorCuatro(posicion,posicionAnterior,movimientos);
-    }
-
 }

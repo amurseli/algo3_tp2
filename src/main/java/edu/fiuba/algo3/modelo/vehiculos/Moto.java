@@ -3,21 +3,14 @@ package edu.fiuba.algo3.modelo.vehiculos;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.efectos.Efecto;
 
-public class Moto extends Vehiculo {
-    public Moto(Esquina posicion) {
-        super(posicion);
+public class Moto implements TipoVehiculo {
+    @Override
+    public TipoVehiculo cambiarVehiculo(){
+        return new Auto();
     }
 
-    public void aplicarEfecto(Jugador jugador, Efecto efecto) {
-        efecto.aplicarEfecto(jugador, this);
+    @Override
+    public void aplicarEfecto(Vehiculo vehiculo, Efecto efecto) {
+        efecto.aplicarEfecto(vehiculo, this);
     }
-
-    public Moto(Esquina posicion, Esquina posicionAnterior, int movimientos) {
-        super(posicion, posicionAnterior, movimientos);
-    }
-
-    public Vehiculo cambiarVehiculo(){
-        return new Auto(posicion,posicionAnterior,movimientos);
-    }
-
 }

@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.Movimientos.Direccion;
+import edu.fiuba.algo3.modelo.Direcciones.Direccion;
 import edu.fiuba.algo3.modelo.efectos.Efecto;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 
@@ -34,9 +34,9 @@ public class Camino {
         return this.esquinaInicial.equals(c.esquinaFinal) && this.esquinaFinal.equals(c.esquinaInicial);
     }
 
-    public void aplicarEfecto(Jugador jugador, Vehiculo vehiculo){
+    public void aplicarEfecto(Vehiculo vehiculo){
         for (Efecto efecto: efectos) {
-            vehiculo.aplicarEfecto(jugador, efecto);
+            vehiculo.aplicarEfecto(efecto);
         }
     }
 }
