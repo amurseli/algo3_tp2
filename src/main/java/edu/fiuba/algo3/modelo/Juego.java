@@ -1,7 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.Movimientos.Direccion;
+import edu.fiuba.algo3.modelo.Direcciones.Direccion;
 import edu.fiuba.algo3.modelo.efectos.Efecto;
+import edu.fiuba.algo3.modelo.vehiculos.TipoVehiculo;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 
 public class Juego {
@@ -19,6 +20,10 @@ public class Juego {
 
     public Vehiculo obtenerVehiculo(){
         return ciudad.obtenerVehiculo();
+    }
+
+    public TipoVehiculo obtenerTipoVehiculo(){
+        return ciudad.obtenerTipoVehiculo();
     }
 
     public int obtenerMovimientosRealizados() {

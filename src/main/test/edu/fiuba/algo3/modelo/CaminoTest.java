@@ -1,10 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.Movimientos.Derecha;
-import edu.fiuba.algo3.modelo.Movimientos.Izquierda;
-import edu.fiuba.algo3.modelo.efectos.sorpresas.Sorpresa;
-import edu.fiuba.algo3.modelo.efectos.sorpresas.SorpresaDesfavorable;
-import edu.fiuba.algo3.modelo.efectos.sorpresas.SorpresaFavorable;
+import edu.fiuba.algo3.modelo.Direcciones.Derecha;
+import edu.fiuba.algo3.modelo.Direcciones.Izquierda;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

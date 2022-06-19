@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.Movimientos;
+package edu.fiuba.algo3.modelo.Direcciones;
 
 import edu.fiuba.algo3.modelo.Esquina;
 
