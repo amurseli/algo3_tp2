@@ -48,4 +48,8 @@ public class Juego {
     public ListadoCaminos obtenerEfectos() {
         return  ciudad.obtenerEfectos();
     }
+
+    public Esquina obtenerMeta() {
+        return ciudad.obtenerMeta();
+    }
 }

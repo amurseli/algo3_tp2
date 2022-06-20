@@ -50,4 +50,8 @@ public class Ciudad {
     public ListadoCaminos obtenerEfectos() {
         return caminos;
     }
+
+    public Esquina obtenerMeta() {
+        return meta;
+    }
 }

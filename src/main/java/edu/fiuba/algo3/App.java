@@ -35,11 +35,12 @@ public class App extends Application implements EventHandler<KeyEvent> {
 
         Group layout = new Group();
         Juego juego = new Juego();
-        juego.crearCiudad(new Esquina(10,10),new Esquina(1,10),new Vehiculo(new Moto(), new Esquina(5,5)));
+        juego.crearCiudad(new Esquina(10,10),new Esquina(1,9),new Vehiculo(new Moto(), new Esquina(5,5)));
         juego.agregarCaminoConEfecto(new Camino(new Esquina(2,2),new Derecha()), new Pozo());
-        juego.agregarCaminoConEfecto(new Camino(new Esquina(2,7),new Abajo()), new Piquete());
+        juego.agregarCaminoConEfecto(new Camino(new Esquina(2,7),new Abajo()), new Pozo());
         Esquina limite = juego.devolverLimite();
         Esquina posicionJugador = juego.obtenerVehiculo().posicion;
+        Esquina posicionMeta = juego.obtenerMeta();
 
 
         Rectangle mapa = new Rectangle(limite.columna * 50, limite.fila* 50);
@@ -47,12 +48,18 @@ public class App extends Application implements EventHandler<KeyEvent> {
         mapa.setY(720/2 - mapa.getHeight()/2);
         layout.getChildren().add(mapa);
 
+        Rectangle meta = new Rectangle(20,20);
+        meta.setFill(Paint.valueOf("blue"));
+        meta.setX(1620/2 - mapa.getWidth()/2 +  (posicionMeta.columna)* 50);
+        meta.setY(720/2 - mapa.getHeight()/2 + (posicionMeta.fila)* 50);
+        layout.getChildren().add(meta);
+
         ListadoCaminos caminosConEfectos = juego.obtenerEfectos();
         for (Camino camino : caminosConEfectos.caminosConEfectos) {
             Rectangle efecto = new Rectangle(20,20);
             efecto.setFill(Paint.valueOf("green"));
-            efecto.setX(1620/2 - mapa.getWidth()/2 + camino.esquinaInicial.columna * 50 );
-            efecto.setY(720/2 - mapa.getHeight()/2 +camino.esquinaInicial.fila * 50 );
+            efecto.setX(1620/2 - mapa.getWidth()/2 +  (camino.esquinaInicial.columna * 50 + camino.esquinaFinal.columna*50) / 2);
+            efecto.setY(720/2 - mapa.getHeight()/2 + (camino.esquinaInicial.fila * 50 + camino.esquinaFinal.fila*50) / 2);
             layout.getChildren().add(efecto);
         }
 
