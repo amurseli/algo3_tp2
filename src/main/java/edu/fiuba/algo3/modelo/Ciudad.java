@@ -43,4 +43,7 @@ public class Ciudad {
     }
 
 
+    public Esquina obtenerLimite() {
+        return limite;
+    }
 }

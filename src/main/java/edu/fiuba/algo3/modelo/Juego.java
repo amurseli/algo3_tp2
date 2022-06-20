@@ -29,6 +29,10 @@ public class Juego {
         };
     }
 
+    public Esquina devolverLimite(){
+        return ciudad.obtenerLimite();
+    }
+
     public Vehiculo obtenerVehiculo(){
         return ciudad.obtenerVehiculo();
     }
