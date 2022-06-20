@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class ListadoCaminos {
 
     //creo que seria mas apropiado que se llame listado de camions CON EFECTOS
-    private ArrayList<Camino> caminosConEfectos;
+    public ArrayList<Camino> caminosConEfectos;
 
     public ListadoCaminos(){
         caminosConEfectos = new ArrayList<>();

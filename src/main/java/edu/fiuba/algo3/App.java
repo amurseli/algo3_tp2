@@ -1,8 +1,12 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Direcciones.*;
 import edu.fiuba.algo3.modelo.Esquina;
 import edu.fiuba.algo3.modelo.Juego;
+import edu.fiuba.algo3.modelo.ListadoCaminos;
+import edu.fiuba.algo3.modelo.efectos.obstaculos.Piquete;
+import edu.fiuba.algo3.modelo.efectos.obstaculos.Pozo;
 import edu.fiuba.algo3.modelo.vehiculos.Moto;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 import javafx.application.Application;
@@ -32,6 +36,8 @@ public class App extends Application implements EventHandler<KeyEvent> {
         Group layout = new Group();
         Juego juego = new Juego();
         juego.crearCiudad(new Esquina(10,10),new Esquina(1,10),new Vehiculo(new Moto(), new Esquina(5,5)));
+        juego.agregarCaminoConEfecto(new Camino(new Esquina(2,2),new Derecha()), new Pozo());
+        juego.agregarCaminoConEfecto(new Camino(new Esquina(2,7),new Abajo()), new Piquete());
         Esquina limite = juego.devolverLimite();
         Esquina posicionJugador = juego.obtenerVehiculo().posicion;
 
@@ -40,6 +46,16 @@ public class App extends Application implements EventHandler<KeyEvent> {
         mapa.setX(1620/2 - mapa.getWidth()/2); //los pongo en el centro
         mapa.setY(720/2 - mapa.getHeight()/2);
         layout.getChildren().add(mapa);
+
+        ListadoCaminos caminosConEfectos = juego.obtenerEfectos();
+        for (Camino camino : caminosConEfectos.caminosConEfectos) {
+            Rectangle efecto = new Rectangle(20,20);
+            efecto.setFill(Paint.valueOf("green"));
+            efecto.setX(1620/2 - mapa.getWidth()/2 + camino.esquinaInicial.columna * 50 );
+            efecto.setY(720/2 - mapa.getHeight()/2 +camino.esquinaInicial.fila * 50 );
+            layout.getChildren().add(efecto);
+        }
+
 
         Rectangle vehicle = new Rectangle(20, 15);
         vehicle.setFill(Paint.valueOf("red"));

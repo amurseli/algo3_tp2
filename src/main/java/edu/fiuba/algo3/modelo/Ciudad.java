@@ -46,4 +46,8 @@ public class Ciudad {
     public Esquina obtenerLimite() {
         return limite;
     }
+
+    public ListadoCaminos obtenerEfectos() {
+        return caminos;
+    }
 }

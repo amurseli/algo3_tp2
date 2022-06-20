@@ -45,4 +45,7 @@ public class Juego {
         return this.ciudad.obtenerMovimientosRealizados();
     }
 
+    public ListadoCaminos obtenerEfectos() {
+        return  ciudad.obtenerEfectos();
+    }
 }
