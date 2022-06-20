@@ -7,7 +7,11 @@ import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 
 public class Juego {
     Ciudad ciudad;
-    public Juego(){}
+
+    Ranking listaDePuntajes;
+    public Juego(){
+        this.listaDePuntajes = new Ranking();
+    }
 
     public void crearCiudad(Esquina limite, Esquina meta, Vehiculo vehiculo) {
         this.ciudad = new Ciudad(limite, meta, vehiculo);
@@ -16,7 +20,14 @@ public class Juego {
     public void agregarCaminoConEfecto(Camino nuevoCamino, Efecto nuevoEfecto){
         ciudad.agregarCaminoConEfecto(nuevoCamino, nuevoEfecto);
     }
-    public void mover(Direccion unaDireccion) { ciudad.mover(unaDireccion);}
+    public void mover(Direccion unaDireccion) {
+        if(ciudad.mover(unaDireccion)){
+            System.out.println("SE TERMINO EL JUEGO. HAS GANADO");
+            Puntaje nuevoPuntaje = new Puntaje(this.obtenerMovimientosRealizados(),"JUANCITO"); //harcodeo el nikname porque eso habria que pasarlo cuando se gane como un input
+            this.listaDePuntajes.agregarPuntaje(nuevoPuntaje);
+            listaDePuntajes.mostrarRanking();
+        };
+    }
 
     public Vehiculo obtenerVehiculo(){
         return ciudad.obtenerVehiculo();

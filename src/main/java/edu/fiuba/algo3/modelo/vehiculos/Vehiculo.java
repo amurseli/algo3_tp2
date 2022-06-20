@@ -27,12 +27,13 @@ public class Vehiculo {
         return this.estado;
     }
 
-    public void mover(Direccion unaDireccion, ListadoCaminos caminos) {
+    public Esquina mover(Direccion unaDireccion, ListadoCaminos caminos) {
         Esquina nuevaEsquina = unaDireccion.siguiente(posicion);
         sumarMovimientos(1);
         asignarPosicion(nuevaEsquina);
         Camino caminoRecorrido = caminos.obtenerCaminoRecorrido(new Camino(posicionAnterior, unaDireccion));
         caminoRecorrido.aplicarEfecto(this);
+        return posicion;
     }
 
     public void asignarPosicion(Esquina nuevaPosicion) {

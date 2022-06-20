@@ -29,7 +29,14 @@ public class Ciudad {
         return vehiculo.obtenerTipoVehiculo();
     }
 
-    public void mover(Direccion unaDireccion) { vehiculo.mover(unaDireccion,caminos); }
+    public Boolean mover(Direccion unaDireccion) {
+        Esquina posicionActual = vehiculo.mover(unaDireccion,caminos);
+        if (posicionActual.equals(meta)){
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+
+    }
 
     public void agregarCaminoConEfecto(Camino camino, Efecto efecto){
         caminos.agregarCaminoConEfecto(camino,efecto);
