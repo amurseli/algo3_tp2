@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.ListadoCaminos;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.Piquete;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.Pozo;
+import edu.fiuba.algo3.modelo.vehiculos.Auto;
 import edu.fiuba.algo3.modelo.vehiculos.Moto;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 import javafx.application.Application;
@@ -35,9 +36,9 @@ public class App extends Application implements EventHandler<KeyEvent> {
 
         Group layout = new Group();
         Juego juego = new Juego();
-        juego.crearCiudad(new Esquina(10,10),new Esquina(1,9),new Vehiculo(new Moto(), new Esquina(5,5)));
+        juego.crearCiudad(new Esquina(10,10),new Esquina(1,9),new Vehiculo(new Auto(), new Esquina(5,5)));
         juego.agregarCaminoConEfecto(new Camino(new Esquina(2,2),new Derecha()), new Pozo());
-        juego.agregarCaminoConEfecto(new Camino(new Esquina(2,7),new Abajo()), new Pozo());
+        juego.agregarCaminoConEfecto(new Camino(new Esquina(2,7),new Abajo()), new Piquete());
         Esquina limite = juego.devolverLimite();
         Esquina posicionJugador = juego.obtenerVehiculo().posicion;
         Esquina posicionMeta = juego.obtenerMeta();
@@ -47,6 +48,19 @@ public class App extends Application implements EventHandler<KeyEvent> {
         mapa.setX(1620/2 - mapa.getWidth()/2); //los pongo en el centro
         mapa.setY(720/2 - mapa.getHeight()/2);
         layout.getChildren().add(mapa);
+
+
+        //aca se crean los caminos blancos
+        for (int i = 0; i < 30 ; i++){
+            Rectangle caminitoHorizontal = new Rectangle(1620, 20);
+            Rectangle caminitoVertical = new Rectangle(20, 720);
+            caminitoHorizontal.setFill(Paint.valueOf("white"));
+            caminitoVertical.setFill(Paint.valueOf("white"));
+            caminitoHorizontal.setY(i * 50 + 10);
+            caminitoVertical.setX(i* 50 + 10);
+            layout.getChildren().add(caminitoHorizontal);
+            layout.getChildren().add(caminitoVertical);
+        }
 
         Rectangle meta = new Rectangle(20,20);
         meta.setFill(Paint.valueOf("blue"));
