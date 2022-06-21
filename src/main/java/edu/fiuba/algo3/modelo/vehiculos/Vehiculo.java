@@ -27,12 +27,17 @@ public class Vehiculo {
         return this.estado;
     }
 
-    public Esquina mover(Direccion unaDireccion, ListadoCaminos caminos) {
+    public Esquina mover(Direccion unaDireccion, ListadoCaminos caminos, Esquina limite) {
         Esquina nuevaEsquina = unaDireccion.siguiente(posicion);
-        sumarMovimientos(1);
-        asignarPosicion(nuevaEsquina);
-        Camino caminoRecorrido = caminos.obtenerCaminoRecorrido(new Camino(posicionAnterior, unaDireccion));
-        caminoRecorrido.aplicarEfecto(this);
+
+        if(!validarPosicion(limite,nuevaEsquina)){
+
+            sumarMovimientos(1);
+            asignarPosicion(nuevaEsquina);
+            Camino caminoRecorrido = caminos.obtenerCaminoRecorrido(new Camino(posicionAnterior, unaDireccion));
+            caminoRecorrido.aplicarEfecto(this);
+        }
+
         return posicion;
     }
 
@@ -59,5 +64,10 @@ public class Vehiculo {
 
     public void cambiarTipo() {
         this.estado = this.estado.cambiarVehiculo();
+    }
+
+    public boolean validarPosicion(Esquina limite, Esquina nuevaEsquina){
+        return nuevaEsquina.getFila() < 0 || nuevaEsquina.getColumna() < 0 ||
+                nuevaEsquina.getFila() > limite.getFila() || nuevaEsquina.getColumna() > limite.getColumna();
     }
 }

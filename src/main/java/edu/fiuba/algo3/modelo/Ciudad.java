@@ -30,7 +30,7 @@ public class Ciudad {
     }
 
     public Boolean mover(Direccion unaDireccion) {
-        Esquina posicionActual = vehiculo.mover(unaDireccion,caminos);
+        Esquina posicionActual = vehiculo.mover(unaDireccion,caminos, limite);
         if (posicionActual.equals(meta)){
             return Boolean.TRUE;
         }
@@ -54,4 +54,5 @@ public class Ciudad {
     public Esquina obtenerMeta() {
         return meta;
     }
+
 }
