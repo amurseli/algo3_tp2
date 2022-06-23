@@ -1,30 +1,46 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.Movimientos.Direccion;
-import edu.fiuba.algo3.modelo.efectos.Efecto;
+import edu.fiuba.algo3.modelo.Direcciones.Direccion;
+import edu.fiuba.algo3.modelo.efectos.obstaculos.Obstaculo;
+import edu.fiuba.algo3.modelo.efectos.sorpresas.Sorpresa;
+import edu.fiuba.algo3.modelo.vehiculos.TipoVehiculo;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 
 import java.util.ArrayList;
 
 public class Camino {
     public Esquina esquinaInicial, esquinaFinal;
-    private ArrayList<Efecto> efectos;
+    private ArrayList<Sorpresa> sospresas;
+    private ArrayList<Obstaculo> obstaculos;
 
     public Camino(Esquina esquinaInicial, Direccion unaDireccion) {
         this.esquinaInicial = esquinaInicial;
         esquinaFinal = unaDireccion.siguiente(esquinaInicial);
-        efectos = new ArrayList<>();
+        sospresas = new ArrayList<>();
+        obstaculos = new ArrayList<>();
     }
-    public void agregrarEfecto(Efecto nuevoEfecto){
+    public void agregrarEfecto(Sorpresa nuevaSorpresa){
         // TODO: excepciones en los controles
-        if (efectos.size() >= 2) {
+        if (sospresas.size() >= 2) {
             return;
         }
-        if (efectos.size() == 1 && efectos.get(0).getClass().equals(nuevoEfecto.getClass())) {
+        if (sospresas.size() == 1 && sospresas.get(0).getClass().equals(nuevaSorpresa.getClass())) {
             // TODO: ver de mejorar la logica para que solo acepte como máximo 1 Obstaculo y 1 Sorpresa
             return;
         }
-        efectos.add(nuevoEfecto);
+        sospresas.add(nuevaSorpresa);
+    }
+
+    public void agregrarEfecto(Obstaculo nuevoObstaculo){
+        // TODO: excepciones en los controles
+        if (obstaculos.size() >= 2) {
+            return;
+        }
+        if (obstaculos.size() == 1 && obstaculos.get(0).getClass().equals(nuevoObstaculo.getClass())) {
+            // TODO: ver de mejorar la logica para que solo acepte como máximo 1 Obstaculo y 1 Sorpresa
+            return;
+        }
+        obstaculos.add(nuevoObstaculo);
     }
 
     @Override
@@ -34,18 +50,20 @@ public class Camino {
         return this.esquinaInicial.equals(c.esquinaFinal) && this.esquinaFinal.equals(c.esquinaInicial);
     }
 
-    public void aplicarEfecto(Jugador jugador, Vehiculo vehiculo){
-        for (Efecto efecto: efectos) {
-            vehiculo.aplicarEfecto(jugador, efecto);
+    public void aplicarEfecto(Vehiculo vehiculo, TipoVehiculo estadoVehiculo){
+        for (Sorpresa sorpresa: sospresas) {
+            estadoVehiculo.aplicarEfecto(vehiculo,sorpresa);
         }
+        for (Obstaculo obstaculo: obstaculos) {
+            estadoVehiculo.aplicarEfecto(vehiculo,obstaculo);
+        }
+
+        sospresas = new ArrayList<>();
     }
 
-    //TODO: UNA VEZ ESTE CLARO COMO USAR EXEPCION SE ACTIVA
-    /*public boolean validarEntradaDeEfecto(Efecto efecto) throws LimiteAlcanzado{
-        if (efectos.size() == 1 && efectos.get(0).getClass().equals(efecto.getClass())) {
-            throw new LimiteAlcanzado();
-        }
-        return false;
-    }*/
+    //Hecho unicamente para las pruebas
+    public int obtenerCantidadEfectos(){
+        return (sospresas.size() + obstaculos.size());
+    }
 
 }

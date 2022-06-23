@@ -25,6 +25,14 @@ public class Esquina {
         return new Esquina(this.fila, this.columna - 1);
     }
 
+    public int getFila(){
+        return fila;
+    }
+
+    public int getColumna(){
+        return columna;
+    }
+
     @Override
     public boolean equals(Object o) {
         Esquina e = (Esquina)o;

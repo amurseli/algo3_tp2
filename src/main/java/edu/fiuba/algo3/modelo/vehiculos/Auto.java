@@ -1,26 +1,21 @@
 package edu.fiuba.algo3.modelo.vehiculos;
 
-import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.efectos.Efecto;
+import edu.fiuba.algo3.modelo.efectos.obstaculos.Obstaculo;
+import edu.fiuba.algo3.modelo.efectos.sorpresas.Sorpresa;
 
-public class Auto extends Vehiculo {
-    public Auto(Esquina posicion) {
-        super(posicion);
+public class Auto implements TipoVehiculo {
+    @Override
+    public TipoVehiculo cambiarVehiculo(){
+        return new CuatroPorCuatro();
     }
 
     @Override
-    public void aplicarEfecto(Jugador jugador, Efecto efecto) {
-        efecto.aplicarEfecto(jugador,this);
+    public void aplicarEfecto(Vehiculo vehiculo, Sorpresa sorpresas) {
+        sorpresas.aplicarEfecto(vehiculo);
     }
 
-    //TODO: Para cuando tengamos las sorpresas hechas
-
-    public Auto(Esquina posicion, Esquina posicionAnterior, int movimientos) {
-        super(posicion, posicionAnterior, movimientos);
+    @Override
+    public void aplicarEfecto(Vehiculo vehiculo, Obstaculo obstaculos) {
+        obstaculos.aplicarEfecto(vehiculo, this);
     }
-
-    public Vehiculo cambiarVehiculo(){
-        return new CuatroPorCuatro(posicion,posicionAnterior,movimientos);
-    }
-
 }

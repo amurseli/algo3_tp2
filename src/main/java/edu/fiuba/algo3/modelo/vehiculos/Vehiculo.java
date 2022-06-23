@@ -1,24 +1,19 @@
 package edu.fiuba.algo3.modelo.vehiculos;
 
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.Movimientos.Direccion;
-import edu.fiuba.algo3.modelo.efectos.Efecto;
+import edu.fiuba.algo3.modelo.Direcciones.Direccion;
+import edu.fiuba.algo3.modelo.Puntaje;
 
-public abstract class Vehiculo {
+public class Vehiculo {
     public Esquina posicion;
     public Esquina posicionAnterior;
+    private int movimientos;
+    private TipoVehiculo estado;
 
-    protected int movimientos;
-
-    public Vehiculo(Esquina posicion) {
+    public Vehiculo(TipoVehiculo tipo, Esquina posicion) {
+        this.estado = tipo;
         this.posicion = posicion;
         movimientos = 0;
-    }
-
-    public Vehiculo(Esquina posicion, Esquina posicionAnterior, int movimientos){
-        this.posicion = posicion;
-        this.posicionAnterior = posicionAnterior;
-        this.movimientos = movimientos;
     }
 
     public int obtenerMovimientosRealizados() {
@@ -28,13 +23,22 @@ public abstract class Vehiculo {
     public Esquina obtenerPosicion(){
         return posicion;
     }
+    public TipoVehiculo obtenerTipoVehiculo() {
+        return this.estado;
+    }
 
-    public Camino mover(Direccion unaDireccion, ListadoCaminos caminos) {
+    public Esquina mover(Direccion unaDireccion, ListadoCaminos caminos, Esquina limite) {
         Esquina nuevaEsquina = unaDireccion.siguiente(posicion);
-        sumarMovimientos(1);
-        asignarPosicion(nuevaEsquina);
-        Camino caminoRecorrido = caminos.obtenerCaminoRecorrido(new Camino(posicionAnterior, unaDireccion));
-        return caminoRecorrido;
+
+        if(!validarPosicion(limite,nuevaEsquina)){
+
+            sumarMovimientos(1);
+            asignarPosicion(nuevaEsquina);
+            Camino caminoRecorrido = caminos.obtenerCaminoRecorrido(new Camino(posicionAnterior, unaDireccion));
+            caminoRecorrido.aplicarEfecto(this,estado);
+        }
+
+        return posicion;
     }
 
     public void asignarPosicion(Esquina nuevaPosicion) {
@@ -50,15 +54,21 @@ public abstract class Vehiculo {
         this.movimientos += m;
     }
 
-    public void setMovimientos(int nuevosMovimientos){
-        movimientos = nuevosMovimientos;
-    }
-
     public void aplicarPorcentaje(double porcentaje){
         movimientos = movimientos + (int)(movimientos * porcentaje);
     }
 
-    public abstract void aplicarEfecto(Jugador jugador, Efecto efecto);
+    public void cambiarTipo() {
+        this.estado = this.estado.cambiarVehiculo();
+    }
 
-    public abstract Vehiculo cambiarVehiculo();
+    public boolean validarPosicion(Esquina limite, Esquina nuevaEsquina){
+        return nuevaEsquina.getFila() < 0 || nuevaEsquina.getColumna() < 0 ||
+                nuevaEsquina.getFila() > limite.getFila() || nuevaEsquina.getColumna() > limite.getColumna();
+    }
+
+    public void datosDePartida(Ranking listaDePuntajes, String nickname){
+        Puntaje nuevoPuntaje = new Puntaje(movimientos,nickname);
+        listaDePuntajes.agregarPuntaje(nuevoPuntaje);
+    }
 }
