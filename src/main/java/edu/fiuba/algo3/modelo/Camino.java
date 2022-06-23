@@ -51,11 +51,11 @@ public class Camino {
     }
 
     public void aplicarEfecto(Vehiculo vehiculo, TipoVehiculo estadoVehiculo){
-        for (Sorpresa sorpresa: sospresas) {
-            estadoVehiculo.aplicarEfecto(vehiculo,sorpresa);
-        }
         for (Obstaculo obstaculo: obstaculos) {
             estadoVehiculo.aplicarEfecto(vehiculo,obstaculo);
+        }
+        for (Sorpresa sorpresa: sospresas) {
+            estadoVehiculo.aplicarEfecto(vehiculo,sorpresa);
         }
 
         sospresas = new ArrayList<>();

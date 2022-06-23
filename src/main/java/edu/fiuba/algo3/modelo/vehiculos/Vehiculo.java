@@ -6,7 +6,7 @@ import edu.fiuba.algo3.modelo.Puntaje;
 
 public class Vehiculo {
     private Esquina posicion;
-    public Esquina posicionAnterior;
+    private Esquina posicionAnterior;
     private int movimientos;
     private TipoVehiculo estado;
 
@@ -41,7 +41,7 @@ public class Vehiculo {
         return posicion;
     }
 
-    public void asignarPosicion(Esquina nuevaPosicion) {
+    private void asignarPosicion(Esquina nuevaPosicion) {
         posicionAnterior = posicion;
         posicion = nuevaPosicion;
     }
@@ -50,8 +50,8 @@ public class Vehiculo {
         posicion = posicionAnterior;
     }
 
-    public void sumarMovimientos(int m) {
-        this.movimientos += m;
+    public void sumarMovimientos(int movimientos) {
+        this.movimientos += movimientos;
     }
 
     public void aplicarPorcentaje(double porcentaje){
@@ -59,7 +59,7 @@ public class Vehiculo {
     }
 
     public void cambiarTipo() {
-        this.estado = this.estado.cambiarVehiculo();
+        estado = estado.cambiarVehiculo();
     }
 
     public boolean validarPosicion(Esquina limite, Esquina nuevaEsquina){
@@ -74,5 +74,5 @@ public class Vehiculo {
 
     public Boolean enEsquina(Esquina unaEsquina){
         return (posicion.equals(unaEsquina));
-    }
+    } //Solo para test
 }
