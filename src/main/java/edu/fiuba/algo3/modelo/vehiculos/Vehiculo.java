@@ -5,7 +5,7 @@ import edu.fiuba.algo3.modelo.Direcciones.Direccion;
 import edu.fiuba.algo3.modelo.Puntaje;
 
 public class Vehiculo {
-    public Esquina posicion;
+    private Esquina posicion;
     public Esquina posicionAnterior;
     private int movimientos;
     private TipoVehiculo estado;
@@ -23,8 +23,8 @@ public class Vehiculo {
     public Esquina obtenerPosicion(){
         return posicion;
     }
-    public TipoVehiculo obtenerTipoVehiculo() {
-        return this.estado;
+    public Object obtenerTipoVehiculo() {//METODO USADO SOLO EN PRUEBAS
+        return (estado.getClass());
     }
 
     public Esquina mover(Direccion unaDireccion, ListadoCaminos caminos, Esquina limite) {
@@ -70,5 +70,9 @@ public class Vehiculo {
     public void datosDePartida(Ranking listaDePuntajes, String nickname){
         Puntaje nuevoPuntaje = new Puntaje(movimientos,nickname);
         listaDePuntajes.agregarPuntaje(nuevoPuntaje);
+    }
+
+    public Boolean enEsquina(Esquina unaEsquina){
+        return (posicion.equals(unaEsquina));
     }
 }

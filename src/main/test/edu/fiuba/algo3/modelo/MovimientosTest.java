@@ -18,28 +18,28 @@ public class MovimientosTest {
         Juego juego = new Juego();
         juego.crearCiudad(new Esquina(10, 10),new Esquina(10,10),new Vehiculo(new Auto(), new Esquina(2,2)));
         juego.mover(new Izquierda());
-        Assertions.assertEquals(juego.ciudad.vehiculo.posicion, new Esquina(2,1));
+        Assertions.assertTrue(juego.vehiculoEnEsquina(new Esquina(2, 1)));
     }
     @Test
     public void Test02MoverseDerecha(){
         Juego juego = new Juego();
         juego.crearCiudad(new Esquina(10, 10),new Esquina(10,10),new Vehiculo(new Auto(), new Esquina(2,2)));
         juego.mover(new Derecha());
-        Assertions.assertEquals(juego.ciudad.vehiculo.posicion, new Esquina(2,3));
+        Assertions.assertTrue(juego.vehiculoEnEsquina(new Esquina(2, 3)));
     }
     @Test
     public void Test03MoverseArriba(){
         Juego juego = new Juego();
         juego.crearCiudad(new Esquina(10, 10),new Esquina(10,10),new Vehiculo(new Auto(), new Esquina(2,2)));
         juego.mover(new Arriba());
-        Assertions.assertEquals(juego.ciudad.vehiculo.posicion, new Esquina(1,2));
+        Assertions.assertTrue(juego.vehiculoEnEsquina(new Esquina(1, 2)));
     }
     @Test
     public void Test04MoverseAbajo(){
         Juego juego = new Juego();
         juego.crearCiudad(new Esquina(10, 10),new Esquina(10,10),new Vehiculo(new Auto(), new Esquina(2,2)));
         juego.mover(new Abajo());
-        Assertions.assertEquals(juego.ciudad.vehiculo.posicion, new Esquina(3,2));
+        Assertions.assertTrue(juego.vehiculoEnEsquina(new Esquina(3, 2)));
     }
     @Test
     public void Test05ProbarMovimientosRealizados(){
@@ -68,7 +68,7 @@ public class MovimientosTest {
         juego.agregarCamino(camino);
 
         juego.mover(new Arriba());
-        Assertions.assertEquals(juego.obtenerVehiculo().obtenerPosicion(), new Esquina(2, 5));
+        Assertions.assertTrue(juego.vehiculoEnEsquina(new Esquina(2, 5)));
 
     }
     @Test

@@ -14,12 +14,9 @@ public class MetaTest {
 
     @Test
     public void VehiculoLlegaALaMetaYGana() {
-        Juego juego = new Juego();
-        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 3), new Vehiculo(new Auto(), new Esquina(1, 1)));
+        Ciudad ciudad = new Ciudad(new Esquina(10, 10), new Esquina(1, 2), new Vehiculo(new Auto(),new Esquina(1, 1)));
 
-        juego.mover(new Derecha());
-        juego.mover(new Derecha());
-
+        Assertions.assertTrue(ciudad.mover(new Derecha()));
     }
 
     @Test
@@ -36,7 +33,6 @@ public class MetaTest {
         juego.mover(new Derecha());
         juego.mover(new Derecha());
         juego.mover(new Derecha());
-
 
     }
 }
