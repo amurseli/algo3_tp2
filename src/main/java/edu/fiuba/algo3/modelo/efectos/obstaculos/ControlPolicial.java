@@ -6,7 +6,7 @@ import edu.fiuba.algo3.modelo.vehiculos.CuatroPorCuatro;
 import edu.fiuba.algo3.modelo.vehiculos.Moto;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 
-public class ControlPolicial extends Obstaculo {
+public class ControlPolicial implements Obstaculo {
     GeneradorNumeros generadorNumeros;
 
     public ControlPolicial(GeneradorNumeros generadorNumeros) {

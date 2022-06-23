@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.Direcciones.*;
 import edu.fiuba.algo3.modelo.Esquina;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.ListadoCaminos;
+import edu.fiuba.algo3.modelo.efectos.obstaculos.ControlPolicial;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.Piquete;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.Pozo;
 import edu.fiuba.algo3.modelo.vehiculos.Auto;
@@ -37,8 +38,15 @@ public class App extends Application implements EventHandler<KeyEvent> {
         Group layout = new Group();
         Juego juego = new Juego();
         juego.crearCiudad(new Esquina(10,10),new Esquina(1,9),new Vehiculo(new Auto(), new Esquina(5,5)));
-        juego.agregarCaminoConEfecto(new Camino(new Esquina(2,2),new Derecha()), new Pozo());
-        juego.agregarCaminoConEfecto(new Camino(new Esquina(2,7),new Abajo()), new Piquete());
+
+        Camino camino1 = new Camino(new Esquina(2,2),new Derecha());
+        camino1.agregrarEfecto(new Pozo());
+        juego.agregarCamino(camino1);
+
+        Camino camino2 = new Camino(new Esquina(2,2),new Derecha());
+        camino2.agregrarEfecto(new Piquete());
+        juego.agregarCamino(camino2);
+
         Esquina limite = juego.devolverLimite();
         Esquina posicionJugador = juego.obtenerVehiculo().posicion;
         Esquina posicionMeta = juego.obtenerMeta();

@@ -52,7 +52,10 @@ public class MovimientosTest {
     public void Test06MuevoAbajoYSeAplicaEfectoPozo(){
         Juego juego = new Juego();
         juego.crearCiudad(new Esquina(10, 10),new Esquina(10,10),new Vehiculo(new Auto(), new Esquina(1,5)));
-        juego.agregarCaminoConEfecto(new Camino(new Esquina(1,5), new Abajo()), new Pozo());
+        Camino camino = new Camino(new Esquina(1,5), new Abajo());
+        camino.agregrarEfecto(new Pozo());
+        juego.agregarCamino(camino);
+
         juego.mover(new Abajo());
         Assertions.assertEquals(juego.obtenerMovimientosRealizados(), 4);
     }
@@ -60,7 +63,10 @@ public class MovimientosTest {
     public void Test07MuevoArribaYSeAplicaEfectoPiquete(){
         Juego juego = new Juego();
         juego.crearCiudad(new Esquina(10, 10),new Esquina(10,10),new Vehiculo(new Auto(), new Esquina(2,5)));
-        juego.agregarCaminoConEfecto(new Camino(new Esquina(1,5), new Abajo()), new Piquete());
+        Camino camino = new Camino(new Esquina(1,5), new Abajo());
+        camino.agregrarEfecto(new Piquete());
+        juego.agregarCamino(camino);
+
         juego.mover(new Arriba());
         Assertions.assertEquals(juego.obtenerVehiculo().obtenerPosicion(), new Esquina(2, 5));
 
@@ -69,7 +75,10 @@ public class MovimientosTest {
     public void Test08MuevoIzquierdaYSeAplicaEfectoSorpresaDesfavorable(){
         Juego juego = new Juego();
         juego.crearCiudad(new Esquina(10, 10),new Esquina(10,10),new Vehiculo(new Auto(), new Esquina(1,5)));
-        juego.agregarCaminoConEfecto(new Camino(new Esquina(1,5), new Abajo()), new SorpresaDesfavorable());
+        Camino camino = new Camino(new Esquina(1,5), new Abajo());
+        camino.agregrarEfecto(new SorpresaDesfavorable());
+        juego.agregarCamino(camino);
+
         juego.mover(new Derecha());
         juego.mover(new Izquierda());
         juego.mover(new Derecha());

@@ -1,7 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.efectos.Efecto;
-
 import java.util.ArrayList;
 
 public class ListadoCaminos {
@@ -13,17 +11,8 @@ public class ListadoCaminos {
         caminosConEfectos = new ArrayList<>();
     }
 
-    public void agregarCaminoConEfecto(Camino nuevoCamino, Efecto nuevoEfecto){
-        boolean esNuevo = true;
-        Camino camino = nuevoCamino;
-        for (Camino c : caminosConEfectos) {
-            if (c.equals(nuevoCamino)) {
-                esNuevo = false;
-                camino = c;
-            }
-        }
-        camino.agregrarEfecto(nuevoEfecto);
-        if (esNuevo) caminosConEfectos.add(camino);
+    public void agregarCamino(Camino nuevoCamino){
+        caminosConEfectos.add(nuevoCamino);
     }
     public Camino obtenerCaminoRecorrido(Camino caminoRecorrido){
         Camino caminoConEfecto = null;

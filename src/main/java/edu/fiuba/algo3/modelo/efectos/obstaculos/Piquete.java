@@ -5,7 +5,7 @@ import edu.fiuba.algo3.modelo.vehiculos.CuatroPorCuatro;
 import edu.fiuba.algo3.modelo.vehiculos.Moto;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 
-public class Piquete extends Obstaculo {
+public class Piquete implements Obstaculo {
 
     @Override
     public void aplicarEfecto(Vehiculo vehiculo, Auto auto) {

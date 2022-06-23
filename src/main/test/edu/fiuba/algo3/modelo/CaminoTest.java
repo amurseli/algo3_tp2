@@ -2,6 +2,12 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Direcciones.Derecha;
 import edu.fiuba.algo3.modelo.Direcciones.Izquierda;
+import edu.fiuba.algo3.modelo.efectos.obstaculos.Pozo;
+import edu.fiuba.algo3.modelo.efectos.sorpresas.*;
+import edu.fiuba.algo3.modelo.vehiculos.Moto;
+import edu.fiuba.algo3.modelo.vehiculos.TipoVehiculo;
+import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,4 +52,20 @@ public class CaminoTest {
 
 
     }*/
+
+    @Test
+    public void Test02UnCaminoTieneDosEfectosSePasaPorLosEfectosSeEliminaLaSorpresaQuedaElObstaculo() {
+        ListadoCaminos lista = new ListadoCaminos();
+        Camino camino = new Camino(new Esquina(1,2),new Derecha());
+        camino.agregrarEfecto(new SorpresaFavorable());
+        camino.agregrarEfecto(new Pozo());
+
+        lista.agregarCamino(camino);
+        TipoVehiculo estado = new Moto();
+        Vehiculo unVehiculo = new Vehiculo(estado,new Esquina(1,1));
+
+        camino.aplicarEfecto(unVehiculo,estado);
+
+        Assertions.assertEquals(camino.obtenerCantidadEfectos(), 1);
+    }
 }

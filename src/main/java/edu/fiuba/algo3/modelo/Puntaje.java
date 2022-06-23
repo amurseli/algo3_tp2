@@ -7,7 +7,7 @@ public class Puntaje {
     Integer movimientos;
     String nickname;
 
-    Puntaje(Integer movimientos, String nickname){
+    public Puntaje(Integer movimientos, String nickname){
         this.movimientos = movimientos;
         this.nickname = nickname;
     }

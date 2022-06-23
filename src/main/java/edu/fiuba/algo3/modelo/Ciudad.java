@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Direcciones.Direccion;
-import edu.fiuba.algo3.modelo.efectos.Efecto;
 import edu.fiuba.algo3.modelo.vehiculos.TipoVehiculo;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 
@@ -31,15 +30,15 @@ public class Ciudad {
 
     public Boolean mover(Direccion unaDireccion) {
         Esquina posicionActual = vehiculo.mover(unaDireccion,caminos, limite);
-        if (posicionActual.equals(meta)){
-            return Boolean.TRUE;
-        }
-        return Boolean.FALSE;
-
+        return (posicionActual.equals(meta));
     }
 
-    public void agregarCaminoConEfecto(Camino camino, Efecto efecto){
-        caminos.agregarCaminoConEfecto(camino,efecto);
+    public void datosDePartida(Ranking listaDePuntajes, String nickname){
+        vehiculo.datosDePartida(listaDePuntajes,nickname);
+    }
+
+    public void agregarCamino(Camino camino){
+        caminos.agregarCamino(camino);
     }
 
 

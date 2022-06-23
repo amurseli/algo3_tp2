@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.efectos.obstaculos.Pozo;
 import edu.fiuba.algo3.modelo.vehiculos.Moto;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 import org.junit.jupiter.api.Assertions;
@@ -15,4 +14,5 @@ public class MotoTest {
         Esquina esquinaDeMoto = new Esquina(1,1);
         Assertions.assertEquals(moto.posicion,esquinaDeMoto);
     }
+
 }

@@ -1,21 +1,10 @@
 package edu.fiuba.algo3.modelo.efectos.sorpresas;
 
-import edu.fiuba.algo3.modelo.vehiculos.Auto;
-import edu.fiuba.algo3.modelo.vehiculos.CuatroPorCuatro;
-import edu.fiuba.algo3.modelo.vehiculos.Moto;
-import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
+import edu.fiuba.algo3.modelo.vehiculos.*;
 
-public class SorpresaDesfavorable extends Sorpresa {
+public class SorpresaDesfavorable implements Sorpresa {
     final double porcentaje = 0.25;
-    public void aplicarEfecto(Vehiculo vehiculo, Auto auto) {
-        vehiculo.aplicarPorcentaje(porcentaje);
-    }
-
-    public void aplicarEfecto(Vehiculo vehiculo, Moto moto) {
-        vehiculo.aplicarPorcentaje(porcentaje);
-    }
-
-    public void aplicarEfecto(Vehiculo vehiculo, CuatroPorCuatro cuatroPorCuatro) {
+    public void aplicarEfecto(Vehiculo vehiculo) {
         vehiculo.aplicarPorcentaje(porcentaje);
     }
 }

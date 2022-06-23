@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo.vehiculos;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Direcciones.Direccion;
-import edu.fiuba.algo3.modelo.efectos.Efecto;
+import edu.fiuba.algo3.modelo.Puntaje;
 
 public class Vehiculo {
     public Esquina posicion;
@@ -35,7 +35,7 @@ public class Vehiculo {
             sumarMovimientos(1);
             asignarPosicion(nuevaEsquina);
             Camino caminoRecorrido = caminos.obtenerCaminoRecorrido(new Camino(posicionAnterior, unaDireccion));
-            caminoRecorrido.aplicarEfecto(this);
+            caminoRecorrido.aplicarEfecto(this,estado);
         }
 
         return posicion;
@@ -58,10 +58,6 @@ public class Vehiculo {
         movimientos = movimientos + (int)(movimientos * porcentaje);
     }
 
-    public void aplicarEfecto(Efecto efecto) {
-        estado.aplicarEfecto(this, efecto);
-    }
-
     public void cambiarTipo() {
         this.estado = this.estado.cambiarVehiculo();
     }
@@ -69,5 +65,10 @@ public class Vehiculo {
     public boolean validarPosicion(Esquina limite, Esquina nuevaEsquina){
         return nuevaEsquina.getFila() < 0 || nuevaEsquina.getColumna() < 0 ||
                 nuevaEsquina.getFila() > limite.getFila() || nuevaEsquina.getColumna() > limite.getColumna();
+    }
+
+    public void datosDePartida(Ranking listaDePuntajes, String nickname){
+        Puntaje nuevoPuntaje = new Puntaje(movimientos,nickname);
+        listaDePuntajes.agregarPuntaje(nuevoPuntaje);
     }
 }
