@@ -12,7 +12,7 @@ public class MotoTest {
     public void Test01CreoUnVehiculoCorrectamenteSeLeAsignaUnaPosicionYseSolicitaLaPosicion(){
         Vehiculo moto = new Vehiculo(new Moto(), new Esquina(1,1));
         Esquina esquinaDeMoto = new Esquina(1,1);
-        Assertions.assertEquals(moto.posicion,esquinaDeMoto);
+        Assertions.assertEquals(moto.obtenerPosicion(),esquinaDeMoto);
     }
 
 }

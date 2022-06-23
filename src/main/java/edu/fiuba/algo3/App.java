@@ -48,7 +48,7 @@ public class App extends Application implements EventHandler<KeyEvent> {
         juego.agregarCamino(camino2);
 
         Esquina limite = juego.devolverLimite();
-        Esquina posicionJugador = juego.obtenerVehiculo().posicion;
+        Esquina posicionJugador = juego.obtenerPosicionVehiculo();
         Esquina posicionMeta = juego.obtenerMeta();
 
 
@@ -116,7 +116,7 @@ public class App extends Application implements EventHandler<KeyEvent> {
             if(event.getCode() == KeyCode.W){
 
                 juego.mover(new Arriba());
-                Esquina posicionActual = juego.obtenerVehiculo().posicion;
+                Esquina posicionActual = juego.obtenerPosicionVehiculo();
                 vehicle.setY(720/2 - mapa.getHeight()/2 + posicionActual.fila * 50);
 
                 System.out.println("W");
@@ -125,7 +125,7 @@ public class App extends Application implements EventHandler<KeyEvent> {
             }
             if(event.getCode() == KeyCode.S){
                 juego.mover(new Abajo());
-                Esquina posicionActual = juego.obtenerVehiculo().posicion;
+                Esquina posicionActual = juego.obtenerPosicionVehiculo();
                 vehicle.setY(720/2 - mapa.getHeight()/2 + posicionActual.fila * 50);
                 stage.setScene(scene);
 
@@ -134,7 +134,7 @@ public class App extends Application implements EventHandler<KeyEvent> {
             }
             if(event.getCode() == KeyCode.A){
                 juego.mover(new Izquierda());
-                Esquina posicionActual = juego.obtenerVehiculo().posicion;
+                Esquina posicionActual = juego.obtenerPosicionVehiculo();
                 stage.setScene(scene);
                 vehicle.setX(1620/2 - mapa.getWidth()/2 + posicionActual.columna * 50);
                 System.out.println("A");
@@ -142,7 +142,7 @@ public class App extends Application implements EventHandler<KeyEvent> {
             }
             if(event.getCode() == KeyCode.D){
                 juego.mover(new Derecha());
-                Esquina posicionActual = juego.obtenerVehiculo().posicion;
+                Esquina posicionActual = juego.obtenerPosicionVehiculo();
                 vehicle.setX(1620/2 - mapa.getWidth()/2 + posicionActual.columna * 50);
                 stage.setScene(scene);
                 System.out.println("D");

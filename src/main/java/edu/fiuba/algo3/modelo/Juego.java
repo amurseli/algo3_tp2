@@ -35,11 +35,15 @@ public class Juego {
         return ciudad.obtenerLimite();
     }
 
-    public Vehiculo obtenerVehiculo(){
-        return ciudad.obtenerVehiculo();
+    public Boolean vehiculoEnEsquina(Esquina unaEsquina){
+        return ciudad.vehiculoEnEsquina(unaEsquina);
     }
 
-    public TipoVehiculo obtenerTipoVehiculo(){
+    public Esquina obtenerPosicionVehiculo(){
+        return ciudad.obtenerPosicionVehiculo();
+    }
+
+    public Object obtenerTipoVehiculo(){
         return ciudad.obtenerTipoVehiculo();
     }
 

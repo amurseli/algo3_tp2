@@ -65,9 +65,9 @@ public class CasosDeUso2 {
 
         juego.mover(new Derecha());
         // TODO crear metodos para test para no tener que usar getters acá
-        Assertions.assertEquals(juego.obtenerTipoVehiculo().getClass(), Auto.class);
+        Assertions.assertEquals(juego.obtenerTipoVehiculo(), Auto.class);
         Assertions.assertEquals(juego.obtenerMovimientosRealizados(),1);
-        Assertions.assertEquals(juego.obtenerVehiculo().obtenerPosicion(),new Esquina(1,6));
+        Assertions.assertTrue(juego.vehiculoEnEsquina(new Esquina(1,6)));
     }
 
     @Test
@@ -79,7 +79,7 @@ public class CasosDeUso2 {
         juego.agregarCamino(camino);
 
         juego.mover(new Derecha());
-        Assertions.assertEquals(juego.obtenerVehiculo().obtenerPosicion(), new Esquina(1, 5));
+        Assertions.assertTrue(juego.vehiculoEnEsquina(new Esquina(1, 5)));
         Assertions.assertEquals(juego.obtenerMovimientosRealizados(),1);
     }
 
@@ -92,7 +92,7 @@ public class CasosDeUso2 {
         juego.agregarCamino(camino);
 
         juego.mover(new Derecha());
-        Assertions.assertEquals(juego.obtenerVehiculo().obtenerPosicion(), new Esquina(1, 6));
+        Assertions.assertTrue(juego.vehiculoEnEsquina(new Esquina(1, 6)));
         Assertions.assertEquals(juego.obtenerMovimientosRealizados(),3);
     }
 
@@ -105,7 +105,7 @@ public class CasosDeUso2 {
         juego.agregarCamino(camino);
 
         juego.mover(new Derecha());
-        Assertions.assertEquals(juego.obtenerVehiculo().obtenerPosicion(), new Esquina(1, 5));
+        Assertions.assertTrue(juego.vehiculoEnEsquina(new Esquina(1, 5)));
         Assertions.assertEquals(juego.obtenerMovimientosRealizados(),1);
     }
 }

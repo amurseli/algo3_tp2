@@ -20,11 +20,15 @@ public class Ciudad {
         return this.vehiculo.obtenerMovimientosRealizados();
     }
 
-    public Vehiculo obtenerVehiculo(){
-        return vehiculo;
+    public Boolean vehiculoEnEsquina(Esquina unaEsquina){
+        return vehiculo.enEsquina(unaEsquina);
     }
 
-    public TipoVehiculo obtenerTipoVehiculo(){
+    public Esquina obtenerPosicionVehiculo(){
+        return vehiculo.obtenerPosicion();
+    }
+
+    public Object obtenerTipoVehiculo(){
         return vehiculo.obtenerTipoVehiculo();
     }
 
