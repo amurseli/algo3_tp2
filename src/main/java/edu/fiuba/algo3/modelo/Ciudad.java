@@ -58,4 +58,7 @@ public class Ciudad {
         return meta;
     }
 
+    public Vehiculo obtenerVehiculo() {
+        return vehiculo;
+    }
 }

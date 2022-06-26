@@ -58,4 +58,8 @@ public class Juego {
     public Esquina obtenerMeta() {
         return ciudad.obtenerMeta();
     }
+
+    public Vehiculo obtenerVehiculo(){
+        return ciudad.obtenerVehiculo();
+    }
 }
