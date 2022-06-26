@@ -8,6 +8,7 @@ import edu.fiuba.algo3.modelo.ListadoCaminos;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.ControlPolicial;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.Piquete;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.Pozo;
+import edu.fiuba.algo3.modelo.efectos.sorpresas.CambioDeVehiculo;
 import edu.fiuba.algo3.modelo.vehiculos.Auto;
 import edu.fiuba.algo3.modelo.vehiculos.Moto;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
@@ -35,7 +36,6 @@ import javafx.stage.Stage;
  */
 public class App extends Application implements EventHandler<KeyEvent> {
     public static final int MULTIPLICADOR = 50;
-    Button button;
     @Override
     public void start(Stage stage) {
 
@@ -43,6 +43,10 @@ public class App extends Application implements EventHandler<KeyEvent> {
         Juego juego = new Juego();
         juego.crearCiudad(new Esquina(10,10),new Esquina(1,9),new Vehiculo(new Auto(), new Esquina(5,5)));
 
+        Esquina limite = juego.devolverLimite();
+        Esquina posicionMeta = juego.obtenerMeta();
+
+        //agregar los efectos. Aca tendria que haber un for que agregue ponele 15 efectos random en el mapa
         Camino camino1 = new Camino(new Esquina(2,2),new Derecha());
         camino1.agregrarEfecto(new Pozo());
         juego.agregarCamino(camino1);
@@ -51,11 +55,17 @@ public class App extends Application implements EventHandler<KeyEvent> {
         camino2.agregrarEfecto(new Piquete());
         juego.agregarCamino(camino2);
 
-        Esquina limite = juego.devolverLimite();
-        Esquina posicionJugador = juego.obtenerPosicionVehiculo();
-        Esquina posicionMeta = juego.obtenerMeta();
+        Camino camino3 = new Camino(new Esquina(4,4),new Derecha());
+        camino3.agregrarEfecto(new CambioDeVehiculo());
+        juego.agregarCamino(camino3);
+
+        Camino camino4 = new Camino(new Esquina(5,4),new Derecha());
+        camino4.agregrarEfecto(new CambioDeVehiculo());
+        juego.agregarCamino(camino4);
 
 
+
+        //creo el mapa
         Rectangle mapa = new Rectangle(limite.columna * MULTIPLICADOR, limite.fila* MULTIPLICADOR);
         mapa.setX(1620/2 - mapa.getWidth()/2); //los pongo en el centro
         mapa.setY(720/2 - mapa.getHeight()/2);
@@ -80,40 +90,17 @@ public class App extends Application implements EventHandler<KeyEvent> {
         metaView.setY(720/2 - mapa.getHeight()/2 + (posicionMeta.fila)* MULTIPLICADOR);
         layout.getChildren().add(metaView);
 
-        ListadoCaminos caminosConEfectos = juego.obtenerEfectos();
-        for (Camino camino : caminosConEfectos.caminosConEfectos) {
 
-            Image efecto = new Image("/piquete.png",30,30,true,false);
-            ImageView efectoView = new ImageView(efecto);
-            efectoView.setX(1620/2 - mapa.getWidth()/2 - 5 +  (camino.esquinaInicial.columna * MULTIPLICADOR + camino.esquinaFinal.columna*MULTIPLICADOR) / 2);
-            efectoView.setY(720/2 - mapa.getHeight()/2 - 5 + (camino.esquinaInicial.fila * MULTIPLICADOR + camino.esquinaFinal.fila*MULTIPLICADOR) / 2);
-            layout.getChildren().add(efectoView);
-        }
+        mostrarEfectos(juego,layout,mapa);
 
-
-        Image image1 = new Image("/auto.png", 20, 40,true,false);
-        ImageView imageView1 = new ImageView(image1);
-        imageView1.setX(MULTIPLICADOR);
-        imageView1.setY(MULTIPLICADOR);
-
-        layout.getChildren().add(imageView1);
-
-
-
-        Image vehicle = new Image("/auto.png", 20, 40,true,false);
-        ImageView imageVehicle = new ImageView(vehicle);
-
-        imageVehicle.setX(1620/2 - mapa.getWidth()/2 + posicionJugador.columna * MULTIPLICADOR);
-        imageVehicle.setY(720/2 - mapa.getHeight()/2 + posicionJugador.fila * MULTIPLICADOR);
-        imageView1.setRotate(270);
-        layout.getChildren().add(imageVehicle);
+        VehiculoView vehiculoView = new VehiculoView(juego.obtenerVehiculo(), layout, mapa);
 
         var scene = new Scene(layout, 1620, 720);
 
         stage.setScene(scene);
         stage.show();
 
-        leerInputs(scene,juego,imageVehicle,mapa,stage);
+        leerInputs(scene,juego,vehiculoView,stage);
 
 
     }
@@ -127,51 +114,43 @@ public class App extends Application implements EventHandler<KeyEvent> {
         launch();
     }
 
-    private void leerInputs(Scene scene, Juego juego, ImageView vehicle, Rectangle mapa, Stage stage){
+    private void leerInputs(Scene scene, Juego juego, VehiculoView vehiculoView, Stage stage){
         scene.setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.W){
 
                 juego.mover(new Arriba());
-                Esquina posicionActual = juego.obtenerPosicionVehiculo();
-                vehicle.setY(720/2 - mapa.getHeight()/2 + posicionActual.fila * MULTIPLICADOR);
-                vehicle.setRotate(180);
-
-                System.out.println("W");
-                stage.setScene(scene);
-                stage.show();
+                vehiculoView.actualizarPosicion(juego.obtenerVehiculo(),180);
             }
             if(event.getCode() == KeyCode.S){
                 juego.mover(new Abajo());
-                Esquina posicionActual = juego.obtenerPosicionVehiculo();
-                vehicle.setY(720/2 - mapa.getHeight()/2 + posicionActual.fila * MULTIPLICADOR);
-                vehicle.setRotate(0);
-                stage.setScene(scene);
+                vehiculoView.actualizarPosicion(juego.obtenerVehiculo(),0);
 
-
-
-                System.out.println("S");
-                stage.show();
             }
             if(event.getCode() == KeyCode.A){
                 juego.mover(new Izquierda());
-                Esquina posicionActual = juego.obtenerPosicionVehiculo();
-                stage.setScene(scene);
-                vehicle.setX(1620/2 - mapa.getWidth()/2 + posicionActual.columna * MULTIPLICADOR);
-                vehicle.setRotate(90);
-                System.out.println("A");
-                stage.show();
+                vehiculoView.actualizarPosicion(juego.obtenerVehiculo(),90);
+
             }
             if(event.getCode() == KeyCode.D){
                 juego.mover(new Derecha());
-                Esquina posicionActual = juego.obtenerPosicionVehiculo();
-                vehicle.setX(1620/2 - mapa.getWidth()/2 + posicionActual.columna * MULTIPLICADOR);
-                vehicle.setRotate(270);
-                stage.setScene(scene);
-                System.out.println("D");
-                stage.show();
+                vehiculoView.actualizarPosicion(juego.obtenerVehiculo(),270);
+
             }
         });
+        stage.setScene(scene);
+        stage.show();
+    }
 
+    private void mostrarEfectos(Juego juego, Group layout, Rectangle mapa){
+        ListadoCaminos caminosConEfectos = juego.obtenerEfectos();
+        for (Camino camino : caminosConEfectos.caminosConEfectos) {
+
+            Image efecto = new Image("/piquete.png",30,30,true,false);
+            ImageView efectoView = new ImageView(efecto);
+            efectoView.setX(1620/2 - mapa.getWidth()/2 - 5 +  (camino.esquinaInicial.columna * MULTIPLICADOR + camino.esquinaFinal.columna*MULTIPLICADOR) / 2);
+            efectoView.setY(720/2 - mapa.getHeight()/2 - 5 + (camino.esquinaInicial.fila * MULTIPLICADOR + camino.esquinaFinal.fila*MULTIPLICADOR) / 2);
+            layout.getChildren().add(efectoView);
+        }
     }
 
 }
