@@ -6,7 +6,6 @@ import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 
 public class Juego {
     Ciudad ciudad;
-
     Ranking listaDePuntajes;
     public Juego(){
         this.listaDePuntajes = new Ranking();
