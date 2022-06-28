@@ -5,30 +5,22 @@ import edu.fiuba.algo3.modelo.Direcciones.*;
 import edu.fiuba.algo3.modelo.Esquina;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.ListadoCaminos;
-import edu.fiuba.algo3.modelo.efectos.obstaculos.ControlPolicial;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.Piquete;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.Pozo;
 import edu.fiuba.algo3.modelo.efectos.sorpresas.CambioDeVehiculo;
 import edu.fiuba.algo3.modelo.vehiculos.Auto;
-import edu.fiuba.algo3.modelo.vehiculos.Moto;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 import edu.fiuba.algo3.vista.VehiculoView;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
 /**
@@ -43,7 +35,7 @@ public class App extends Application implements EventHandler<KeyEvent> {
         Juego juego = new Juego();
         juego.crearCiudad(new Esquina(10,10),new Esquina(1,9),new Vehiculo(new Auto(), new Esquina(5,5)));
 
-        Esquina limite = juego.devolverLimite();
+        Esquina limite = juego.obtenerLimite();
         Esquina posicionMeta = juego.obtenerMeta();
 
         //agregar los efectos. Aca tendria que haber un for que agregue ponele 15 efectos random en el mapa
@@ -142,7 +134,7 @@ public class App extends Application implements EventHandler<KeyEvent> {
     }
 
     private void mostrarEfectos(Juego juego, Group layout, Rectangle mapa){
-        ListadoCaminos caminosConEfectos = juego.obtenerEfectos();
+        ListadoCaminos caminosConEfectos = juego.obtenerCaminos();
         for (Camino camino : caminosConEfectos.caminosConEfectos) {
 
             Image efecto = new Image("/piquete.png",30,30,true,false);

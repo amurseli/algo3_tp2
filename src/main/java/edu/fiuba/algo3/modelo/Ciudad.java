@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Direcciones.Direccion;
-import edu.fiuba.algo3.modelo.vehiculos.TipoVehiculo;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 
 public class Ciudad {
@@ -22,10 +21,6 @@ public class Ciudad {
 
     public Boolean vehiculoEnEsquina(Esquina unaEsquina){
         return vehiculo.enEsquina(unaEsquina);
-    }
-
-    public Esquina obtenerPosicionVehiculo(){
-        return vehiculo.obtenerPosicion();
     }
 
     public Object obtenerTipoVehiculo(){

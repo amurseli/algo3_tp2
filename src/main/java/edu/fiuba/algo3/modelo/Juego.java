@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Direcciones.Direccion;
-import edu.fiuba.algo3.modelo.vehiculos.TipoVehiculo;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 
 public class Juego {
@@ -30,16 +29,12 @@ public class Juego {
         listaDePuntajes.mostrarRanking();
     }
 
-    public Esquina devolverLimite(){
+    public Esquina obtenerLimite(){
         return ciudad.obtenerLimite();
     }
 
     public Boolean vehiculoEnEsquina(Esquina unaEsquina){
         return ciudad.vehiculoEnEsquina(unaEsquina);
-    }
-
-    public Esquina obtenerPosicionVehiculo(){
-        return ciudad.obtenerPosicionVehiculo();
     }
 
     public Object obtenerTipoVehiculo(){
@@ -50,7 +45,7 @@ public class Juego {
         return this.ciudad.obtenerMovimientosRealizados();
     }
 
-    public ListadoCaminos obtenerEfectos() {
+    public ListadoCaminos obtenerCaminos() {
         return  ciudad.obtenerEfectos();
     }
 
