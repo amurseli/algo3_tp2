@@ -32,4 +32,8 @@ public class SorpresaView {
         efectoView.setY(720/2 - mapa.getHeight()/2 - 5 + (camino.esquinaInicial.fila * MULTIPLICADOR + camino.esquinaFinal.fila*MULTIPLICADOR) / 2);
         layout.getChildren().add(efectoView);
     }
+
+    void quitarImagen(ImageView imageView){
+        layout.getChildren().remove(imageView);
+    }
 }

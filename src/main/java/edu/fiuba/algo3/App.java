@@ -68,6 +68,8 @@ public class App extends Application implements EventHandler<KeyEvent> {
         metaView.setY(720/2 - mapa.getHeight()/2 + (posicionMeta.fila)* MULTIPLICADOR);
         layout.getChildren().add(metaView);
 
+
+
         //agregar los obtaculo
 
         for (int i = 0; i < 20; i++){
@@ -90,9 +92,9 @@ public class App extends Application implements EventHandler<KeyEvent> {
             Sorpresa sorpresa = generadorRandom.generarSorpresa();
             camino.agregrarEfecto(sorpresa);
             juego.agregarCamino(camino);
-            SorpresaView sorpresaView = new SorpresaView(layout,mapa,camino);
-            sorpresaView.mostrarImagen();
         }
+
+        mostrarSorpresas(juego,layout,mapa);
 
         //mostrarEfectos(juego,layout,mapa);
 
@@ -103,7 +105,7 @@ public class App extends Application implements EventHandler<KeyEvent> {
         stage.setScene(scene);
         stage.show();
 
-        leerInputs(scene,juego,vehiculoView,stage);
+        leerInputs(scene,juego,vehiculoView,stage,layout,mapa);
 
 
     }
@@ -117,7 +119,7 @@ public class App extends Application implements EventHandler<KeyEvent> {
         launch();
     }
 
-    private void leerInputs(Scene scene, Juego juego, VehiculoView vehiculoView, Stage stage){
+    private void leerInputs(Scene scene, Juego juego, VehiculoView vehiculoView, Stage stage, Group layout, Rectangle mapa){
         scene.setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.W){
 
@@ -140,19 +142,20 @@ public class App extends Application implements EventHandler<KeyEvent> {
 
             }
         });
+        mostrarSorpresas(juego, layout, mapa);
         stage.setScene(scene);
         stage.show();
     }
 
     private void mostrarSorpresas(Juego juego, Group layout, Rectangle mapa){
+        
         ListadoCaminos caminosConEfectos = juego.obtenerCaminos();
         for (Camino camino : caminosConEfectos.caminosConEfectos) {
 
-            Image efecto = new Image("/piquete.png",30,30,true,false);
-            ImageView efectoView = new ImageView(efecto);
-            efectoView.setX(1620/2 - mapa.getWidth()/2 - 5 +  (camino.esquinaInicial.columna * MULTIPLICADOR + camino.esquinaFinal.columna*MULTIPLICADOR) / 2);
-            efectoView.setY(720/2 - mapa.getHeight()/2 - 5 + (camino.esquinaInicial.fila * MULTIPLICADOR + camino.esquinaFinal.fila*MULTIPLICADOR) / 2);
-            layout.getChildren().add(efectoView);
+            for(Sorpresa sorpresa : camino.sospresas) {
+                SorpresaView sorpresaView = new SorpresaView(layout,mapa,camino);
+                sorpresaView.mostrarImagen();
+            }
         }
     }
 

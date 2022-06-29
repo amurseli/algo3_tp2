@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Camino {
     public Esquina esquinaInicial, esquinaFinal;
-    private ArrayList<Sorpresa> sospresas;
+    public ArrayList<Sorpresa> sospresas;
     private ArrayList<Obstaculo> obstaculos;
 
     public Camino(Esquina esquinaInicial, Direccion unaDireccion) {
