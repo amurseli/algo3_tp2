@@ -10,5 +10,4 @@ public interface Sorpresa {
     public abstract void aplicarEfecto(Vehiculo vehiculo);
 
 
-
 }

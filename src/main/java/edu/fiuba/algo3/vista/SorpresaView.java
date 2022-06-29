@@ -1,9 +1,6 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.modelo.Camino;
-import edu.fiuba.algo3.modelo.efectos.obstaculos.ControlPolicial;
-import edu.fiuba.algo3.modelo.efectos.obstaculos.Piquete;
-import edu.fiuba.algo3.modelo.efectos.obstaculos.Pozo;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

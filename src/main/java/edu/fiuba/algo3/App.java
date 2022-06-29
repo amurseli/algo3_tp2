@@ -17,13 +17,24 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.TilePane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 /**
  * JavaFX App
@@ -39,8 +50,6 @@ public class App extends Application implements EventHandler<KeyEvent> {
 
         Esquina limite = juego.obtenerLimite();
         Esquina posicionMeta = juego.obtenerMeta();
-
-
 
 
         //creo el mapa
@@ -96,19 +105,26 @@ public class App extends Application implements EventHandler<KeyEvent> {
 
         mostrarSorpresas(juego,layout,mapa);
 
-        //mostrarEfectos(juego,layout,mapa);
 
         VehiculoView vehiculoView = new VehiculoView(juego.obtenerVehiculo(), layout, mapa);
 
+        Text movimientos = new Text(100,100,"Movimientos: " + juego.obtenerMovimientosRealizados());
+        movimientos.setFont(Font.font(20));
+        movimientos.setFill(Color.BLACK);
+        layout.getChildren().add(movimientos);
+
+
+
+
         var scene = new Scene(layout, 1620, 720);
+
 
         stage.setScene(scene);
         stage.show();
 
-        leerInputs(scene,juego,vehiculoView,stage,layout,mapa);
-
-
+        leerInputs(scene,juego,vehiculoView,stage,movimientos);
     }
+
 
     @Override
     public void handle(KeyEvent event){
@@ -119,12 +135,13 @@ public class App extends Application implements EventHandler<KeyEvent> {
         launch();
     }
 
-    private void leerInputs(Scene scene, Juego juego, VehiculoView vehiculoView, Stage stage, Group layout, Rectangle mapa){
+    private void leerInputs(Scene scene, Juego juego, VehiculoView vehiculoView, Stage stage, Text movimientos){
         scene.setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.W){
 
                 juego.mover(new Arriba());
                 vehiculoView.actualizarPosicion(juego.obtenerVehiculo(),180);
+
             }
             if(event.getCode() == KeyCode.S){
                 juego.mover(new Abajo());
@@ -141,15 +158,16 @@ public class App extends Application implements EventHandler<KeyEvent> {
                 vehiculoView.actualizarPosicion(juego.obtenerVehiculo(),270);
 
             }
+
+            movimientos.setText("Movimientos: " + juego.obtenerMovimientosRealizados());
         });
-        mostrarSorpresas(juego, layout, mapa);
-        stage.setScene(scene);
-        stage.show();
+
     }
 
     private void mostrarSorpresas(Juego juego, Group layout, Rectangle mapa){
-        
+
         ListadoCaminos caminosConEfectos = juego.obtenerCaminos();
+
         for (Camino camino : caminosConEfectos.caminosConEfectos) {
 
             for(Sorpresa sorpresa : camino.sospresas) {

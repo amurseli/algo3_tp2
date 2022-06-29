@@ -18,8 +18,6 @@ public class GeneradorRandom {
 
         ThreadLocalRandom tlr = ThreadLocalRandom.current();
         int randomNum = tlr.nextInt(min, max + 1);
-
-        System.out.println("SE GENERO: " + randomNum );
         return randomNum;
 
     }
@@ -36,7 +34,7 @@ public class GeneradorRandom {
     }
 
     public Esquina generarEsquina(Esquina limite){
-        return new Esquina(generarRandomInt(0,limite.columna), generarRandomInt(0,limite.fila));
+        return new Esquina(generarRandomInt(1,limite.columna-1), generarRandomInt(1,limite.fila-1));
     }
 
     public Obstaculo generarObstaculo(){

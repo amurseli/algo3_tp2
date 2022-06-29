@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.App;
 import edu.fiuba.algo3.modelo.Direcciones.Direccion;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 
@@ -24,6 +25,7 @@ public class Juego {
     }
 
     private void finDelJuego(){
+        App.launch();
         System.out.println("SE TERMINO EL JUEGO. HAS GANADO");
         ciudad.datosDePartida(listaDePuntajes,"JUANCITO");//harcodeo el nikname porque eso habria que pasarlo cuando se gane como un input
         listaDePuntajes.mostrarRanking();
