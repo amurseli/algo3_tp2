@@ -10,7 +10,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class Inicio extends Application implements EventHandler<ActionEvent> {
-
+Button button;
     public static void main(String[] args) {
         launch(args);
     }
@@ -19,7 +19,7 @@ public class Inicio extends Application implements EventHandler<ActionEvent> {
     public void start(Stage primaryStage) {
 
         Group layout = new Group();
-        Button button = new Button("COMIENZA EL JUEGO");
+        button = new Button("COMIENZA EL JUEGO");
         button.setLayoutX(1620/2);
         button.setLayoutY(720/2);
 
@@ -29,17 +29,13 @@ public class Inicio extends Application implements EventHandler<ActionEvent> {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-
-                App.launch();
-            }
-        });
 
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
+        if(actionEvent.getSource() == button){
+            App.launch();
+        }
     }
 }
