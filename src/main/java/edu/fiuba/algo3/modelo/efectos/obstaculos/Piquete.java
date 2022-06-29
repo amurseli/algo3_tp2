@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.vehiculos.Auto;
 import edu.fiuba.algo3.modelo.vehiculos.CuatroPorCuatro;
 import edu.fiuba.algo3.modelo.vehiculos.Moto;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
+import edu.fiuba.algo3.vista.ObtaculoView;
 
 public class Piquete implements Obstaculo {
 
@@ -20,6 +21,9 @@ public class Piquete implements Obstaculo {
         vehiculo.darLaVuelta();
     }
 
+    public void mostrarImagen(ObtaculoView obtaculoView){
+        obtaculoView.mostrarImagen(this);
+    }
 }
 
 

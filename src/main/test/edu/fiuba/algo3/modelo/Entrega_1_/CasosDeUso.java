@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo.Entrega_1_;
 
 import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Esquina;
-import edu.fiuba.algo3.modelo.GeneradorNumeros;
+import edu.fiuba.algo3.modelo.GeneradorRandom;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Direcciones.Derecha;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.ControlPolicial;
@@ -94,10 +94,10 @@ public class CasosDeUso {
         Juego juego = new Juego();
         juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Vehiculo(new Auto(), new Esquina(1, 1)));
 
-        GeneradorNumeros stubGeneradorNumeros = Mockito.mock(GeneradorNumeros.class);
-        Mockito.when(stubGeneradorNumeros.generarRandom()).thenReturn(2);
+        GeneradorRandom stubGeneradorRandom = Mockito.mock(GeneradorRandom.class);
+        Mockito.when(stubGeneradorRandom.generarRandomInt(1,10)).thenReturn(2);
         Camino camino = new Camino(new Esquina(1, 1), new Derecha());
-        camino.agregrarEfecto(new ControlPolicial(stubGeneradorNumeros));
+        camino.agregrarEfecto(new ControlPolicial(stubGeneradorRandom));
 
         juego.agregarCamino(camino);
         juego.mover(new Derecha());
@@ -110,10 +110,10 @@ public class CasosDeUso {
         Juego juego = new Juego();
         juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Vehiculo(new CuatroPorCuatro(), new Esquina(1, 1)));
 
-        GeneradorNumeros stubGeneradorNumeros = Mockito.mock(GeneradorNumeros.class);
-        Mockito.when(stubGeneradorNumeros.generarRandom()).thenReturn(2);
+        GeneradorRandom stubGeneradorRandom = Mockito.mock(GeneradorRandom.class);
+        Mockito.when(stubGeneradorRandom.generarRandomInt(1,10)).thenReturn(2);
         Camino camino = new Camino(new Esquina(1, 1), new Derecha());
-        camino.agregrarEfecto(new ControlPolicial(stubGeneradorNumeros));
+        camino.agregrarEfecto(new ControlPolicial(stubGeneradorRandom));
 
         juego.agregarCamino(camino);
         juego.mover(new Derecha());
@@ -126,10 +126,10 @@ public class CasosDeUso {
         Juego juego = new Juego();
         juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Vehiculo(new CuatroPorCuatro(), new Esquina(1, 1)));
 
-        GeneradorNumeros stubGeneradorNumeros = Mockito.mock(GeneradorNumeros.class);
-        Mockito.when(stubGeneradorNumeros.generarRandom()).thenReturn(6);
+        GeneradorRandom stubGeneradorRandom = Mockito.mock(GeneradorRandom.class);
+        Mockito.when(stubGeneradorRandom.generarRandomInt(1,10)).thenReturn(6);
         Camino camino = new Camino(new Esquina(1, 1), new Derecha());
-        camino.agregrarEfecto(new ControlPolicial(stubGeneradorNumeros));
+        camino.agregrarEfecto(new ControlPolicial(stubGeneradorRandom));
 
         juego.agregarCamino(camino);
 
@@ -144,10 +144,10 @@ public class CasosDeUso {
         Juego juego = new Juego();
         juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Vehiculo(new Moto(), new Esquina(1, 1)));
 
-        GeneradorNumeros stubGeneradorNumeros = Mockito.mock(GeneradorNumeros.class);
-        Mockito.when(stubGeneradorNumeros.generarRandom()).thenReturn(9);
+        GeneradorRandom stubGeneradorRandom = Mockito.mock(GeneradorRandom.class);
+        Mockito.when(stubGeneradorRandom.generarRandomInt(1,10)).thenReturn(9);
         Camino camino = new Camino(new Esquina(1, 1), new Derecha());
-        camino.agregrarEfecto(new ControlPolicial(stubGeneradorNumeros));
+        camino.agregrarEfecto(new ControlPolicial(stubGeneradorRandom));
 
         juego.agregarCamino(camino);
         juego.mover(new Derecha());

@@ -1,15 +1,17 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.modelo.Camino;
+import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Direcciones.*;
-import edu.fiuba.algo3.modelo.Esquina;
-import edu.fiuba.algo3.modelo.Juego;
-import edu.fiuba.algo3.modelo.ListadoCaminos;
+import edu.fiuba.algo3.modelo.efectos.obstaculos.ControlPolicial;
+import edu.fiuba.algo3.modelo.efectos.obstaculos.Obstaculo;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.Piquete;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.Pozo;
 import edu.fiuba.algo3.modelo.efectos.sorpresas.CambioDeVehiculo;
+import edu.fiuba.algo3.modelo.efectos.sorpresas.Sorpresa;
 import edu.fiuba.algo3.modelo.vehiculos.Auto;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
+import edu.fiuba.algo3.vista.ObtaculoView;
+import edu.fiuba.algo3.vista.SorpresaView;
 import edu.fiuba.algo3.vista.VehiculoView;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -33,27 +35,11 @@ public class App extends Application implements EventHandler<KeyEvent> {
 
         Group layout = new Group();
         Juego juego = new Juego();
-        juego.crearCiudad(new Esquina(10,10),new Esquina(1,9),new Vehiculo(new Auto(), new Esquina(5,5)));
+        juego.crearCiudad(new Esquina(10,10),new Esquina(1,9),new Vehiculo(new Auto(), new Esquina(5,1)));
 
         Esquina limite = juego.obtenerLimite();
         Esquina posicionMeta = juego.obtenerMeta();
 
-        //agregar los efectos. Aca tendria que haber un for que agregue ponele 15 efectos random en el mapa
-        Camino camino1 = new Camino(new Esquina(2,2),new Derecha());
-        camino1.agregrarEfecto(new Pozo());
-        juego.agregarCamino(camino1);
-
-        Camino camino2 = new Camino(new Esquina(5,1),new Derecha());
-        camino2.agregrarEfecto(new Piquete());
-        juego.agregarCamino(camino2);
-
-        Camino camino3 = new Camino(new Esquina(4,4),new Derecha());
-        camino3.agregrarEfecto(new CambioDeVehiculo());
-        juego.agregarCamino(camino3);
-
-        Camino camino4 = new Camino(new Esquina(5,4),new Derecha());
-        camino4.agregrarEfecto(new CambioDeVehiculo());
-        juego.agregarCamino(camino4);
 
 
 
@@ -82,8 +68,33 @@ public class App extends Application implements EventHandler<KeyEvent> {
         metaView.setY(720/2 - mapa.getHeight()/2 + (posicionMeta.fila)* MULTIPLICADOR);
         layout.getChildren().add(metaView);
 
+        //agregar los obtaculo
 
-        mostrarEfectos(juego,layout,mapa);
+        for (int i = 0; i < 20; i++){
+
+            GeneradorRandom generadorRandom = new GeneradorRandom();
+            Camino camino = new Camino(generadorRandom.generarEsquina(limite), generadorRandom.generarDireccion());
+            Obstaculo obtaculo = generadorRandom.generarObstaculo();
+            camino.agregrarEfecto(obtaculo);
+            juego.agregarCamino(camino);
+            ObtaculoView obtaculoView = new ObtaculoView(layout,mapa,camino);
+            obtaculo.mostrarImagen(obtaculoView);
+
+        }
+
+        //agregar las sorpresas
+
+        for (int i = 0; i < 20 ; i++){
+            GeneradorRandom generadorRandom = new GeneradorRandom();
+            Camino camino = new Camino(generadorRandom.generarEsquina(limite), generadorRandom.generarDireccion());
+            Sorpresa sorpresa = generadorRandom.generarSorpresa();
+            camino.agregrarEfecto(sorpresa);
+            juego.agregarCamino(camino);
+            SorpresaView sorpresaView = new SorpresaView(layout,mapa,camino);
+            sorpresaView.mostrarImagen();
+        }
+
+        //mostrarEfectos(juego,layout,mapa);
 
         VehiculoView vehiculoView = new VehiculoView(juego.obtenerVehiculo(), layout, mapa);
 
@@ -133,7 +144,7 @@ public class App extends Application implements EventHandler<KeyEvent> {
         stage.show();
     }
 
-    private void mostrarEfectos(Juego juego, Group layout, Rectangle mapa){
+    private void mostrarSorpresas(Juego juego, Group layout, Rectangle mapa){
         ListadoCaminos caminosConEfectos = juego.obtenerCaminos();
         for (Camino camino : caminosConEfectos.caminosConEfectos) {
 
@@ -144,5 +155,6 @@ public class App extends Application implements EventHandler<KeyEvent> {
             layout.getChildren().add(efectoView);
         }
     }
+
 
 }
