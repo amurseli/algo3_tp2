@@ -179,6 +179,4 @@ public class App extends Application implements EventHandler<KeyEvent> {
             }
         }
     }
-
-
 }
