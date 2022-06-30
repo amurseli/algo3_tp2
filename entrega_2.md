@@ -1,4 +1,4 @@
-# Entrega 2
+# Entrega 3
 
 Aprobada: :heavy_check_mark:
 
@@ -14,33 +14,7 @@ Aprobada: :heavy_check_mark:
 
 # Casos de uso
 
-## Cosas pendientes 
-
--  [ ]  Intentar simular el número aleatorio utilizando Mock objects.
-
-## Caso de uso 1 :heavy_check_mark:
-
-- N/A
-
-## Caso de uso 2 :heavy_check_mark:
-
-- N/A
-
-## Caso de uso 3 :heavy_check_mark:
-
-- [ ] Eliminar el `Jugador` de las `Sorpresa`.
-- [ ] Eliminar el `Jugador` de las `Obstaculo`.
-
-## Caso de uso 4 :heavy_check_mark:
-
-- N/A
-
-## Caso de uso 5 :heavy_check_mark:
-
-- [ ] Quitar método obtener posición del veículo. Para no violar la Ley de Dimeter. Agregarlo al informe.
-- [ ] Revisar el diagrama de clase. Ej.: `Camino` no tiene relación con `Esquina`. `Camino` no tiene multiplicidad con `Efecto`.
-
-# Comentaris por aspecto
+Completos
 
 ## Modelo y paradigma
 
