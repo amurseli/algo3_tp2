@@ -108,4 +108,35 @@ public class CasosDeUso2 {
         Assertions.assertTrue(juego.vehiculoEnEsquina(new Esquina(1, 5)));
         Assertions.assertEquals(juego.obtenerMovimientosRealizados(),1);
     }
+
+    @Test
+    public void Test07UnAutoAtraviesaLaCiudadYEncuentraUnaSorpresaDeCambioDeVehiculoYCambiaACuatroPorCuatro(){
+        Juego juego = new Juego();
+        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Vehiculo(new Auto(), new Esquina(1,5)));
+        Camino camino = new Camino(new Esquina(1,5), new Derecha());
+        camino.agregrarEfecto(new CambioDeVehiculo());
+
+        juego.agregarCamino(camino);
+
+        juego.mover(new Derecha());
+
+        Assertions.assertEquals(juego.obtenerTipoVehiculo(), CuatroPorCuatro.class);
+        Assertions.assertEquals(juego.obtenerMovimientosRealizados(),1);
+        Assertions.assertTrue(juego.vehiculoEnEsquina(new Esquina(1,6)));
+    }
+    @Test
+    public void Test08UnaCuatroPorCuatroAtraviesaLaCiudadYEncuentraUnaSorpresaDeCambioDeVehiculoYCambiaAMoto(){
+        Juego juego = new Juego();
+        juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Vehiculo(new CuatroPorCuatro(), new Esquina(1,5)));
+        Camino camino = new Camino(new Esquina(1,5), new Derecha());
+        camino.agregrarEfecto(new CambioDeVehiculo());
+
+        juego.agregarCamino(camino);
+
+        juego.mover(new Derecha());
+
+        Assertions.assertEquals(juego.obtenerTipoVehiculo(), Moto.class);
+        Assertions.assertEquals(juego.obtenerMovimientosRealizados(),1);
+        Assertions.assertTrue(juego.vehiculoEnEsquina(new Esquina(1,6)));
+    }
 }
