@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Ranking {
 
-    ArrayList<Puntaje> puntajes;
+    public ArrayList<Puntaje> puntajes;
 
     Ranking(){
         puntajes = new ArrayList<>();
@@ -12,7 +12,7 @@ public class Ranking {
 
     public void agregarPuntaje(Puntaje nuevoPuntaje){
         int i = 0;
-        while (i < puntajes.size() && puntajes.get(i).comparar(nuevoPuntaje) > 0) {
+        while (i < puntajes.size() && puntajes.get(i).comparar(nuevoPuntaje) < 0) {
             i++;
         }
         if (i < puntajes.size()) {

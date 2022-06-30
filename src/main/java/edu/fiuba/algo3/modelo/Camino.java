@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Camino {
     public Esquina esquinaInicial, esquinaFinal;
     public ArrayList<Sorpresa> sospresas;
-    private ArrayList<Obstaculo> obstaculos;
+    public ArrayList<Obstaculo> obstaculos;
 
     public Camino(Esquina esquinaInicial, Direccion unaDireccion) {
         this.esquinaInicial = esquinaInicial;

@@ -44,88 +44,49 @@ public class App extends Application implements EventHandler<KeyEvent> {
     public static final int SCREEN_WIDTH = 1620;
     public static final int SCREEN_HEIGHT = 720;
 
+
+    Group layout = new Group();
+    Juego juego = new Juego();
+
+    Scene sceneInicio;
+    Scene sceneJuego;
+
+    Esquina limite;
+    Esquina posicionMeta;
+
+    Rectangle mapa;
+
+    Text movimientos;
+
+    VehiculoView vehiculoView;
+
+
+
     @Override
     public void start(Stage stage) {
 
-        Group layout = new Group();
-        Juego juego = new Juego();
-        juego.crearCiudad(new Esquina(10,10),new Esquina(1,9),new Vehiculo(new Auto(), new Esquina(5,1)));
+        //INICIO
+        Group inicio = new Group();
+        Button button = new Button("COMIENZA EL JUEGO");
+        button.setLayoutX(SCREEN_WIDTH /4 - button.getWidth()/2);
+        button.setLayoutY(SCREEN_HEIGHT /4 - button.getHeight()/2);
 
-        Esquina limite = juego.obtenerLimite();
-        Esquina posicionMeta = juego.obtenerMeta();
+        inicio.getChildren().add(button);
 
-
-        //creo el mapa
-        Rectangle mapa = new Rectangle(limite.columna * MULTIPLICADOR, limite.fila* MULTIPLICADOR);
-        mapa.setX(SCREEN_WIDTH/2 - mapa.getWidth()/2); //los pongo en el centro
-        mapa.setY(SCREEN_HEIGHT/2 - mapa.getHeight()/2);
-        layout.getChildren().add(mapa);
-
-
-        //aca se crean los caminos blancos
-        for (int i = 0; i < 30 ; i++){
-            Rectangle caminitoHorizontal = new Rectangle(SCREEN_WIDTH, 20);
-            Rectangle caminitoVertical = new Rectangle(20, SCREEN_HEIGHT);
-            caminitoHorizontal.setFill(Paint.valueOf("white"));
-            caminitoVertical.setFill(Paint.valueOf("white"));
-            caminitoHorizontal.setY(i * MULTIPLICADOR + 10);
-            caminitoVertical.setX(i* MULTIPLICADOR + 10);
-            layout.getChildren().add(caminitoHorizontal);
-            layout.getChildren().add(caminitoVertical);
-        }
-
-        Image meta = new Image("/meta.png",30,30,true,true);
-        ImageView metaView = new ImageView(meta);
-        metaView.setX(SCREEN_WIDTH / 2 - mapa.getWidth()/2 +  (posicionMeta.columna)* MULTIPLICADOR);
-        metaView.setY(SCREEN_HEIGHT / 2 - mapa.getHeight()/2 + (posicionMeta.fila)* MULTIPLICADOR);
-        layout.getChildren().add(metaView);
-
-
-
-        //agregar los obtaculo
-
-        for (int i = 0; i < 20; i++){
-
-            GeneradorRandom generadorRandom = new GeneradorRandom();
-            Camino camino = new Camino(generadorRandom.generarEsquina(limite), generadorRandom.generarDireccion());
-            Obstaculo obtaculo = generadorRandom.generarObstaculo();
-            camino.agregrarEfecto(obtaculo);
-            juego.agregarCamino(camino);
-            ObtaculoView obtaculoView = new ObtaculoView(layout,mapa,camino);
-            obtaculo.mostrarImagen(obtaculoView);
-
-        }
-
-        //agregar las sorpresas
-
-        for (int i = 0; i < 20 ; i++){
-            GeneradorRandom generadorRandom = new GeneradorRandom();
-            Camino camino = new Camino(generadorRandom.generarEsquina(limite), generadorRandom.generarDireccion());
-            Sorpresa sorpresa = generadorRandom.generarSorpresa();
-            camino.agregrarEfecto(sorpresa);
-            juego.agregarCamino(camino);
-        }
-
-        mostrarSorpresas(juego,layout,mapa);
-
-
-        VehiculoView vehiculoView = new VehiculoView(juego.obtenerVehiculo(), layout, mapa);
-
-        Text movimientos = new Text(100,100,"Movimientos: " + juego.obtenerMovimientosRealizados());
-        movimientos.setFont(Font.font(20));
-        movimientos.setFill(Color.BLACK);
-        layout.getChildren().add(movimientos);
-
-
-
-
-        var scene = new Scene(layout, SCREEN_WIDTH, SCREEN_HEIGHT);
-
-
-        stage.setScene(scene);
+        sceneInicio = new Scene(inicio, SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
+        stage.setScene(sceneInicio);
         stage.show();
 
-        leerInputs(scene,juego,vehiculoView,stage,movimientos);
+
+
+
+        //BOTON INICIO
+        button.setOnAction(value ->{
+            nuevoJuego(stage);
+        });
+
+
+
     }
 
 
@@ -163,11 +124,88 @@ public class App extends Application implements EventHandler<KeyEvent> {
             }
 
             movimientos.setText("Movimientos: " + juego.obtenerMovimientosRealizados());
+            if (juego.finDeJuego){
+                layout = new Group();
+                nuevoJuego(stage);
+
+            }
         });
 
     }
 
-    private void mostrarSorpresas(Juego juego, Group layout, Rectangle mapa){
+
+
+    private void crearCiudadNueva(){
+        //JUEGO
+        juego.finDeJuego = false;
+        juego.crearCiudad(new Esquina(10,10),new Esquina(1,9),new Vehiculo(new Auto(), new Esquina(5,1)));
+        limite = juego.obtenerLimite();
+        posicionMeta = juego.obtenerMeta();
+    }
+
+    private void crearMapa(){
+        mapa = new Rectangle(limite.columna * MULTIPLICADOR, limite.fila* MULTIPLICADOR);
+        mapa.setX(SCREEN_WIDTH/2 - mapa.getWidth()/2); //los pongo en el centro
+        mapa.setY(SCREEN_HEIGHT/2 - mapa.getHeight()/2);
+        layout.getChildren().add(mapa);
+    }
+
+    private void crearCaminos(){
+        for (int i = 0; i < 30 ; i++){
+            Rectangle caminitoHorizontal = new Rectangle(SCREEN_WIDTH, 20);
+            Rectangle caminitoVertical = new Rectangle(20, SCREEN_HEIGHT);
+            caminitoHorizontal.setFill(Paint.valueOf("white"));
+            caminitoVertical.setFill(Paint.valueOf("white"));
+            caminitoHorizontal.setY(i * MULTIPLICADOR + 10);
+            caminitoVertical.setX(i* MULTIPLICADOR + 10);
+            layout.getChildren().add(caminitoHorizontal);
+            layout.getChildren().add(caminitoVertical);
+        }
+    }
+
+    private void dibujarMeta(){
+        Image meta = new Image("/meta.png",30,30,true,true);
+        ImageView metaView = new ImageView(meta);
+        metaView.setX(SCREEN_WIDTH / 2 - mapa.getWidth()/2 +  (posicionMeta.columna)* MULTIPLICADOR);
+        metaView.setY(SCREEN_HEIGHT / 2 - mapa.getHeight()/2 + (posicionMeta.fila)* MULTIPLICADOR);
+        layout.getChildren().add(metaView);
+    }
+
+    private void crearObstaculos(){
+        for (int i = 0; i < 20; i++){
+
+            GeneradorRandom generadorRandom = new GeneradorRandom();
+            Camino camino = new Camino(generadorRandom.generarEsquina(limite), generadorRandom.generarDireccion());
+            Obstaculo obtaculo = generadorRandom.generarObstaculo();
+            camino.agregrarEfecto(obtaculo);
+            juego.agregarCamino(camino);
+        }
+    }
+
+    private void dibujarObstaculos(Juego juego, Group layout, Rectangle mapa){
+
+        ListadoCaminos caminosConEfectos = juego.obtenerCaminos();
+
+        for (Camino camino : caminosConEfectos.caminosConEfectos) {
+
+            for(Obstaculo obstaculo : camino.obstaculos) {
+                ObtaculoView obtaculoView = new ObtaculoView(layout,mapa,camino);
+                obstaculo.mostrarImagen(obtaculoView);
+            }
+        }
+    }
+
+    private void crearSorpresas(){
+        for (int i = 0; i < 20 ; i++){
+            GeneradorRandom generadorRandom = new GeneradorRandom();
+            Camino camino = new Camino(generadorRandom.generarEsquina(limite), generadorRandom.generarDireccion());
+            Sorpresa sorpresa = generadorRandom.generarSorpresa();
+            camino.agregrarEfecto(sorpresa);
+            juego.agregarCamino(camino);
+        }
+    }
+
+    private void dibujarSorpresas(Juego juego, Group layout, Rectangle mapa){
 
         ListadoCaminos caminosConEfectos = juego.obtenerCaminos();
 
@@ -178,5 +216,53 @@ public class App extends Application implements EventHandler<KeyEvent> {
                 sorpresaView.mostrarImagen();
             }
         }
+    }
+
+    private void dibujarMovimientos(){
+        movimientos = new Text(100,100,"Movimientos: " + juego.obtenerMovimientosRealizados());
+        movimientos.setFont(Font.font(20));
+        movimientos.setFill(Color.BLACK);
+        layout.getChildren().add(movimientos);
+    }
+
+    private void dibujarRanking(){
+        int i = 20;
+        Text titulo = new Text(100,150,"Highscores: ");
+        layout.getChildren().add(titulo);
+        for (Puntaje puntaje : juego.obtenerRanking().puntajes){
+            Text nuevoPuntajeTexto = new Text(100,150 + i,"Puntos: " + puntaje.getMovimientos() + "\n");
+            nuevoPuntajeTexto.setFont(Font.font(20));
+            nuevoPuntajeTexto.setFill(Color.BLACK);
+            layout.getChildren().add(nuevoPuntajeTexto);
+            i+= 20;
+        }
+    }
+
+    private void nuevoJuego(Stage stage){
+        crearCiudadNueva();
+
+        crearMapa();
+
+        crearCaminos();
+
+        dibujarMeta();
+
+        crearObstaculos();
+        dibujarObstaculos(juego,layout,mapa);
+
+        crearSorpresas();
+        dibujarSorpresas(juego,layout,mapa);
+
+        vehiculoView = new VehiculoView(juego.obtenerVehiculo(), layout, mapa);
+
+        dibujarMovimientos();
+        dibujarRanking();
+
+        sceneJuego = new Scene(layout, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+        leerInputs(sceneJuego,juego,vehiculoView,stage,movimientos);
+
+        stage.setScene(sceneJuego);
+        stage.show();
     }
 }

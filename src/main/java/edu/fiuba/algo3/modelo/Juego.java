@@ -7,6 +7,8 @@ import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 public class Juego {
     Ciudad ciudad;
     Ranking listaDePuntajes;
+
+    public boolean finDeJuego = false;
     public Juego(){
         this.listaDePuntajes = new Ranking();
     }
@@ -24,10 +26,16 @@ public class Juego {
         };
     }
 
+    public Ranking obtenerRanking(){
+        return listaDePuntajes;
+    }
+
     private void finDelJuego(){
         System.out.println("SE TERMINO EL JUEGO. HAS GANADO");
         ciudad.datosDePartida(listaDePuntajes,"JUANCITO");//harcodeo el nikname porque eso habria que pasarlo cuando se gane como un input
+        finDeJuego = true;
         listaDePuntajes.mostrarRanking();
+
     }
 
     public Esquina obtenerLimite(){
