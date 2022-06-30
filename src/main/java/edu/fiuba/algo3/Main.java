@@ -3,8 +3,6 @@ package edu.fiuba.algo3;
 public class Main {
     public static void main(String[] args) {
 
-        Inicio.main(args);
+        App.main(args);
     }
-
-    
 }

@@ -41,6 +41,9 @@ import java.util.ArrayList;
  */
 public class App extends Application implements EventHandler<KeyEvent> {
     public static final int MULTIPLICADOR = 50;
+    public static final int SCREEN_WIDTH = 1620;
+    public static final int SCREEN_HEIGHT = 720;
+
     @Override
     public void start(Stage stage) {
 
@@ -54,15 +57,15 @@ public class App extends Application implements EventHandler<KeyEvent> {
 
         //creo el mapa
         Rectangle mapa = new Rectangle(limite.columna * MULTIPLICADOR, limite.fila* MULTIPLICADOR);
-        mapa.setX(1620/2 - mapa.getWidth()/2); //los pongo en el centro
-        mapa.setY(720/2 - mapa.getHeight()/2);
+        mapa.setX(SCREEN_WIDTH/2 - mapa.getWidth()/2); //los pongo en el centro
+        mapa.setY(SCREEN_HEIGHT/2 - mapa.getHeight()/2);
         layout.getChildren().add(mapa);
 
 
         //aca se crean los caminos blancos
         for (int i = 0; i < 30 ; i++){
-            Rectangle caminitoHorizontal = new Rectangle(1620, 20);
-            Rectangle caminitoVertical = new Rectangle(20, 720);
+            Rectangle caminitoHorizontal = new Rectangle(SCREEN_WIDTH, 20);
+            Rectangle caminitoVertical = new Rectangle(20, SCREEN_HEIGHT);
             caminitoHorizontal.setFill(Paint.valueOf("white"));
             caminitoVertical.setFill(Paint.valueOf("white"));
             caminitoHorizontal.setY(i * MULTIPLICADOR + 10);
@@ -73,8 +76,8 @@ public class App extends Application implements EventHandler<KeyEvent> {
 
         Image meta = new Image("/meta.png",30,30,true,true);
         ImageView metaView = new ImageView(meta);
-        metaView.setX(1620/2 - mapa.getWidth()/2 +  (posicionMeta.columna)* MULTIPLICADOR);
-        metaView.setY(720/2 - mapa.getHeight()/2 + (posicionMeta.fila)* MULTIPLICADOR);
+        metaView.setX(SCREEN_WIDTH / 2 - mapa.getWidth()/2 +  (posicionMeta.columna)* MULTIPLICADOR);
+        metaView.setY(SCREEN_HEIGHT / 2 - mapa.getHeight()/2 + (posicionMeta.fila)* MULTIPLICADOR);
         layout.getChildren().add(metaView);
 
 
@@ -116,7 +119,7 @@ public class App extends Application implements EventHandler<KeyEvent> {
 
 
 
-        var scene = new Scene(layout, 1620, 720);
+        var scene = new Scene(layout, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 
         stage.setScene(scene);
