@@ -15,9 +15,9 @@ public class RankingTest {
         ranking.agregarPuntaje(puntaje4);
         ranking.agregarPuntaje(puntaje1);
         ranking.agregarPuntaje(puntaje3);
-        Assertions.assertTrue(ranking.compararPuntaje(puntaje4, 0));
-        Assertions.assertTrue(ranking.compararPuntaje(puntaje3, 1));
-        Assertions.assertTrue(ranking.compararPuntaje(puntaje2, 2));
-        Assertions.assertTrue(ranking.compararPuntaje(puntaje1, 3));
+        Assertions.assertTrue(ranking.compararPuntaje(puntaje4, 3));
+        Assertions.assertTrue(ranking.compararPuntaje(puntaje3, 2));
+        Assertions.assertTrue(ranking.compararPuntaje(puntaje2, 1));
+        Assertions.assertTrue(ranking.compararPuntaje(puntaje1, 0));
     }
 }
