@@ -158,9 +158,17 @@ public class App extends Application implements EventHandler<KeyEvent> {
     private void dibujarMeta(){
         Image meta = new Image("/meta.png",30,30,true,true);
         ImageView metaView = new ImageView(meta);
+        Rectangle rectangle = new Rectangle(25,25);
+        rectangle.setFill(Color.WHITE);
+        rectangle.setX(SCREEN_WIDTH / 2 - mapa.getWidth()/2 +  (posicionMeta.columna)* MULTIPLICADOR);
+        rectangle.setY(SCREEN_HEIGHT / 2 - mapa.getHeight()/2 + (posicionMeta.fila)* MULTIPLICADOR);
+
         metaView.setX(SCREEN_WIDTH / 2 - mapa.getWidth()/2 +  (posicionMeta.columna)* MULTIPLICADOR);
         metaView.setY(SCREEN_HEIGHT / 2 - mapa.getHeight()/2 + (posicionMeta.fila)* MULTIPLICADOR);
+
+        layout.getChildren().add(rectangle);
         layout.getChildren().add(metaView);
+
     }
 
     private void crearObstaculos(){
@@ -243,8 +251,6 @@ public class App extends Application implements EventHandler<KeyEvent> {
 
         crearCaminos();
 
-        dibujarMeta();
-
         crearObstaculos();
         dibujarObstaculos(juego,layout,mapa);
 
@@ -252,6 +258,8 @@ public class App extends Application implements EventHandler<KeyEvent> {
         dibujarSorpresas(juego,layout,mapa);
 
         vehiculoView = new VehiculoView(juego.obtenerVehiculo(), layout, mapa);
+
+        dibujarMeta();
 
         dibujarMovimientos();
         dibujarRanking();
