@@ -41,7 +41,7 @@ public class VehiculoView {
         inicioY = ALTO_PANTALLA /2 - mapa.getHeight()/2;
 
         vehiculoView.setX(inicioX + vehiculo.obtenerPosicion().columna * MULTIPLICADOR);
-        vehiculoView.setY(inicioY + vehiculo.obtenerPosicion().fila * MULTIPLICADOR);
+        vehiculoView.setY(inicioY + vehiculo.obtenerPosicion().fila * MULTIPLICADOR - 10);
         fondoNegroView.setX(inicioX + vehiculo.obtenerPosicion().columna * MULTIPLICADOR - 1800/2);
         fondoNegroView.setY(inicioY + vehiculo.obtenerPosicion().fila * MULTIPLICADOR - 1800/2);
         layout.getChildren().add(vehiculoView);
@@ -51,7 +51,7 @@ public class VehiculoView {
 
     public void actualizarPosicion(Vehiculo vehiculo, int orientation){
         vehiculoView.setX(inicioX + vehiculo.obtenerPosicion().getColumna() * MULTIPLICADOR);
-        vehiculoView.setY(inicioY + vehiculo.obtenerPosicion().getFila() * MULTIPLICADOR);
+        vehiculoView.setY(inicioY + vehiculo.obtenerPosicion().getFila() * MULTIPLICADOR -10);
         vehiculoView.setRotate(orientation);
         fondoNegroView.setX(inicioX + vehiculo.obtenerPosicion().columna * MULTIPLICADOR - 1800/2);
         fondoNegroView.setY(inicioY + vehiculo.obtenerPosicion().fila * MULTIPLICADOR - 1800/2);
