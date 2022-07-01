@@ -14,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -23,6 +24,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 /**
@@ -35,6 +37,7 @@ public class App extends Application implements EventHandler<KeyEvent> {
 
 
     Group layout = new Group();
+
     Juego juego = new Juego();
 
     Scene sceneInicio;
@@ -54,30 +57,30 @@ public class App extends Application implements EventHandler<KeyEvent> {
     @Override
     public void start(Stage stage) {
 
-        //INICIO
         Group inicio = new Group();
         Button button = new Button("COMIENZA EL JUEGO");
         button.setLayoutX(SCREEN_WIDTH /4 - button.getWidth()/2);
         button.setLayoutY(SCREEN_HEIGHT /4 - button.getHeight()/2);
 
+        TextField textField = new TextField("Ingresa tu nickname");
+        textField.setLayoutX(100);
+        textField.setLayoutY(100);
+        inicio.getChildren().add(textField);
         inicio.getChildren().add(button);
+
+
 
         sceneInicio = new Scene(inicio, SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
         stage.setScene(sceneInicio);
         stage.show();
 
 
-
-
-        //BOTON INICIO
         button.setOnAction(value ->{
-            nuevoJuego(stage);
+            String nickname = textField.getText();
+            nuevoJuego(stage, nickname);
         });
 
-
-
     }
-
 
     @Override
     public void handle(KeyEvent event){
@@ -113,10 +116,9 @@ public class App extends Application implements EventHandler<KeyEvent> {
             }
 
             movimientos.setText("Movimientos: " + juego.obtenerMovimientosRealizados());
-            if (juego.finDeJuego){
-                layout = new Group();
-                nuevoJuego(stage);
 
+            if (juego.finDeJuego){
+                hasGanado(stage);
             }
         });
 
@@ -216,10 +218,13 @@ public class App extends Application implements EventHandler<KeyEvent> {
 
     private void dibujarRanking(){
         int i = 20;
+        Rectangle fondoRanking = new Rectangle(100,100,200,800);
+        fondoRanking.setFill(Color.WHITE);
+        layout.getChildren().add(fondoRanking);
         Text titulo = new Text(100,150,"Highscores: ");
         layout.getChildren().add(titulo);
         for (Puntaje puntaje : juego.obtenerRanking().puntajes){
-            Text nuevoPuntajeTexto = new Text(100,150 + i,"Puntos: " + puntaje.getMovimientos() + "\n");
+            Text nuevoPuntajeTexto = new Text(100,150 + i,puntaje.getNombre()+": " + puntaje.getMovimientos() + "\n");
             nuevoPuntajeTexto.setFont(Font.font(20));
             nuevoPuntajeTexto.setFill(Color.BLACK);
             layout.getChildren().add(nuevoPuntajeTexto);
@@ -227,7 +232,10 @@ public class App extends Application implements EventHandler<KeyEvent> {
         }
     }
 
-    private void nuevoJuego(Stage stage){
+    private void nuevoJuego(Stage stage, String nickname){
+
+        juego.asignarNickname(nickname);
+
         crearCiudadNueva();
 
         crearMapa();
@@ -254,4 +262,33 @@ public class App extends Application implements EventHandler<KeyEvent> {
         stage.setScene(sceneJuego);
         stage.show();
     }
+
+    private void hasGanado(Stage stage){
+
+
+        Text text = new Text(400, 100, "Has ganado");
+        text.setFont(Font.font(20));
+        text.setFill(Color.GREEN);
+
+
+        Button button = new Button("JUGAR OTRA VEZ");
+        button.setLayoutX(400);
+        button.setLayoutY(150);
+
+        layout.getChildren().add(text);
+        layout.getChildren().add(button);
+
+        dibujarRanking();
+
+
+
+        button.setOnAction(value ->{
+            layout = new Group();
+            stage.setScene(sceneInicio);
+        });
+
+
+
+    }
+
 }
