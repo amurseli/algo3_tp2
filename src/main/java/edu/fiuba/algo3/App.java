@@ -58,11 +58,11 @@ public class App extends Application implements EventHandler<KeyEvent> {
 
         Group inicio = new Group();
         Button button = new Button("COMIENZA EL JUEGO");
-        button.setLayoutX(SCREEN_WIDTH /4 - button.getWidth()/2);
+        button.setLayoutX(320);
         button.setLayoutY(SCREEN_HEIGHT /4 - button.getHeight()/2);
 
         TextField textField = new TextField("Ingresa tu nickname");
-        textField.setLayoutX(100);
+        textField.setLayoutX(310);
         textField.setLayoutY(100);
         inicio.getChildren().add(textField);
         inicio.getChildren().add(button);
@@ -217,21 +217,32 @@ public class App extends Application implements EventHandler<KeyEvent> {
     }
 
     private void dibujarMovimientos(){
-        movimientos = new Text(100,100,"Movimientos: " + juego.obtenerMovimientosRealizados());
+        Rectangle fondoMovimientos = new Rectangle(100,40,200,45);
+        fondoMovimientos.setFill(Color.WHITE);
+        fondoMovimientos.setStroke(Color.BLUE);
+        fondoMovimientos.setStrokeWidth(5);
+
+        movimientos = new Text(110,70,"Movimientos: " + juego.obtenerMovimientosRealizados());
         movimientos.setFont(Font.font(20));
         movimientos.setFill(Color.BLACK);
+
+        layout.getChildren().add(fondoMovimientos);
         layout.getChildren().add(movimientos);
     }
 
     private void dibujarRanking(){
         int i = 20;
-        Rectangle fondoRanking = new Rectangle(100,100,200,800);
+        Rectangle fondoRanking = new Rectangle(100,100,200,600);
         fondoRanking.setFill(Color.WHITE);
+        fondoRanking.setStroke(Color.SALMON);
+        fondoRanking.setStrokeWidth(5);
         layout.getChildren().add(fondoRanking);
-        Text titulo = new Text(100,150,"Highscores: ");
+
+        Text titulo = new Text(110,150,"Highscores: ");
+        titulo.setFont(Font.font(30));
         layout.getChildren().add(titulo);
         for (Puntaje puntaje : juego.obtenerRanking().puntajes){
-            Text nuevoPuntajeTexto = new Text(100,150 + i,puntaje.getNombre()+": " + puntaje.getMovimientos() + "\n");
+            Text nuevoPuntajeTexto = new Text(110,160 + i,puntaje.getNombre()+": " + puntaje.getMovimientos() + "\n");
             nuevoPuntajeTexto.setFont(Font.font(20));
             nuevoPuntajeTexto.setFill(Color.BLACK);
             layout.getChildren().add(nuevoPuntajeTexto);
@@ -272,22 +283,24 @@ public class App extends Application implements EventHandler<KeyEvent> {
 
     private void hasGanado(Stage stage){
 
+        Rectangle hasGanadoFondo = new Rectangle(350,100,200,200);
+        hasGanadoFondo.setFill(Color.WHITE);
+        hasGanadoFondo.setStroke(Color.GREEN);
+        hasGanadoFondo.setStrokeWidth(5);
+        layout.getChildren().add(hasGanadoFondo);
 
-        Text text = new Text(400, 100, "Has ganado");
-        text.setFont(Font.font(20));
+        Text text = new Text(370, 140, "Has ganado!");
+        text.setFont(Font.font(30));
         text.setFill(Color.GREEN);
 
-
         Button button = new Button("JUGAR OTRA VEZ");
-        button.setLayoutX(400);
-        button.setLayoutY(150);
+        button.setLayoutX(390);
+        button.setLayoutY(200);
 
         layout.getChildren().add(text);
         layout.getChildren().add(button);
 
         dibujarRanking();
-
-
 
         button.setOnAction(value ->{
             layout = new Group();
