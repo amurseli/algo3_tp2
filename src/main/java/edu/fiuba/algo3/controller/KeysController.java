@@ -32,7 +32,6 @@ public class KeysController implements EventHandler<KeyEvent> {
             if (event.getCode() == KeyCode.D || event.getCode() == KeyCode.RIGHT) {
                 juego.mover(new Derecha());
             }
-
         });
     }
 }

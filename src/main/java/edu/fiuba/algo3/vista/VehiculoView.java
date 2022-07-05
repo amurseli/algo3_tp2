@@ -67,6 +67,7 @@ public class VehiculoView implements Observer {
         fondoNegroView.setY(inicioY + vehiculo.obtenerPosicion().fila * MULTIPLICADOR - FONDO_NEGRO_TAMANIO/2);
     }
 
+
     public void actualizarImagen(Object tipoVehiculo){
 
         if (tipoVehiculo == Moto.class){

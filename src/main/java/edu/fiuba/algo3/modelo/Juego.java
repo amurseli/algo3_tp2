@@ -75,13 +75,15 @@ public class Juego extends Observable {
     }
 
     public void nuevaPartida(Esquina limite){
+        GeneradorRandom generadorRandom = new GeneradorRandom();
 
-        this.crearCiudad(limite,new Esquina(1,5),new Vehiculo(new Auto(), new Esquina(5,1)));
+        Esquina meta = generadorRandom.generarEsquina(limite);
+        Esquina comienzo = new Esquina(0,0);
+        this.crearCiudad(limite,meta,new Vehiculo(new Auto(), comienzo));
 
         //agrego obstaculos
         for (int i = 0; i < 20; i++){
 
-            GeneradorRandom generadorRandom = new GeneradorRandom();
             Camino camino = new Camino(generadorRandom.generarEsquina(this.obtenerLimite()), generadorRandom.generarDireccion());
             Obstaculo obtaculo = generadorRandom.generarObstaculo();
             camino.agregrarEfecto(obtaculo);
@@ -90,7 +92,6 @@ public class Juego extends Observable {
 
         //agrego sorpresas
         for (int i = 0; i < 20 ; i++){
-            GeneradorRandom generadorRandom = new GeneradorRandom();
             Camino camino = new Camino(generadorRandom.generarEsquina(this.obtenerLimite()), generadorRandom.generarDireccion());
             Sorpresa sorpresa = generadorRandom.generarSorpresa();
             camino.agregrarEfecto(sorpresa);
