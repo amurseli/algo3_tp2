@@ -1,25 +1,18 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.controller.KeysController;
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.Direcciones.Abajo;
-import edu.fiuba.algo3.modelo.Direcciones.Arriba;
-import edu.fiuba.algo3.modelo.Direcciones.Derecha;
-import edu.fiuba.algo3.modelo.Direcciones.Izquierda;
-import edu.fiuba.algo3.modelo.efectos.obstaculos.Obstaculo;
-import edu.fiuba.algo3.modelo.efectos.sorpresas.Sorpresa;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import static edu.fiuba.algo3.App.SCREEN_HEIGHT;
@@ -37,6 +30,9 @@ public class JuegoView {
     Rectangle mapa;
 
     VehiculoView vehiculoView;
+
+    MovimientosTextView movimientosTextView;
+
 
     public JuegoView(Stage stage){
 
@@ -88,27 +84,33 @@ public class JuegoView {
         });
     }
 
-    private void mostrarPantalla(Group layout){
+    private Scene mostrarPantalla(Group layout){
 
         Scene scene = new Scene(layout, SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
         stage.setScene(scene);
         stage.setFullScreen(true);
         stage.show();
+        return scene;
     }
 
     private void pantallaJuego(){
         Group layout = new Group();
         crearMapa(layout);
         crearCaminos(layout);
-        dibujarSorpresas(layout);
-        dibujarObstaculos(layout);
+ 
+        crearCaminosView(layout);
+
         vehiculoView = new VehiculoView(juego.obtenerVehiculo(), layout, mapa);
         dibujarMeta(layout);
-        dibujarMovimientos(layout);
+
+        movimientosTextView = new MovimientosTextView(juego.obtenerVehiculo(),layout);
+
         dibujarRanking(layout);
 
-        mostrarPantalla(layout);
+        Scene sceneActual = mostrarPantalla(layout);
 
+        KeysController keysController = new KeysController();
+        keysController.leerInputs(sceneActual,juego);
     }
     private void crearMapa(Group layout){
         mapa = new Rectangle(limite.columna * MULTIPLICADOR, limite.fila* MULTIPLICADOR);
@@ -146,40 +148,16 @@ public class JuegoView {
 
     }
 
-    private void dibujarObstaculos(Group layout){
+    private void crearCaminosView(Group layout){
 
-        ListadoCaminos caminosConEfectos = juego.obtenerCaminos();
+        ListadoCaminos listadoCaminos = juego.obtenerCaminos();
 
-        for (Camino camino : caminosConEfectos.caminosConEfectos) {
-            ObtaculoView obtaculoView = new ObtaculoView(layout,mapa,camino);
-            camino.obstaculo.mostrarImagen(obtaculoView);
+        for (Camino camino : listadoCaminos.caminosConEfectos) {
+            CaminoView caminoView = new CaminoView(camino,layout,mapa);
         }
     }
 
-    private void dibujarSorpresas(Group layout){
 
-        ListadoCaminos caminosConEfectos = juego.obtenerCaminos();
-
-        for (Camino camino : caminosConEfectos.caminosConEfectos) {
-
-            SorpresaView sorpresaView = new SorpresaView(layout,mapa,camino);
-            sorpresaView.mostrarImagen();
-        }
-    }
-
-    private void dibujarMovimientos(Group layout){
-        Rectangle fondoMovimientos = new Rectangle(100,40,200,45);
-        fondoMovimientos.setFill(Color.WHITE);
-        fondoMovimientos.setStroke(Color.BLUE);
-        fondoMovimientos.setStrokeWidth(5);
-
-        Text movimientos = new Text(110,70,"Movimientos: " + juego.obtenerMovimientosRealizados());
-        movimientos.setFont(Font.font(20));
-        movimientos.setFill(Color.BLACK);
-
-        layout.getChildren().add(fondoMovimientos);
-        layout.getChildren().add(movimientos);
-    }
 
     private void dibujarRanking(Group layout){
         int i = 20;

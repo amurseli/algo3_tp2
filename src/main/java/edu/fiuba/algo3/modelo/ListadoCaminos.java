@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 public class ListadoCaminos {
 
@@ -13,6 +14,7 @@ public class ListadoCaminos {
 
     public void agregarCamino(Camino nuevoCamino){
         caminosConEfectos.add(nuevoCamino);
+
     }
     public Camino obtenerCaminoRecorrido(Camino caminoRecorrido){
         Camino caminoConEfecto = null;

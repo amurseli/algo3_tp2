@@ -8,8 +8,10 @@ import edu.fiuba.algo3.modelo.efectos.sorpresas.SorpresaNull;
 import edu.fiuba.algo3.modelo.vehiculos.TipoVehiculo;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 
+import java.util.Observable;
 
-public class Camino {
+
+public class Camino extends Observable {
     public Esquina esquinaInicial, esquinaFinal;
     public Sorpresa sorpresa;
     public Obstaculo obstaculo;
@@ -25,11 +27,15 @@ public class Camino {
 
         //TODO: SUPUESTO, EL AGRAR EFECTO REMPLAZA
         sorpresa = nuevaSorpresa;
+        setChanged();
+        this.notifyObservers();
     }
 
     public void agregrarEfecto(Obstaculo nuevoObstaculo){
 
         obstaculo = nuevoObstaculo;
+        setChanged();
+        this.notifyObservers();
     }
 
     @Override
@@ -46,6 +52,9 @@ public class Camino {
         estadoVehiculo.aplicarEfecto(vehiculo,sorpresa);
 
         sorpresa = new SorpresaNull();
+
+        setChanged();
+        this.notifyObservers();
     }
 
     //Hecho unicamente para las pruebas

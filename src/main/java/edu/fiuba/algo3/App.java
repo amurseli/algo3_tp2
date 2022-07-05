@@ -7,15 +7,12 @@ import edu.fiuba.algo3.modelo.efectos.sorpresas.Sorpresa;
 import edu.fiuba.algo3.modelo.vehiculos.Auto;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 import edu.fiuba.algo3.vista.JuegoView;
-import edu.fiuba.algo3.vista.ObtaculoView;
-import edu.fiuba.algo3.vista.SorpresaView;
 import edu.fiuba.algo3.vista.VehiculoView;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -182,8 +179,8 @@ public class App extends Application implements EventHandler<KeyEvent> {
         ListadoCaminos caminosConEfectos = juego.obtenerCaminos();
 
         for (Camino camino : caminosConEfectos.caminosConEfectos) {
-            ObtaculoView obtaculoView = new ObtaculoView(layout,mapa,camino);
-            camino.obstaculo.mostrarImagen(obtaculoView);
+            ObstaculoView obstaculoView = new ObstaculoView(layout,mapa,camino);
+            camino.obstaculo.mostrarImagen(obstaculoView);
         }
     }
 
@@ -203,7 +200,6 @@ public class App extends Application implements EventHandler<KeyEvent> {
 
         for (Camino camino : caminosConEfectos.caminosConEfectos) {
                 SorpresaView sorpresaView = new SorpresaView(layout,mapa,camino);
-                sorpresaView.mostrarImagen();
         }
     }
 

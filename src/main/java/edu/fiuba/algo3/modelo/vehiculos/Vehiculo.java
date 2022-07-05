@@ -41,6 +41,7 @@ public class Vehiculo extends Observable{
         }
 
         setChanged();
+        this.notifyObservers();
 
         return posicion;
     }
