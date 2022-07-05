@@ -53,29 +53,44 @@ public class JuegoView implements Observer {
         Group inicio = new Group();
         Button button = new Button("COMIENZA EL JUEGO");
         button.setLayoutX(320);
-        button.setLayoutY(SCREEN_HEIGHT /4 - button.getHeight()/2);
+        button.setLayoutY(280);
 
         TextField nickname = new TextField("Ingresa tu nickname");
         nickname.setLayoutX(310);
-        nickname.setLayoutY(100);
+        nickname.setLayoutY(80);
 
         TextField fila = new TextField("Ingresa fila");
-        fila.setLayoutX(110);
-        fila.setLayoutY(100);
+        fila.setLayoutX(200);
+        fila.setLayoutY(180);
 
         TextField columna = new TextField("Ingresa columna");
-        columna.setLayoutX(410);
-        columna.setLayoutY(100);
+        columna.setLayoutX(400);
+        columna.setLayoutY(180);
+
+        Text text = new Text("Bienvenido! Como te llamas?");
+        text.setX(300);
+        text.setY(60);
+
+        Text text2 = new Text("Elije la dimenciones del mapa (Ojo! Solo numeros pares)");
+        text2.setX(220);
+        text2.setY(160);
+
+        Text text3 = new Text("Llega a la meta en la menor cantidad de movimientos posibles!");
+        text3.setX(220);
+        text3.setY(250);
 
         inicio.getChildren().add(nickname);
         inicio.getChildren().add(fila);
         inicio.getChildren().add(columna);
         inicio.getChildren().add(button);
+        inicio.getChildren().add(text);
+        inicio.getChildren().add(text2);
+        inicio.getChildren().add(text3);
 
         //TODO: COMPROBAR ENTRADA DE INT
 
 
-        mostrarPantalla(inicio);
+        mostrarPantalla(inicio, false);
 
         button.setOnAction(value ->{
             int filaInt = Integer.parseInt(fila.getText());
@@ -91,11 +106,11 @@ public class JuegoView implements Observer {
         });
     }
 
-    private Scene mostrarPantalla(Group layout){
+    private Scene mostrarPantalla(Group layout, Boolean pantallaCompleta){
 
         Scene scene = new Scene(layout, SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
         stage.setScene(scene);
-        stage.setFullScreen(true);
+        stage.setFullScreen(pantallaCompleta);
         stage.show();
         return scene;
     }
@@ -113,9 +128,8 @@ public class JuegoView implements Observer {
         movimientosTextView = new MovimientosTextView(juego.obtenerVehiculo(),layout);
 
         rankingView = new RankingView(juego.obtenerRanking(),layout);
-        //dibujarRanking(layout);
 
-        Scene sceneActual = mostrarPantalla(layout);
+        Scene sceneActual = mostrarPantalla(layout, true);
 
         KeysController keysController = new KeysController();
         keysController.leerInputs(sceneActual,juego);
@@ -156,6 +170,7 @@ public class JuegoView implements Observer {
 
     }
 
+
     private void crearCaminosView(Group layout){
 
         ListadoCaminos listadoCaminos = juego.obtenerCaminos();
@@ -166,26 +181,6 @@ public class JuegoView implements Observer {
     }
 
 
-
-    private void dibujarRanking(Group layout){
-        int i = 20;
-        Rectangle fondoRanking = new Rectangle(100,100,200,600);
-        fondoRanking.setFill(Color.WHITE);
-        fondoRanking.setStroke(Color.SALMON);
-        fondoRanking.setStrokeWidth(5);
-        layout.getChildren().add(fondoRanking);
-
-        Text titulo = new Text(110,150,"Highscores: ");
-        titulo.setFont(Font.font(30));
-        layout.getChildren().add(titulo);
-        for (Puntaje puntaje : juego.obtenerRanking().puntajes){
-            Text nuevoPuntajeTexto = new Text(110,160 + i,puntaje.getNombre()+": " + puntaje.getMovimientos() + "\n");
-            nuevoPuntajeTexto.setFont(Font.font(20));
-            nuevoPuntajeTexto.setFill(Color.BLACK);
-            layout.getChildren().add(nuevoPuntajeTexto);
-            i+= 20;
-        }
-    }
 
     private void dibujarHasGanado() {
 
