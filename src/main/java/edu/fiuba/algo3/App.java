@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.efectos.obstaculos.Obstaculo;
 import edu.fiuba.algo3.modelo.efectos.sorpresas.Sorpresa;
 import edu.fiuba.algo3.modelo.vehiculos.Auto;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
+import edu.fiuba.algo3.vista.JuegoView;
 import edu.fiuba.algo3.vista.ObtaculoView;
 import edu.fiuba.algo3.vista.SorpresaView;
 import edu.fiuba.algo3.vista.VehiculoView;
@@ -56,6 +57,9 @@ public class App extends Application implements EventHandler<KeyEvent> {
     @Override
     public void start(Stage stage) {
 
+        JuegoView juegoView = new JuegoView(stage);
+
+        /*
         Group inicio = new Group();
         Button button = new Button("COMIENZA EL JUEGO");
         button.setLayoutX(320);
@@ -79,6 +83,8 @@ public class App extends Application implements EventHandler<KeyEvent> {
             nuevoJuego(stage, nickname);
         });
 
+
+         */
     }
 
     @Override
@@ -185,11 +191,8 @@ public class App extends Application implements EventHandler<KeyEvent> {
         ListadoCaminos caminosConEfectos = juego.obtenerCaminos();
 
         for (Camino camino : caminosConEfectos.caminosConEfectos) {
-
-            for(Obstaculo obstaculo : camino.obstaculos) {
-                ObtaculoView obtaculoView = new ObtaculoView(layout,mapa,camino);
-                obstaculo.mostrarImagen(obtaculoView);
-            }
+            ObtaculoView obtaculoView = new ObtaculoView(layout,mapa,camino);
+            camino.obstaculo.mostrarImagen(obtaculoView);
         }
     }
 
@@ -208,11 +211,8 @@ public class App extends Application implements EventHandler<KeyEvent> {
         ListadoCaminos caminosConEfectos = juego.obtenerCaminos();
 
         for (Camino camino : caminosConEfectos.caminosConEfectos) {
-
-            for(Sorpresa sorpresa : camino.sospresas) {
                 SorpresaView sorpresaView = new SorpresaView(layout,mapa,camino);
                 sorpresaView.mostrarImagen();
-            }
         }
     }
 
