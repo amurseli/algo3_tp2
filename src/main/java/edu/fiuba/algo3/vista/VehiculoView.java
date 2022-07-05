@@ -1,31 +1,39 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.modelo.Direcciones.Abajo;
+import edu.fiuba.algo3.modelo.Direcciones.Arriba;
+import edu.fiuba.algo3.modelo.Direcciones.Derecha;
+import edu.fiuba.algo3.modelo.Direcciones.Izquierda;
 import edu.fiuba.algo3.modelo.Esquina;
+import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.vehiculos.*;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
-public class VehiculoView {
+import java.util.Observable;
+import java.util.Observer;
 
+public class VehiculoView implements Observer {
 
     public static final int MULTIPLICADOR = 50;
     public static final int ANCHO_PANTALLA = 1620;
     public static final int ALTO_PANTALLA = 720;
     public static final int FONDO_NEGRO_TAMANIO = 3000;
     Image estado;
-
     Image fondoNegro;
-
     double inicioX;
     double inicioY;
-
     ImageView vehiculoView;
-
     ImageView fondoNegroView;
 
+    Vehiculo vehiculo;
 
 
     public VehiculoView(Vehiculo vehiculo, Group layout, Rectangle mapa){
@@ -34,7 +42,8 @@ public class VehiculoView {
         estado = new Image("/auto.png", 20, 40,true,false);
         fondoNegro = new Image("/fondoNegro.png",FONDO_NEGRO_TAMANIO,FONDO_NEGRO_TAMANIO,true,false);
         fondoNegroView = new ImageView(fondoNegro);
-
+        this.vehiculo = vehiculo;
+        vehiculo.addObserver(this);
         vehiculoView = new ImageView(estado);
         vehiculoView.setRotate(270);
 
@@ -50,19 +59,15 @@ public class VehiculoView {
 
     }
 
-    public void actualizarPosicion(Vehiculo vehiculo, int orientation){
+    public void actualizarPosicion(){
         vehiculoView.setX(inicioX + vehiculo.obtenerPosicion().getColumna() * MULTIPLICADOR);
         vehiculoView.setY(inicioY + vehiculo.obtenerPosicion().getFila() * MULTIPLICADOR -10);
-        vehiculoView.setRotate(orientation);
+        //vehiculoView.setRotate(orientation);
         fondoNegroView.setX(inicioX + vehiculo.obtenerPosicion().columna * MULTIPLICADOR - FONDO_NEGRO_TAMANIO/2);
         fondoNegroView.setY(inicioY + vehiculo.obtenerPosicion().fila * MULTIPLICADOR - FONDO_NEGRO_TAMANIO/2);
-        actualizarImagen(vehiculo.obtenerTipoVehiculo());
     }
 
     public void actualizarImagen(Object tipoVehiculo){
-        //TODO: CAMBIAAAAAR, HICE ESTO SOLO PARA PROBAR SI ANDABAN BIEN ACTUALIZAR LAS IMAGENES
-
-        System.out.println(tipoVehiculo);
 
         if (tipoVehiculo == Moto.class){
             estado =  new Image("/moto.png", 20, 40,true,false);
@@ -75,7 +80,16 @@ public class VehiculoView {
         }
 
         vehiculoView.setImage(estado);
+    }
 
+    @Override
+    public void update(Observable o, Object arg) {
+        actualizarPosicion();
+        dibujarVehiculo();
+    }
+
+    private void dibujarVehiculo(){
+        actualizarImagen(vehiculo.obtenerTipoVehiculo());
     }
 
 

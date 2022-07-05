@@ -1,6 +1,10 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Direcciones.Abajo;
+import edu.fiuba.algo3.modelo.Direcciones.Arriba;
+import edu.fiuba.algo3.modelo.Direcciones.Derecha;
+import edu.fiuba.algo3.modelo.Direcciones.Izquierda;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.Obstaculo;
 import edu.fiuba.algo3.modelo.efectos.sorpresas.Sorpresa;
 import javafx.scene.Group;
@@ -9,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -81,9 +86,6 @@ public class JuegoView {
             juego.nuevaPartida(limite);
             this.pantallaJuego();
         });
-
-
-
     }
 
     private void mostrarPantalla(Group layout){
@@ -100,9 +102,7 @@ public class JuegoView {
         crearCaminos(layout);
         dibujarSorpresas(layout);
         dibujarObstaculos(layout);
-
-        //vehiculoView = new VehiculoView(juego.obtenerVehiculo(), layout, mapa);
-
+        vehiculoView = new VehiculoView(juego.obtenerVehiculo(), layout, mapa);
         dibujarMeta(layout);
         dibujarMovimientos(layout);
         dibujarRanking(layout);
@@ -200,6 +200,5 @@ public class JuegoView {
             i+= 20;
         }
     }
-
 
 }

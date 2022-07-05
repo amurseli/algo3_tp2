@@ -35,24 +35,15 @@ public class App extends Application implements EventHandler<KeyEvent> {
     public static final int SCREEN_WIDTH = 1620;
     public static final int SCREEN_HEIGHT = 720;
 
-
     Group layout = new Group();
-
     Juego juego = new Juego();
-
     Scene sceneInicio;
     Scene sceneJuego;
-
     Esquina limite;
     Esquina posicionMeta;
-
     Rectangle mapa;
-
     Text movimientos;
-
     VehiculoView vehiculoView;
-
-
 
     @Override
     public void start(Stage stage) {
@@ -101,22 +92,22 @@ public class App extends Application implements EventHandler<KeyEvent> {
             if(event.getCode() == KeyCode.W){
 
                 juego.mover(new Arriba());
-                vehiculoView.actualizarPosicion(juego.obtenerVehiculo(),180);
+                //vehiculoView.actualizarPosicion(juego.obtenerVehiculo(),180);
 
             }
             if(event.getCode() == KeyCode.S){
                 juego.mover(new Abajo());
-                vehiculoView.actualizarPosicion(juego.obtenerVehiculo(),0);
+                //vehiculoView.actualizarPosicion(juego.obtenerVehiculo(),0);
 
             }
             if(event.getCode() == KeyCode.A){
                 juego.mover(new Izquierda());
-                vehiculoView.actualizarPosicion(juego.obtenerVehiculo(),90);
+                //vehiculoView.actualizarPosicion(juego.obtenerVehiculo(),90);
 
             }
             if(event.getCode() == KeyCode.D){
                 juego.mover(new Derecha());
-                vehiculoView.actualizarPosicion(juego.obtenerVehiculo(),270);
+                //vehiculoView.actualizarPosicion(juego.obtenerVehiculo(),270);
 
             }
 

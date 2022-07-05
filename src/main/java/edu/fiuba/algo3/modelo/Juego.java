@@ -10,8 +10,8 @@ import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 public class Juego {
     Ciudad ciudad;
     Ranking listaDePuntajes;
-
     String nickname;
+
 
     public boolean finDeJuego = false;
     public Juego(){
@@ -75,6 +75,7 @@ public class Juego {
 
     public void nuevaPartida(Esquina limite){
         this.finDeJuego = false;
+
         this.crearCiudad(limite,new Esquina(1,5),new Vehiculo(new Auto(), new Esquina(5,1)));
 
         //agrego obstaculos
