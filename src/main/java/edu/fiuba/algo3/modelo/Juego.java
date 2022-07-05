@@ -77,9 +77,8 @@ public class Juego extends Observable {
     public void nuevaPartida(Esquina limite){
         GeneradorRandom generadorRandom = new GeneradorRandom();
 
-        Esquina meta = generadorRandom.generarEsquina(limite);
         Esquina comienzo = new Esquina(0,0);
-        this.crearCiudad(limite,meta,new Vehiculo(new Auto(), comienzo));
+        this.crearCiudad(limite,limite,new Vehiculo(new Auto(), comienzo));
 
         //agrego obstaculos
         for (int i = 0; i < 20; i++){

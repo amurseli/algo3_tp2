@@ -40,6 +40,8 @@ public class JuegoView implements Observer {
 
     Group layout;
 
+    KeysController keysController;
+
     public JuegoView(Stage stage){
 
         this.stage = stage;
@@ -131,7 +133,7 @@ public class JuegoView implements Observer {
 
         Scene sceneActual = mostrarPantalla(layout, true);
 
-        KeysController keysController = new KeysController();
+        keysController = new KeysController();
         keysController.leerInputs(sceneActual,juego);
     }
     private void crearMapa(Group layout){
@@ -208,5 +210,6 @@ public class JuegoView implements Observer {
         @Override
     public void update(Observable o, Object arg) {
         dibujarHasGanado();
+        keysController.bloquearControles();
     }
 }

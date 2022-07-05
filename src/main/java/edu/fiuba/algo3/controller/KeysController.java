@@ -14,24 +14,37 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class KeysController implements EventHandler<KeyEvent> {
+    Boolean habilitado;
+
+    public KeysController (){
+        habilitado = true;
+    }
     @Override
     public void handle(KeyEvent keyEvent) {
     }
 
     public void leerInputs(Scene scene, Juego juego) {
+
         scene.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.W || event.getCode() == KeyCode.UP) {
-                juego.mover(new Arriba());
-            }
-            if (event.getCode() == KeyCode.S || event.getCode() == KeyCode.DOWN) {
-                juego.mover(new Abajo());
-            }
-            if (event.getCode() == KeyCode.A || event.getCode() == KeyCode.LEFT) {
-                juego.mover(new Izquierda());
-            }
-            if (event.getCode() == KeyCode.D || event.getCode() == KeyCode.RIGHT) {
-                juego.mover(new Derecha());
+            if (habilitado) {
+
+                if (event.getCode() == KeyCode.W || event.getCode() == KeyCode.UP) {
+                    juego.mover(new Arriba());
+                }
+                if (event.getCode() == KeyCode.S || event.getCode() == KeyCode.DOWN) {
+                    juego.mover(new Abajo());
+                }
+                if (event.getCode() == KeyCode.A || event.getCode() == KeyCode.LEFT) {
+                    juego.mover(new Izquierda());
+                }
+                if (event.getCode() == KeyCode.D || event.getCode() == KeyCode.RIGHT) {
+                    juego.mover(new Derecha());
+                }
             }
         });
+    }
+
+    public void bloquearControles(){
+        habilitado = false;
     }
 }
