@@ -20,9 +20,7 @@ public class Piquete implements Obstaculo {
         vehiculo.darLaVuelta();
     }
 
-    public void mostrarImagen(ObstaculoView obstaculoView){
-        obstaculoView.mostrarImagen(this);
-    }
+
 }
 
 

@@ -1,8 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class Ranking {
+public class Ranking extends Observable {
 
     public ArrayList<Puntaje> puntajes;
 
@@ -20,17 +21,13 @@ public class Ranking {
             return;
         }
         puntajes.add(nuevoPuntaje);
+
+        setChanged();
+        notifyObservers();
     }
 
     public boolean compararPuntaje(Puntaje puntaje, int index) {
         return puntajes.get(index).equals(puntaje);
     }
 
-    public void mostrarRanking(){
-        System.out.println("TABLA DE PUNAJE\n");
-
-        for (Puntaje puntaje : puntajes){
-            System.out.println(puntaje.nombre + " realizó "+puntaje.movimientos + " movimientos");
-        }
-    }
 }

@@ -15,11 +15,14 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import static edu.fiuba.algo3.App.SCREEN_HEIGHT;
 import static edu.fiuba.algo3.App.SCREEN_WIDTH;
 import static edu.fiuba.algo3.vista.VehiculoView.MULTIPLICADOR;
 
-public class JuegoView {
+public class JuegoView implements Observer {
 
     Stage stage;
     Juego juego;
@@ -33,10 +36,14 @@ public class JuegoView {
 
     MovimientosTextView movimientosTextView;
 
+    RankingView rankingView;
+
+    Group layout;
 
     public JuegoView(Stage stage){
 
         this.stage = stage;
+        juego = new Juego();
         pantallaInicio();
 
     }
@@ -77,7 +84,7 @@ public class JuegoView {
             limite = new Esquina(filaInt,columnaInt);
             this.nickname = nickname.getText();
 
-            juego = new Juego();
+            juego.addObserver(this);
             juego.asignarNickname(this.nickname);
             juego.nuevaPartida(limite);
             this.pantallaJuego();
@@ -94,7 +101,7 @@ public class JuegoView {
     }
 
     private void pantallaJuego(){
-        Group layout = new Group();
+        layout = new Group();
         crearMapa(layout);
         crearCaminos(layout);
  
@@ -105,7 +112,8 @@ public class JuegoView {
 
         movimientosTextView = new MovimientosTextView(juego.obtenerVehiculo(),layout);
 
-        dibujarRanking(layout);
+        rankingView = new RankingView(juego.obtenerRanking(),layout);
+        //dibujarRanking(layout);
 
         Scene sceneActual = mostrarPantalla(layout);
 
@@ -179,4 +187,31 @@ public class JuegoView {
         }
     }
 
+    private void dibujarHasGanado() {
+
+        Rectangle hasGanadoFondo = new Rectangle(350, 100, 200, 200);
+        hasGanadoFondo.setFill(Color.WHITE);
+        hasGanadoFondo.setStroke(Color.GREEN);
+        hasGanadoFondo.setStrokeWidth(5);
+        layout.getChildren().add(hasGanadoFondo);
+
+        Text text = new Text(370, 140, "Has ganado!");
+        text.setFont(Font.font(30));
+        text.setFill(Color.GREEN);
+
+        Button button = new Button("JUGAR OTRA VEZ");
+        button.setLayoutX(390);
+        button.setLayoutY(200);
+
+        layout.getChildren().add(text);
+        layout.getChildren().add(button);
+
+        button.setOnAction(value -> {
+            pantallaInicio();
+        });
+    }
+        @Override
+    public void update(Observable o, Object arg) {
+        dibujarHasGanado();
+    }
 }

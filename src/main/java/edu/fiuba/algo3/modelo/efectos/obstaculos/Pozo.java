@@ -24,9 +24,5 @@ public class Pozo implements Obstaculo {
         }
     }
 
-    public void mostrarImagen(ObstaculoView obstaculoView){
-        obstaculoView.mostrarImagen(this);
-    }
-
 
 }

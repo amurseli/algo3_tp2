@@ -11,6 +11,5 @@ public interface Obstaculo {
     void aplicarEfecto(Vehiculo vehiculo, Moto moto);
     public void aplicarEfecto(Vehiculo vehiculo, CuatroPorCuatro cuatroPorCuatro);
 
-    void mostrarImagen(ObstaculoView obstaculoView);
 
 }

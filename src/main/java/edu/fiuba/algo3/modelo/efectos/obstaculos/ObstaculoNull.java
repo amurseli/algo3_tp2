@@ -21,8 +21,5 @@ public class ObstaculoNull implements Obstaculo{
 
     }
 
-    @Override
-    public void mostrarImagen(ObstaculoView obstaculoView) {
 
-    }
 }

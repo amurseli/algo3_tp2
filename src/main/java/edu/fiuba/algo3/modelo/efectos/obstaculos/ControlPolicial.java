@@ -32,8 +32,5 @@ public class ControlPolicial implements Obstaculo {
         }
     }
 
-    public void mostrarImagen(ObstaculoView obstaculoView){
-        obstaculoView.mostrarImagen(this);
-    }
 }
 

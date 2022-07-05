@@ -7,13 +7,14 @@ import edu.fiuba.algo3.modelo.efectos.sorpresas.Sorpresa;
 import edu.fiuba.algo3.modelo.vehiculos.Auto;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 
-public class Juego {
+import java.util.Observable;
+
+public class Juego extends Observable {
     Ciudad ciudad;
     Ranking listaDePuntajes;
     String nickname;
 
 
-    public boolean finDeJuego = false;
     public Juego(){
         this.listaDePuntajes = new Ranking();
     }
@@ -39,9 +40,9 @@ public class Juego {
     }
 
     private void finDelJuego(){
-        System.out.println("SE TERMINO EL JUEGO. HAS GANADO");
-        ciudad.datosDePartida(listaDePuntajes,nickname);//harcodeo el nikname porque eso habria que pasarlo cuando se gane como un input
-        finDeJuego = true;
+        ciudad.datosDePartida(listaDePuntajes,nickname);
+        setChanged();
+        notifyObservers();
 
     }
 
@@ -74,7 +75,6 @@ public class Juego {
     }
 
     public void nuevaPartida(Esquina limite){
-        this.finDeJuego = false;
 
         this.crearCiudad(limite,new Esquina(1,5),new Vehiculo(new Auto(), new Esquina(5,1)));
 
