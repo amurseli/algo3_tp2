@@ -13,7 +13,6 @@ import java.util.Observer;
 
 public class RankingView implements Observer {
 
-
     Ranking ranking;
     Group layout;
 
@@ -26,7 +25,7 @@ public class RankingView implements Observer {
     }
 
     private void dibujarFondoRanking(Group layout){
-        Rectangle fondoRanking = new Rectangle(100,100,200,600);
+        Rectangle fondoRanking = new Rectangle(100,100,200,500);
         fondoRanking.setFill(Color.WHITE);
         fondoRanking.setStroke(Color.SALMON);
         fondoRanking.setStrokeWidth(5);

@@ -89,23 +89,62 @@ public class JuegoView implements Observer {
         inicio.getChildren().add(text2);
         inicio.getChildren().add(text3);
 
-        //TODO: COMPROBAR ENTRADA DE INT
-
-
+        
         mostrarPantalla(inicio, false);
 
         button.setOnAction(value ->{
-            int filaInt = Integer.parseInt(fila.getText());
-            int columnaInt = Integer.parseInt(columna.getText());
 
-            limite = new Esquina(filaInt,columnaInt);
-            this.nickname = nickname.getText();
+            if (comprobarEntrada(fila.getText(),columna.getText())) {
+                System.out.println("GOLA");
 
-            juego.addObserver(this);
-            juego.asignarNickname(this.nickname);
-            juego.nuevaPartida(limite);
-            this.pantallaJuego();
-        });
+                int filaInt = Integer.parseInt(fila.getText());
+                int columnaInt = Integer.parseInt(columna.getText());
+
+
+                limite = new Esquina(filaInt, columnaInt);
+                this.nickname = nickname.getText();
+
+                juego.addObserver(this);
+                juego.asignarNickname(this.nickname);
+                juego.nuevaPartida(limite);
+                this.pantallaJuego();
+            }
+            else {
+                Text advertencia = new Text("Dije numeros pares!");
+                advertencia.setX(600);
+                advertencia.setY(200);
+                advertencia.setFill(Color.RED);
+                inicio.getChildren().add(advertencia);
+            }
+            });
+
+    }
+    private boolean comprobarEntrada(String fila, String columna){
+        if(esNumero(fila) && esNumero(columna)){
+            int filaInt = Integer.parseInt(fila);
+            int columnaInt = Integer.parseInt(columna);
+
+            if (esPar(filaInt) && esPar(columnaInt)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Boolean esNumero(String entrada){
+        try {
+            Integer.parseInt(entrada);
+            return true;
+        } catch (NumberFormatException nfe){
+            return false;
+        }
+    }
+
+    private Boolean esPar(Integer entrada){
+        if (entrada % 2 == 0){
+            return true;
+        }
+        return false;
     }
 
     private Scene mostrarPantalla(Group layout, Boolean pantallaCompleta){
@@ -120,7 +159,7 @@ public class JuegoView implements Observer {
     private void pantallaJuego(){
         layout = new Group();
         crearMapa(layout);
-        crearCaminos(layout);
+        dibujarCaminosBlancos(layout);
  
         crearCaminosView(layout);
 
@@ -143,7 +182,7 @@ public class JuegoView implements Observer {
         layout.getChildren().add(mapa);
     }
 
-    private void crearCaminos(Group layout){
+    private void dibujarCaminosBlancos(Group layout){
         for (int i = 0; i < 30 ; i++){
             Rectangle caminitoHorizontal = new Rectangle(SCREEN_WIDTH, 20);
             Rectangle caminitoVertical = new Rectangle(20, SCREEN_HEIGHT);
