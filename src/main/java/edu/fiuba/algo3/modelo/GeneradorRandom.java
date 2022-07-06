@@ -29,8 +29,8 @@ public class GeneradorRandom {
             case 2: return new Izquierda();
             case 3: return new Arriba();
             case 4: return new Abajo();
+            default: return new Derecha();
         }
-        return null;
     }
 
     public Esquina generarEsquina(Esquina limite){
@@ -43,8 +43,8 @@ public class GeneradorRandom {
             case 1: return new Pozo();
             case 2: return new ControlPolicial(new GeneradorRandom());
             case 3: return new Piquete();
+            default: return new Pozo();
         }
-        return null;
     }
 
     public Sorpresa generarSorpresa(){
