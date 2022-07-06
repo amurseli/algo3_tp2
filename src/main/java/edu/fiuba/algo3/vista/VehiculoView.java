@@ -1,11 +1,5 @@
 package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.modelo.Direcciones.Abajo;
-import edu.fiuba.algo3.modelo.Direcciones.Arriba;
-import edu.fiuba.algo3.modelo.Direcciones.Derecha;
-import edu.fiuba.algo3.modelo.Direcciones.Izquierda;
-import edu.fiuba.algo3.modelo.Esquina;
-import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.vehiculos.*;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -30,7 +24,7 @@ public class VehiculoView implements Observer {
     Image fondoNegro;
     double inicioX;
     double inicioY;
-    ImageView vehiculoView;
+    public ImageView vehiculoView;
     ImageView fondoNegroView;
 
     Vehiculo vehiculo;
@@ -40,8 +34,8 @@ public class VehiculoView implements Observer {
 
 
         estado = new Image("/auto.png", 20, 40,true,false);
-        fondoNegro = new Image("/fondoNegro.png",FONDO_NEGRO_TAMANIO,FONDO_NEGRO_TAMANIO,true,false);
-        fondoNegroView = new ImageView(fondoNegro);
+        //fondoNegro = new Image("/fondoNegro.png",FONDO_NEGRO_TAMANIO,FONDO_NEGRO_TAMANIO,true,false);
+        //fondoNegroView = new ImageView(fondoNegro);
         this.vehiculo = vehiculo;
         vehiculo.addObserver(this);
         vehiculoView = new ImageView(estado);
@@ -52,10 +46,10 @@ public class VehiculoView implements Observer {
 
         vehiculoView.setX(inicioX + vehiculo.obtenerPosicion().columna * MULTIPLICADOR);
         vehiculoView.setY(inicioY + vehiculo.obtenerPosicion().fila * MULTIPLICADOR - 10);
-        fondoNegroView.setX(inicioX + vehiculo.obtenerPosicion().columna * MULTIPLICADOR - FONDO_NEGRO_TAMANIO/2);
-        fondoNegroView.setY(inicioY + vehiculo.obtenerPosicion().fila * MULTIPLICADOR - FONDO_NEGRO_TAMANIO/2);
+        //fondoNegroView.setX(inicioX + vehiculo.obtenerPosicion().columna * MULTIPLICADOR - FONDO_NEGRO_TAMANIO/2);
+        //fondoNegroView.setY(inicioY + vehiculo.obtenerPosicion().fila * MULTIPLICADOR - FONDO_NEGRO_TAMANIO/2);
         layout.getChildren().add(vehiculoView);
-        layout.getChildren().add(fondoNegroView);
+        //layout.getChildren().add(fondoNegroView);
 
     }
 
@@ -63,11 +57,11 @@ public class VehiculoView implements Observer {
         vehiculoView.setX(inicioX + vehiculo.obtenerPosicion().getColumna() * MULTIPLICADOR);
         vehiculoView.setY(inicioY + vehiculo.obtenerPosicion().getFila() * MULTIPLICADOR -10);
         //vehiculoView.setRotate(orientation);
-        fondoNegroView.setX(inicioX + vehiculo.obtenerPosicion().columna * MULTIPLICADOR - FONDO_NEGRO_TAMANIO/2);
-        fondoNegroView.setY(inicioY + vehiculo.obtenerPosicion().fila * MULTIPLICADOR - FONDO_NEGRO_TAMANIO/2);
+        //fondoNegroView.setX(inicioX + vehiculo.obtenerPosicion().columna * MULTIPLICADOR - FONDO_NEGRO_TAMANIO/2);
+        //fondoNegroView.setY(inicioY + vehiculo.obtenerPosicion().fila * MULTIPLICADOR - FONDO_NEGRO_TAMANIO/2);
     }
 
-
+/*
     public void actualizarImagen(Object tipoVehiculo){
 
         if (tipoVehiculo == Moto.class){
@@ -82,16 +76,16 @@ public class VehiculoView implements Observer {
 
         vehiculoView.setImage(estado);
     }
-
+*/
     @Override
     public void update(Observable o, Object arg) {
         actualizarPosicion();
-        dibujarVehiculo();
+        //dibujarVehiculo();
     }
 
-    private void dibujarVehiculo(){
-        actualizarImagen(vehiculo.obtenerTipoVehiculo());
-    }
+    //private void dibujarVehiculo(){
+    //actualizarImagen(vehiculo.obtenerTipoVehiculo());
+    //}
 
 
 }

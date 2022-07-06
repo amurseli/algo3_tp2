@@ -67,7 +67,6 @@ public class CaminoView implements Observer {
         if (sorpresa.getClass() == SorpresaFavorable.class){
             sorpresaImage =  new Image("/sorpresa.png", 20, 40,true,false);
         }
-
         if (sorpresa.getClass() == CambioDeVehiculo.class){
             sorpresaImage =  new Image("/sorpresa.png", 20, 40,true,false);
         }

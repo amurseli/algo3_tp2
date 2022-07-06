@@ -2,6 +2,9 @@ package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.controller.KeysController;
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.vista.tipoDeVehiculoView.AutoView;
+import edu.fiuba.algo3.vista.tipoDeVehiculoView.CuatroPorCuatroView;
+import edu.fiuba.algo3.vista.tipoDeVehiculoView.MotoView;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -89,7 +92,7 @@ public class JuegoView implements Observer {
         inicio.getChildren().add(text2);
         inicio.getChildren().add(text3);
 
-        
+
         mostrarPantalla(inicio, false);
 
         button.setOnAction(value ->{
@@ -164,10 +167,14 @@ public class JuegoView implements Observer {
         crearCaminosView(layout);
 
         vehiculoView = new VehiculoView(juego.obtenerVehiculo(), layout, mapa);
+
+        new AutoView(vehiculoView);
+        new CuatroPorCuatroView(vehiculoView);
+        new MotoView(vehiculoView);
+
         dibujarMeta(layout);
 
         movimientosTextView = new MovimientosTextView(juego.obtenerVehiculo(),layout);
-
         rankingView = new RankingView(juego.obtenerRanking(),layout);
 
         Scene sceneActual = mostrarPantalla(layout, true);
@@ -217,7 +224,7 @@ public class JuegoView implements Observer {
         ListadoCaminos listadoCaminos = juego.obtenerCaminos();
 
         for (Camino camino : listadoCaminos.caminosConEfectos) {
-            CaminoView caminoView = new CaminoView(camino,layout,mapa);
+            new CaminoView(camino,layout,mapa);
         }
     }
 

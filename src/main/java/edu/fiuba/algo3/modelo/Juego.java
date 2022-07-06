@@ -1,10 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.App;
 import edu.fiuba.algo3.modelo.Direcciones.Direccion;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.Obstaculo;
 import edu.fiuba.algo3.modelo.efectos.sorpresas.Sorpresa;
-import edu.fiuba.algo3.modelo.vehiculos.Auto;
+import edu.fiuba.algo3.modelo.vehiculos.singletons.AutoSingleton;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 
 import java.util.Observable;
@@ -78,10 +77,11 @@ public class Juego extends Observable {
         GeneradorRandom generadorRandom = new GeneradorRandom();
 
         Esquina comienzo = new Esquina(0,0);
-        this.crearCiudad(limite,limite,new Vehiculo(new Auto(), comienzo));
+        this.crearCiudad(limite,limite,new Vehiculo(AutoSingleton.obtenerInstancia(), comienzo));
+
 
         //agrego obstaculos
-        for (int i = 0; i < 20; i++){
+        for (int i = 0; i < limite.fila + limite.columna; i++){
 
             Camino camino = new Camino(generadorRandom.generarEsquina(this.obtenerLimite()), generadorRandom.generarDireccion());
             Obstaculo obtaculo = generadorRandom.generarObstaculo();
@@ -90,7 +90,7 @@ public class Juego extends Observable {
         }
 
         //agrego sorpresas
-        for (int i = 0; i < 20 ; i++){
+        for (int i = 0; i < limite.fila + limite.columna ; i++){
             Camino camino = new Camino(generadorRandom.generarEsquina(this.obtenerLimite()), generadorRandom.generarDireccion());
             Sorpresa sorpresa = generadorRandom.generarSorpresa();
             camino.agregrarEfecto(sorpresa);

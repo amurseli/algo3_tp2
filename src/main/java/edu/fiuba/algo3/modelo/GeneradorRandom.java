@@ -34,7 +34,7 @@ public class GeneradorRandom {
     }
 
     public Esquina generarEsquina(Esquina limite){
-        return new Esquina(generarRandomInt(1,limite.columna-1), generarRandomInt(1,limite.fila-1));
+        return new Esquina(generarRandomInt(1,limite.fila-1), generarRandomInt(1,limite.columna-1));
     }
 
     public Obstaculo generarObstaculo(){

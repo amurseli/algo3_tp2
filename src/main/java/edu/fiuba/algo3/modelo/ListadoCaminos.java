@@ -13,7 +13,20 @@ public class ListadoCaminos {
     }
 
     public void agregarCamino(Camino nuevoCamino){
-        caminosConEfectos.add(nuevoCamino);
+
+        if (comprobarSiCaminoExiste(nuevoCamino)){
+            caminosConEfectos.add(nuevoCamino);
+        }
+    }
+
+    private boolean comprobarSiCaminoExiste(Camino nuevoCamino){
+
+        for (Camino camino:caminosConEfectos) {
+            if(camino.equals(nuevoCamino)){
+                return false;
+            }
+        }
+        return true;
 
     }
     public Camino obtenerCaminoRecorrido(Camino caminoRecorrido){
