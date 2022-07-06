@@ -1,11 +1,9 @@
 package edu.fiuba.algo3.modelo.vehiculos;
 
-import edu.fiuba.algo3.modelo.ManejadorDeObservables;
-import edu.fiuba.algo3.modelo.Observador;
+import edu.fiuba.algo3.modelo.ObservadorPersonalizado.ManejadorDeObservables;
+import edu.fiuba.algo3.modelo.ObservadorPersonalizado.ObservadorTipoVehiculo;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.Obstaculo;
 import edu.fiuba.algo3.modelo.efectos.sorpresas.Sorpresa;
-
-import java.util.Observable;
 
 public class CuatroPorCuatro extends ManejadorDeObservables implements TipoVehiculo {
     int pozosPisados = 0;
@@ -40,8 +38,8 @@ public class CuatroPorCuatro extends ManejadorDeObservables implements TipoVehic
     }
 
     @Override
-    public void observar(Observador unObservador) {
-        addObservador(unObservador);
+    public void observar(ObservadorTipoVehiculo unObservadorTipoVehiculo) {
+        addObservador(unObservadorTipoVehiculo);
     }
 
 

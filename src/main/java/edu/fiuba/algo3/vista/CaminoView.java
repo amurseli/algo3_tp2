@@ -1,11 +1,9 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.modelo.Camino;
+import edu.fiuba.algo3.modelo.ObservadorPersonalizado.ObservadorEfectos;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.*;
-import edu.fiuba.algo3.modelo.efectos.sorpresas.CambioDeVehiculo;
-import edu.fiuba.algo3.modelo.efectos.sorpresas.Sorpresa;
-import edu.fiuba.algo3.modelo.efectos.sorpresas.SorpresaFavorable;
-import edu.fiuba.algo3.modelo.efectos.sorpresas.SorpresaNull;
+import edu.fiuba.algo3.modelo.efectos.sorpresas.*;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,7 +14,7 @@ import java.util.Observer;
 
 import static edu.fiuba.algo3.App.MULTIPLICADOR;
 
-public class CaminoView implements Observer {
+public class CaminoView implements ObservadorEfectos {
 
     Camino camino;
     Group layout;
@@ -33,7 +31,8 @@ public class CaminoView implements Observer {
         this.layout = layout;
         this.mapa = mapa;
         this.camino = camino;
-        this.camino.addObserver(this);
+        this.camino.obstaculo.observar(this);
+        this.camino.sorpresa.observar(this);
 
         sorpresaImage = new Image("/vacio.png", 20, 40,true,false);
         sorpresaImageView = new ImageView(sorpresaImage);
@@ -47,22 +46,16 @@ public class CaminoView implements Observer {
         obstaculoImageView.setY(720/2 - mapa.getHeight()/2 - 5 + (camino.esquinaInicial.fila * MULTIPLICADOR + camino.esquinaFinal.fila*MULTIPLICADOR) / 2);
         layout.getChildren().add(obstaculoImageView);
 
-        actualizarObstaculo(camino.obstaculo);
-        actualizarSorpresa(camino.sorpresa);
+        //actualizarObstaculo(camino.obstaculo);
+        //actualizarSorpresa(camino.sorpresa);
 
 
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        actualizarObstaculo(camino.obstaculo);
-        actualizarSorpresa(camino.sorpresa);
-    }
-
+/*
     private void actualizarSorpresa(Sorpresa sorpresa){
 
         if (sorpresa.getClass() == SorpresaFavorable.class){
-            sorpresaImage =  new Image("/sorpresa.png", 20, 40,true,false);
         }
         if (sorpresa.getClass() == SorpresaFavorable.class){
             sorpresaImage =  new Image("/sorpresa.png", 20, 40,true,false);
@@ -96,13 +89,68 @@ public class CaminoView implements Observer {
 
         obstaculoImageView.setImage(obstaculoImage);
     }
+    */
 
+    @Override
+    public void actualizar(SorpresaFavorable sorpresaFavorable) {
+        sorpresaImage =  new Image("/sorpresa.png", 20, 40,true,false);
+        sorpresaFavorable.observar(this);
+        cambiarImagen(sorpresaImage,sorpresaImageView);
+    }
 
-    void crearImageView(Image efecto){
-        ImageView efectoView = new ImageView(efecto);
-        efectoView.setX(1620/2 - mapa.getWidth()/2 - 5 +  (camino.esquinaInicial.columna * MULTIPLICADOR + camino.esquinaFinal.columna*MULTIPLICADOR) / 2);
-        efectoView.setY(720/2 - mapa.getHeight()/2 - 5 + (camino.esquinaInicial.fila * MULTIPLICADOR + camino.esquinaFinal.fila*MULTIPLICADOR) / 2);
-        layout.getChildren().add(efectoView);
+    @Override
+    public void actualizar(SorpresaDesfavorable sorpresaDesfavorable) {
+        sorpresaImage =  new Image("/sorpresa.png", 20, 40,true,false);
+        sorpresaDesfavorable.observar(this);
+        cambiarImagen(sorpresaImage,sorpresaImageView);
+    }
+
+    @Override
+    public void actualizar(CambioDeVehiculo cambioDeVehiculo) {
+        sorpresaImage =  new Image("/sorpresa.png", 20, 40,true,false);
+        cambioDeVehiculo.observar(this);
+        cambiarImagen(sorpresaImage,sorpresaImageView);
+    }
+
+    @Override
+    public void actualizar(SorpresaNull sorpresaNull) {
+        sorpresaImage =  new Image("/vacio.png", 20, 40,true,false);
+        sorpresaNull.observar(this);
+        cambiarImagen(sorpresaImage,sorpresaImageView);
+    }
+
+    @Override
+    public void actualizar(Pozo pozo) {
+        obstaculoImage =  new Image("/pozo.png", 30, 40,true,false);
+        pozo.observar(this);
+        cambiarImagen(obstaculoImage,obstaculoImageView);
+
+    }
+
+    @Override
+    public void actualizar(Piquete piquete) {
+        obstaculoImage =  new Image("/piquete.png", 40, 40,true,false);
+        piquete.observar(this);
+        cambiarImagen(obstaculoImage,obstaculoImageView);
+
+    }
+
+    @Override
+    public void actualizar(ControlPolicial controlPolicial) {
+        obstaculoImage =  new Image("/policia.png", 30, 40,true,false);
+        controlPolicial.observar(this);
+        cambiarImagen(obstaculoImage, obstaculoImageView);
+    }
+
+    @Override
+    public void actualizar(ObstaculoNull obstaculoNull) {
+        obstaculoImage =  new Image("/vacio.png", 30, 40,true,false);
+        obstaculoNull.observar(this);
+        cambiarImagen(obstaculoImage, obstaculoImageView);
+    }
+
+    private void cambiarImagen(Image image, ImageView imageView){
+        imageView.setImage(image);
     }
 }
 

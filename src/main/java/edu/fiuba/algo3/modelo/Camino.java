@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Direcciones.Direccion;
+import edu.fiuba.algo3.modelo.ObservadorPersonalizado.ManejadorDeObservables;
+import edu.fiuba.algo3.modelo.ObservadorPersonalizado.ManejadorDeObservablesEfectos;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.Obstaculo;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.ObstaculoNull;
 import edu.fiuba.algo3.modelo.efectos.sorpresas.Sorpresa;
@@ -11,7 +13,7 @@ import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 import java.util.Observable;
 
 
-public class Camino extends Observable {
+public class Camino extends ManejadorDeObservablesEfectos {
     public Esquina esquinaInicial, esquinaFinal;
     public Sorpresa sorpresa;
     public Obstaculo obstaculo;
@@ -25,16 +27,17 @@ public class Camino extends Observable {
     public void agregrarEfecto(Sorpresa nuevaSorpresa){
 
         //TODO: SUPUESTO, EL AGRAR EFECTO REMPLAZA
+        
         sorpresa = nuevaSorpresa;
-        setChanged();
-        this.notifyObservers();
+        sorpresa.confirmarAgregacion();
+
     }
 
     public void agregrarEfecto(Obstaculo nuevoObstaculo){
 
         obstaculo = nuevoObstaculo;
-        setChanged();
-        this.notifyObservers();
+        System.out.println("AGREGO UN EFECTO");
+        obstaculo.confirmarAgregacion();
     }
 
     @Override
@@ -52,8 +55,7 @@ public class Camino extends Observable {
 
         sorpresa = new SorpresaNull();
 
-        setChanged();
-        this.notifyObservers();
+        sorpresa.confirmarAgregacion();
     }
 
     //Hecho unicamente para las pruebas
