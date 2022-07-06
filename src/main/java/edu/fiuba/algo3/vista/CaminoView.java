@@ -81,14 +81,14 @@ public class CaminoView implements Observer {
 
 
         if (obstaculo.getClass() == Pozo.class){
-            obstaculoImage =  new Image("/pozo.png", 20, 40,true,false);
+            obstaculoImage =  new Image("/pozo.png", 30, 40,true,false);
         }
         if (obstaculo.getClass() == Piquete.class){
-            obstaculoImage =  new Image("/piquete.png", 20, 40,true,false);
+            obstaculoImage =  new Image("/piquete.png", 40, 40,true,false);
         }
 
         if (obstaculo.getClass() == ControlPolicial.class){
-            obstaculoImage =  new Image("/policia.png", 20, 40,true,false);
+            obstaculoImage =  new Image("/policia.png", 30, 40,true,false);
         }
         if (obstaculo.getClass() == ObstaculoNull.class){
             obstaculoImage =  new Image("/vacio.png", 20, 40,true,false);

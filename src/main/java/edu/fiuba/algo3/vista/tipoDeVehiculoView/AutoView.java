@@ -17,7 +17,7 @@ public class AutoView implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        Image image = new Image("/cuatroPorCuatro.png", 20, 40,true,false);
+        Image image = new Image("/cuatroPorCuatro.png", 50, 40,true,false);
         vehiculoView.vehiculoView.setImage(image);
     }
 

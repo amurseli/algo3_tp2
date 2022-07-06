@@ -5,6 +5,7 @@ import java.util.Observable;
 
 public class Ranking extends Observable {
 
+    public static final int MAXIMA_CANTIDAD_DE_JUGADORES_EN_EL_RANKING = 10;
     public ArrayList<Puntaje> puntajes;
 
     Ranking(){
@@ -21,6 +22,10 @@ public class Ranking extends Observable {
             return;
         }
         puntajes.add(nuevoPuntaje);
+
+        if (puntajes.size() > MAXIMA_CANTIDAD_DE_JUGADORES_EN_EL_RANKING){
+            puntajes.remove(puntajes.size()-1);
+        }
 
         setChanged();
         notifyObservers();

@@ -34,8 +34,8 @@ public class VehiculoView implements Observer {
 
 
         estado = new Image("/auto.png", 20, 40,true,false);
-        //fondoNegro = new Image("/fondoNegro.png",FONDO_NEGRO_TAMANIO,FONDO_NEGRO_TAMANIO,true,false);
-        //fondoNegroView = new ImageView(fondoNegro);
+        fondoNegro = new Image("/fondoNegro.png",FONDO_NEGRO_TAMANIO,FONDO_NEGRO_TAMANIO,true,false);
+        fondoNegroView = new ImageView(fondoNegro);
         this.vehiculo = vehiculo;
         vehiculo.addObserver(this);
         vehiculoView = new ImageView(estado);
@@ -46,10 +46,10 @@ public class VehiculoView implements Observer {
 
         vehiculoView.setX(inicioX + vehiculo.obtenerPosicion().columna * MULTIPLICADOR);
         vehiculoView.setY(inicioY + vehiculo.obtenerPosicion().fila * MULTIPLICADOR - 10);
-        //fondoNegroView.setX(inicioX + vehiculo.obtenerPosicion().columna * MULTIPLICADOR - FONDO_NEGRO_TAMANIO/2);
-        //fondoNegroView.setY(inicioY + vehiculo.obtenerPosicion().fila * MULTIPLICADOR - FONDO_NEGRO_TAMANIO/2);
+        fondoNegroView.setX(inicioX + vehiculo.obtenerPosicion().columna * MULTIPLICADOR - FONDO_NEGRO_TAMANIO/2);
+        fondoNegroView.setY(inicioY + vehiculo.obtenerPosicion().fila * MULTIPLICADOR - FONDO_NEGRO_TAMANIO/2);
         layout.getChildren().add(vehiculoView);
-        //layout.getChildren().add(fondoNegroView);
+        layout.getChildren().add(fondoNegroView);
 
     }
 
@@ -57,8 +57,8 @@ public class VehiculoView implements Observer {
         vehiculoView.setX(inicioX + vehiculo.obtenerPosicion().getColumna() * MULTIPLICADOR);
         vehiculoView.setY(inicioY + vehiculo.obtenerPosicion().getFila() * MULTIPLICADOR -10);
         //vehiculoView.setRotate(orientation);
-        //fondoNegroView.setX(inicioX + vehiculo.obtenerPosicion().columna * MULTIPLICADOR - FONDO_NEGRO_TAMANIO/2);
-        //fondoNegroView.setY(inicioY + vehiculo.obtenerPosicion().fila * MULTIPLICADOR - FONDO_NEGRO_TAMANIO/2);
+        fondoNegroView.setX(inicioX + vehiculo.obtenerPosicion().columna * MULTIPLICADOR - FONDO_NEGRO_TAMANIO/2);
+        fondoNegroView.setY(inicioY + vehiculo.obtenerPosicion().fila * MULTIPLICADOR - FONDO_NEGRO_TAMANIO/2);
     }
 
 /*
