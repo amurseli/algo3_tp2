@@ -25,7 +25,6 @@ public class GeneradorRandom {
     public Direccion generarDireccion(){
         int numero = generarRandomInt(1,4);
         switch (numero){
-            case 1: return new Derecha();
             case 2: return new Izquierda();
             case 3: return new Arriba();
             case 4: return new Abajo();
@@ -40,7 +39,6 @@ public class GeneradorRandom {
     public Obstaculo generarObstaculo(){
         int numero = generarRandomInt(1,3);
         switch (numero){
-            case 1: return new Pozo();
             case 2: return new ControlPolicial(new GeneradorRandom());
             case 3: return new Piquete();
             default: return new Pozo();
@@ -50,11 +48,10 @@ public class GeneradorRandom {
     public Sorpresa generarSorpresa(){
         int numero = generarRandomInt(1,3);
         switch (numero){
-            case 1: return new CambioDeVehiculo();
             case 2: return new SorpresaFavorable();
             case 3: return new SorpresaDesfavorable();
+            default: return new CambioDeVehiculo();
         }
-        return null;
     }
 
 

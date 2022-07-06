@@ -1,8 +1,14 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Direcciones.*;
+import edu.fiuba.algo3.modelo.efectos.obstaculos.ControlPolicial;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.Obstaculo;
+import edu.fiuba.algo3.modelo.efectos.obstaculos.Piquete;
+import edu.fiuba.algo3.modelo.efectos.obstaculos.Pozo;
+import edu.fiuba.algo3.modelo.efectos.sorpresas.CambioDeVehiculo;
 import edu.fiuba.algo3.modelo.efectos.sorpresas.Sorpresa;
+import edu.fiuba.algo3.modelo.efectos.sorpresas.SorpresaDesfavorable;
+import edu.fiuba.algo3.modelo.efectos.sorpresas.SorpresaFavorable;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -63,16 +69,52 @@ public class GeneradorRandomTest {
     }
 
     @Test
-    public void generarUnObstaculoAleatorioGeneraUnObtaculo(){
-        GeneradorRandom generadorRandom = new GeneradorRandom();
-        Obstaculo obstaculo = generadorRandom.generarObstaculo();
-        assertEquals((Obstaculo)obstaculo, obstaculo);
+    public void generarUnObstaculoAleatorioGeneraUnPozo(){
+
+        GeneradorRandom stubGeneradorRandom = Mockito.mock(GeneradorRandom.class);
+        Mockito.when(stubGeneradorRandom.generarObstaculo()).thenReturn(new Pozo());
+        Obstaculo obstaculo = stubGeneradorRandom.generarObstaculo();
+        assertEquals(obstaculo.getClass(), Pozo.class);
+    }
+    @Test
+    public void generarUnObstaculoAleatorioGeneraUnControlPolicial(){
+
+        GeneradorRandom stubGeneradorRandom = Mockito.mock(GeneradorRandom.class);
+        Mockito.when(stubGeneradorRandom.generarObstaculo()).thenReturn(new ControlPolicial(new GeneradorRandom()));
+        Obstaculo obstaculo = stubGeneradorRandom.generarObstaculo();
+        assertEquals(obstaculo.getClass(), ControlPolicial.class);
     }
 
     @Test
-    public void generarUnaSorpresaAleatoriaDevuelveUnaSorpresa(){
-        GeneradorRandom generadorRandom = new GeneradorRandom();
-        Sorpresa sorpresa = generadorRandom.generarSorpresa();
-        assertEquals((Sorpresa)sorpresa, sorpresa);
+    public void generarUnObstaculoAleatorioGeneraUnPiquete(){
+
+        GeneradorRandom stubGeneradorRandom = Mockito.mock(GeneradorRandom.class);
+        Mockito.when(stubGeneradorRandom.generarObstaculo()).thenReturn(new Piquete());
+        Obstaculo obstaculo = stubGeneradorRandom.generarObstaculo();
+        assertEquals(obstaculo.getClass(), Piquete.class);
+    }
+
+    @Test
+    public void generarUnaSorpresaAleatoriaDevuelveUnaSorpresaDeCambioDeVehiculo(){
+        GeneradorRandom stubGeneradorRandom = Mockito.mock(GeneradorRandom.class);
+        Mockito.when(stubGeneradorRandom.generarSorpresa()).thenReturn(new CambioDeVehiculo());
+        Sorpresa sorpresa = stubGeneradorRandom.generarSorpresa();
+        assertEquals(sorpresa.getClass(), CambioDeVehiculo.class);
+    }
+
+    @Test
+    public void generarUnaSorpresaAleatoriaDevuelveUnaSorpresaFavorable(){
+        GeneradorRandom stubGeneradorRandom = Mockito.mock(GeneradorRandom.class);
+        Mockito.when(stubGeneradorRandom.generarSorpresa()).thenReturn(new SorpresaFavorable());
+        Sorpresa sorpresa = stubGeneradorRandom.generarSorpresa();
+        assertEquals(sorpresa.getClass(), SorpresaFavorable.class);
+    }
+
+    @Test
+    public void generarUnaSorpresaAleatoriaDevuelveUnaSorpresaDesfavorable(){
+        GeneradorRandom stubGeneradorRandom = Mockito.mock(GeneradorRandom.class);
+        Mockito.when(stubGeneradorRandom.generarSorpresa()).thenReturn(new SorpresaDesfavorable());
+        Sorpresa sorpresa = stubGeneradorRandom.generarSorpresa();
+        assertEquals(sorpresa.getClass(), SorpresaDesfavorable.class);
     }
 }
