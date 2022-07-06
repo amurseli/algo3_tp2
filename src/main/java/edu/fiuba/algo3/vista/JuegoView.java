@@ -116,7 +116,7 @@ public class JuegoView implements Observer {
                     this.pantallaJuego();
                 }
                 else {
-                    Text advertencia = new Text("Maxima cantidad de caracteres: 14");
+                    Text advertencia = new Text("Maxima cantidad de caracteres: 12");
                     advertencia.setX(500);
                     advertencia.setY(95);
                     advertencia.setFill(Color.RED);
@@ -136,7 +136,7 @@ public class JuegoView implements Observer {
 
     }
     private boolean comprobarEntradaNickname(String nickname){
-        return (nickname.length() <= 14);
+        return (nickname.length() <= 12);
     }
 
     private boolean comprobarEntradaTamanioMapa(String fila, String columna){
