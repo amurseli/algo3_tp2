@@ -123,7 +123,6 @@ public class JuegoView implements Observer {
                     inicio.getChildren().add(advertencia);
                 }
 
-
             }
             else {
                 Text advertencia = new Text("Entrada incorrecta!");
