@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.controller.KeysController;
+import edu.fiuba.algo3.excepciones.EntradaInvalidaMapa;
+import edu.fiuba.algo3.excepciones.EntradaInvalidaNickname;
 import edu.fiuba.algo3.modelo.*;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -116,20 +118,28 @@ public class JuegoView implements Observer {
                     this.pantallaJuego();
                 }
                 else {
-                    Text advertencia = new Text("Maxima cantidad de caracteres: 12");
-                    advertencia.setX(500);
-                    advertencia.setY(95);
-                    advertencia.setFill(Color.RED);
-                    inicio.getChildren().add(advertencia);
+                    try {
+                        throw new EntradaInvalidaNickname("Entrada invalida nickname");
+                    } catch (EntradaInvalidaNickname e) {
+                        Text advertencia = new Text("Maxima cantidad de caracteres: 12");
+                        advertencia.setX(500);
+                        advertencia.setY(95);
+                        advertencia.setFill(Color.RED);
+                        inicio.getChildren().add(advertencia);
+                    }
                 }
 
             }
             else {
-                Text advertencia = new Text("Entrada incorrecta!");
-                advertencia.setX(600);
-                advertencia.setY(200);
-                advertencia.setFill(Color.RED);
-                inicio.getChildren().add(advertencia);
+                try {
+                    throw new EntradaInvalidaMapa("Entrada invalida mapa");
+                } catch (EntradaInvalidaMapa e) {
+                    Text advertencia = new Text("Entrada incorrecta!");
+                    advertencia.setX(600);
+                    advertencia.setY(200);
+                    advertencia.setFill(Color.RED);
+                    inicio.getChildren().add(advertencia);
+                }
             }
             });
 
