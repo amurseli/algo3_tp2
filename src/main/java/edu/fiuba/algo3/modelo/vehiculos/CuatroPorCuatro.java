@@ -1,12 +1,13 @@
 package edu.fiuba.algo3.modelo.vehiculos;
 
+import edu.fiuba.algo3.modelo.ManejadorDeObservables;
+import edu.fiuba.algo3.modelo.Observador;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.Obstaculo;
 import edu.fiuba.algo3.modelo.efectos.sorpresas.Sorpresa;
-import edu.fiuba.algo3.modelo.vehiculos.singletons.MotoSingleton;
 
 import java.util.Observable;
 
-public class CuatroPorCuatro extends Observable implements TipoVehiculo {
+public class CuatroPorCuatro extends ManejadorDeObservables implements TipoVehiculo {
     int pozosPisados = 0;
 
     public void sumarPozoPisado(){
@@ -23,11 +24,10 @@ public class CuatroPorCuatro extends Observable implements TipoVehiculo {
         return esPenalizable;
     }
 
-    @Override
     public TipoVehiculo cambiarVehiculo(){
-        setChanged();
-        notifyObservers();
-        return MotoSingleton.obtenerInstancia();
+        Moto moto = new Moto();
+        notificar(moto);
+        return moto;
     }
 
     public void aplicarEfecto(Vehiculo vehiculo, Sorpresa sorpresas) {
@@ -38,5 +38,11 @@ public class CuatroPorCuatro extends Observable implements TipoVehiculo {
     public void aplicarEfecto(Vehiculo vehiculo, Obstaculo obstaculos) {
         obstaculos.aplicarEfecto(vehiculo, this);
     }
+
+    @Override
+    public void observar(Observador unObservador) {
+        addObservador(unObservador);
+    }
+
 
 }

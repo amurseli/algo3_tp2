@@ -26,20 +26,17 @@ public class VehiculoView implements Observer {
     double inicioY;
     public ImageView vehiculoView;
     ImageView fondoNegroView;
-
     Vehiculo vehiculo;
 
 
     public VehiculoView(Vehiculo vehiculo, Group layout, Rectangle mapa){
 
+        TipoVehiculoView estadoVehiculo = new TipoVehiculoView(vehiculo,this);
 
-        estado = new Image("/auto.png", 20, 40,true,false);
         fondoNegro = new Image("/fondoNegro.png",FONDO_NEGRO_TAMANIO,FONDO_NEGRO_TAMANIO,true,false);
         fondoNegroView = new ImageView(fondoNegro);
         this.vehiculo = vehiculo;
         vehiculo.addObserver(this);
-        vehiculoView = new ImageView(estado);
-        vehiculoView.setRotate(270);
 
         inicioX = ANCHO_PANTALLA/2 - mapa.getWidth()/2;
         inicioY = ALTO_PANTALLA /2 - mapa.getHeight()/2;
@@ -61,31 +58,11 @@ public class VehiculoView implements Observer {
         fondoNegroView.setY(inicioY + vehiculo.obtenerPosicion().fila * MULTIPLICADOR - FONDO_NEGRO_TAMANIO/2);
     }
 
-/*
-    public void actualizarImagen(Object tipoVehiculo){
-
-        if (tipoVehiculo == Moto.class){
-            estado =  new Image("/moto.png", 20, 40,true,false);
-        }
-        if (tipoVehiculo == Auto.class){
-            estado =  new Image("/auto.png", 20, 40,true,false);
-        }
-        if (tipoVehiculo == CuatroPorCuatro.class){
-            estado =  new Image("/cuatroPorCuatro.png", 20, 40,true,false);
-        }
-
-        vehiculoView.setImage(estado);
-    }
-*/
     @Override
     public void update(Observable o, Object arg) {
         actualizarPosicion();
-        //dibujarVehiculo();
     }
 
-    //private void dibujarVehiculo(){
-    //actualizarImagen(vehiculo.obtenerTipoVehiculo());
-    //}
 
 
 }

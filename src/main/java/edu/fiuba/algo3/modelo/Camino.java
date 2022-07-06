@@ -21,7 +21,6 @@ public class Camino extends Observable {
         esquinaFinal = unaDireccion.siguiente(esquinaInicial);
         sorpresa = new SorpresaNull();
         obstaculo = new ObstaculoNull();
-
     }
     public void agregrarEfecto(Sorpresa nuevaSorpresa){
 

@@ -2,9 +2,6 @@ package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.controller.KeysController;
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.vista.tipoDeVehiculoView.AutoView;
-import edu.fiuba.algo3.vista.tipoDeVehiculoView.CuatroPorCuatroView;
-import edu.fiuba.algo3.vista.tipoDeVehiculoView.MotoView;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -98,7 +95,6 @@ public class JuegoView implements Observer {
         button.setOnAction(value ->{
 
             if (comprobarEntrada(fila.getText(),columna.getText())) {
-                System.out.println("GOLA");
 
                 int filaInt = Integer.parseInt(fila.getText());
                 int columnaInt = Integer.parseInt(columna.getText());
@@ -167,10 +163,6 @@ public class JuegoView implements Observer {
         crearCaminosView(layout);
 
         vehiculoView = new VehiculoView(juego.obtenerVehiculo(), layout, mapa);
-
-        new AutoView(vehiculoView);
-        new CuatroPorCuatroView(vehiculoView);
-        new MotoView(vehiculoView);
 
         dibujarMeta(layout);
 

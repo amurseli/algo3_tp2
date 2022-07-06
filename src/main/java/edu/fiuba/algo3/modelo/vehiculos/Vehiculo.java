@@ -29,6 +29,10 @@ public class Vehiculo extends Observable{
         return (estado.getClass());
     }
 
+    public TipoVehiculo obtenerEstadoVehiculo() {//METODO USADO SOLO EN PRUEBAS
+        return (estado);
+    }
+
     public Esquina mover(Direccion unaDireccion, ListadoCaminos caminos, Esquina limite) {
         Esquina nuevaEsquina = unaDireccion.siguiente(posicion);
 
@@ -64,6 +68,8 @@ public class Vehiculo extends Observable{
     }
 
     public void cambiarTipo() {
+        setChanged();
+        this.notifyObservers();
         estado = estado.cambiarVehiculo();
     }
 
