@@ -24,6 +24,8 @@ import static edu.fiuba.algo3.vista.VehiculoView.MULTIPLICADOR;
 
 public class JuegoView implements Observer {
 
+    public static final int RANGO_MINIMO_MAPA = 2;
+    public static final int RANGO_MAXIMO_MAPA = 14;
     Stage stage;
     Juego juego;
 
@@ -75,7 +77,11 @@ public class JuegoView implements Observer {
 
         Text text2 = new Text("Elije la dimenciones del mapa (Ojo! Solo numeros pares)");
         text2.setX(220);
-        text2.setY(160);
+        text2.setY(140);
+
+        Text text4 = new Text("Minimo 2x2 y Maximo 14x14");
+        text4.setX(300);
+        text4.setY(160);
 
         Text text3 = new Text("Llega a la meta en la menor cantidad de movimientos posibles!");
         text3.setX(220);
@@ -88,28 +94,39 @@ public class JuegoView implements Observer {
         inicio.getChildren().add(text);
         inicio.getChildren().add(text2);
         inicio.getChildren().add(text3);
+        inicio.getChildren().add(text4);
 
 
         mostrarPantalla(inicio, false);
 
         button.setOnAction(value ->{
 
-            if (comprobarEntrada(fila.getText(),columna.getText())) {
+            if (comprobarEntradaTamanioMapa(fila.getText(),columna.getText())) {
 
                 int filaInt = Integer.parseInt(fila.getText());
                 int columnaInt = Integer.parseInt(columna.getText());
 
-
                 limite = new Esquina(filaInt, columnaInt);
                 this.nickname = nickname.getText();
 
-                juego.addObserver(this);
-                juego.asignarNickname(this.nickname);
-                juego.nuevaPartida(limite);
-                this.pantallaJuego();
+                if(comprobarEntradaNickname(this.nickname)){
+                    juego.addObserver(this);
+                    juego.asignarNickname(this.nickname);
+                    juego.nuevaPartida(limite);
+                    this.pantallaJuego();
+                }
+                else {
+                    Text advertencia = new Text("Maxima cantidad de caracteres: 14");
+                    advertencia.setX(500);
+                    advertencia.setY(95);
+                    advertencia.setFill(Color.RED);
+                    inicio.getChildren().add(advertencia);
+                }
+
+
             }
             else {
-                Text advertencia = new Text("Dije numeros pares!");
+                Text advertencia = new Text("Entrada incorrecta!");
                 advertencia.setX(600);
                 advertencia.setY(200);
                 advertencia.setFill(Color.RED);
@@ -118,13 +135,19 @@ public class JuegoView implements Observer {
             });
 
     }
-    private boolean comprobarEntrada(String fila, String columna){
+    private boolean comprobarEntradaNickname(String nickname){
+        return (nickname.length() <= 14);
+    }
+
+    private boolean comprobarEntradaTamanioMapa(String fila, String columna){
         if(esNumero(fila) && esNumero(columna)){
             int filaInt = Integer.parseInt(fila);
             int columnaInt = Integer.parseInt(columna);
 
             if (esPar(filaInt) && esPar(columnaInt)){
-                return true;
+                if(rangoCorrecto(filaInt,columnaInt)){
+                    return true;
+                }
             }
         }
         return false;
@@ -140,10 +163,17 @@ public class JuegoView implements Observer {
     }
 
     private Boolean esPar(Integer entrada){
-        if (entrada % 2 == 0){
+        if(entrada % 2 == 0){
             return true;
         }
         return false;
+    }
+
+    private Boolean rangoCorrecto(Integer fila, Integer columna){
+        if(fila < RANGO_MINIMO_MAPA || columna < RANGO_MINIMO_MAPA || fila > RANGO_MAXIMO_MAPA || columna > RANGO_MAXIMO_MAPA){
+            return false;
+        }
+        return true;
     }
 
     private Scene mostrarPantalla(Group layout, Boolean pantallaCompleta){
@@ -168,6 +198,8 @@ public class JuegoView implements Observer {
 
         movimientosTextView = new MovimientosTextView(juego.obtenerVehiculo(),layout);
         rankingView = new RankingView(juego.obtenerRanking(),layout);
+
+            dibujarComoJugar();
 
         Scene sceneActual = mostrarPantalla(layout, true);
 
@@ -207,6 +239,39 @@ public class JuegoView implements Observer {
 
         layout.getChildren().add(rectangle);
         layout.getChildren().add(metaView);
+
+    }
+
+    private void dibujarComoJugar() {
+        Rectangle fondoComoJugar = new Rectangle(100, 450, 210, 270);
+        fondoComoJugar.setFill(Color.WHITE);
+        fondoComoJugar.setStroke(Color.AQUAMARINE);
+        fondoComoJugar.setStrokeWidth(5);
+        layout.getChildren().add(fondoComoJugar);
+
+        Text titulo = new Text(110, 490, "Como jugar: ");
+        titulo.setFont(Font.font(30));
+        layout.getChildren().add(titulo);
+
+        Text flechitasText = new Text(105, 520, "* Muevete utilizando las flechitas");
+        layout.getChildren().add(flechitasText);
+
+        Text policias = new Text(105, 540, "* Los policias te penalizarán \n de forma aleatoria si los atraviesas");
+        layout.getChildren().add(policias);
+
+        Text piquetes = new Text(105, 575, "* Los piquetes te bloquean el paso");
+        layout.getChildren().add(piquetes);
+
+        Text pozos = new Text(105, 595, "* Los pozos te penalizan si los pisas");
+        layout.getChildren().add(pozos);
+
+        Text sorpresas = new Text(105, 615, "* Las sorpresas le aplican \n un efecto misterioso a tu vehiculo");
+        layout.getChildren().add(sorpresas);
+
+        Text vehiculos = new Text(105, 650, "* Cada vehiculo interactua \n de forma distinta con los objetos \n " +
+                "Descubre las diferencias! ");
+        layout.getChildren().add(vehiculos);
+
 
     }
 

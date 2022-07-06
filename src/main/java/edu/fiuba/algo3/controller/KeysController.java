@@ -28,16 +28,16 @@ public class KeysController implements EventHandler<KeyEvent> {
         scene.setOnKeyPressed(event -> {
             if (habilitado) {
 
-                if (event.getCode() == KeyCode.W || event.getCode() == KeyCode.UP) {
+                if (event.getCode() == KeyCode.UP) {
                     juego.mover(new Arriba());
                 }
-                if (event.getCode() == KeyCode.S || event.getCode() == KeyCode.DOWN) {
+                if (event.getCode() == KeyCode.DOWN) {
                     juego.mover(new Abajo());
                 }
-                if (event.getCode() == KeyCode.A || event.getCode() == KeyCode.LEFT) {
+                if (event.getCode() == KeyCode.LEFT) {
                     juego.mover(new Izquierda());
                 }
-                if (event.getCode() == KeyCode.D || event.getCode() == KeyCode.RIGHT) {
+                if (event.getCode() == KeyCode.RIGHT) {
                     juego.mover(new Derecha());
                 }
             }

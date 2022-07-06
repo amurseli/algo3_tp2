@@ -25,13 +25,13 @@ public class RankingView implements Observer {
     }
 
     private void dibujarFondoRanking(Group layout){
-        Rectangle fondoRanking = new Rectangle(100,100,200,500);
+        Rectangle fondoRanking = new Rectangle(100,100,210,320);
         fondoRanking.setFill(Color.WHITE);
         fondoRanking.setStroke(Color.SALMON);
         fondoRanking.setStrokeWidth(5);
         layout.getChildren().add(fondoRanking);
 
-        Text titulo = new Text(110,150,"Highscores: ");
+        Text titulo = new Text(110,140,"Highscores: ");
         titulo.setFont(Font.font(30));
         layout.getChildren().add(titulo);
     }

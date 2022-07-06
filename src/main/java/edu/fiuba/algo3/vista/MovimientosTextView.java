@@ -16,7 +16,7 @@ public class MovimientosTextView implements Observer {
     Text movimientos;
 
     public MovimientosTextView(Vehiculo vehiculo, Group layout){
-        Rectangle fondoMovimientos = new Rectangle(100,40,200,45);
+        Rectangle fondoMovimientos = new Rectangle(100,40,210,45);
         fondoMovimientos.setFill(Color.WHITE);
         fondoMovimientos.setStroke(Color.BLUE);
         fondoMovimientos.setStrokeWidth(5);
