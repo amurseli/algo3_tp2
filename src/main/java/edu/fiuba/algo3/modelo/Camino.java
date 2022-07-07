@@ -55,10 +55,4 @@ public class Camino extends Observable {
         setChanged();
         this.notifyObservers();
     }
-
-    //Hecho unicamente para las pruebas
-    public Boolean obtenerCantidadEfectos(Sorpresa sorpresa){
-        return (sorpresa.getClass().equals(this.sorpresa));
-    }
-
 }

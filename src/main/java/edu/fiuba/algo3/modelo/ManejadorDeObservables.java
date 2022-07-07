@@ -19,10 +19,6 @@ public class ManejadorDeObservables {
         observadores.add(o);
     };
 
-    public void deleteObservador(Observador o){
-        observadores.remove(o);
-    }
-
     public void notificar(Auto unAuto){
         for (Observador unObservador:
              observadores)

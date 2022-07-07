@@ -21,6 +21,7 @@ public class Juego extends Observable {
     public void asignarNickname(String nickname){
         this.nickname = nickname;
     }
+
     public void crearCiudad(Esquina limite, Esquina meta, Vehiculo vehiculo) {
         this.ciudad = new Ciudad(limite, meta, vehiculo);
     }
@@ -61,8 +62,8 @@ public class Juego extends Observable {
         return this.ciudad.obtenerMovimientosRealizados();
     }
 
-    public ListadoCaminos obtenerCaminos() {
-        return  ciudad.obtenerEfectos();
+    public ListadoCaminos obtenerCaminosConEfectos() {
+        return  ciudad.obtenerCaminosConEfectos();
     }
 
     public Esquina obtenerMeta() {

@@ -23,6 +23,40 @@ public class GeneradorRandomTest {
         int generado = generador.generarRandomInt(1,10);
         assertEquals((int)generado, generado);
     }
+    @Test
+    public void generarUnaDireccionRandomDevuelveUnaDireccion(){
+        GeneradorRandom generador = new GeneradorRandom();
+        Direccion direccion = generador.generarDireccion();
+        Object claseGenerada = direccion.getClass();
+        assertTrue(
+                claseGenerada == Arriba.class
+                || claseGenerada == Abajo.class
+                || claseGenerada == Derecha.class
+                || claseGenerada == Izquierda.class
+        );
+    }
+    @Test
+    public void generarUnObstaculoRandomDevuelveUnObstaculo(){
+        GeneradorRandom generador = new GeneradorRandom();
+        Obstaculo obstaculo = generador.generarObstaculo();
+        Object claseGenerada = obstaculo.getClass();
+        assertTrue(
+                claseGenerada == Pozo.class
+                        || claseGenerada == ControlPolicial.class
+                        || claseGenerada == Piquete.class
+        );
+    }
+    @Test
+    public void generarUnaSorpresaRandomDevuelveUnaSorpresa(){
+        GeneradorRandom generador = new GeneradorRandom();
+        Sorpresa sorpresa = generador.generarSorpresa();
+        Object claseGenerada = sorpresa.getClass();
+        assertTrue(
+                claseGenerada == SorpresaDesfavorable.class
+                        || claseGenerada == SorpresaFavorable.class
+                        || claseGenerada == CambioDeVehiculo.class
+        );
+    }
 
     @Test
     public void generarUnaDireccionRandomDevuelveDerecha(){
@@ -31,7 +65,6 @@ public class GeneradorRandomTest {
         Mockito.when(stubGeneradorRandom.generarDireccion()).thenReturn(new Derecha());
         Direccion direccion = stubGeneradorRandom.generarDireccion();
         assertEquals(direccion.getClass(), Derecha.class);
-
     }
     @Test
     public void generarUnaDireccionRandomDevuelveAbajo(){

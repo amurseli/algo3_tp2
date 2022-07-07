@@ -45,7 +45,7 @@ public class Ciudad {
         return limite;
     }
 
-    public ListadoCaminos obtenerEfectos() {
+    public ListadoCaminos obtenerCaminosConEfectos() {
         return caminos;
     }
 

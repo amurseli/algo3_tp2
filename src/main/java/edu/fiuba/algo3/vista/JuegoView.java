@@ -287,7 +287,7 @@ public class JuegoView implements Observer {
 
     private void crearCaminosView(Group layout){
 
-        ListadoCaminos listadoCaminos = juego.obtenerCaminos();
+        ListadoCaminos listadoCaminos = juego.obtenerCaminosConEfectos();
 
         for (Camino camino : listadoCaminos.caminosConEfectos) {
             new CaminoView(camino,layout,mapa);
