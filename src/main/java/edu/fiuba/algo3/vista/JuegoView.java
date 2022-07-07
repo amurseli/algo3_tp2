@@ -121,7 +121,7 @@ public class JuegoView implements Observer {
                     try {
                         throw new EntradaInvalidaNickname("Entrada invalida nickname");
                     } catch (EntradaInvalidaNickname e) {
-                        Text advertencia = new Text("Maxima cantidad de caracteres: 12");
+                        Text advertencia = new Text("Minimo 1 caracter. Maximo 12");
                         advertencia.setX(500);
                         advertencia.setY(95);
                         advertencia.setFill(Color.RED);
@@ -145,7 +145,7 @@ public class JuegoView implements Observer {
 
     }
     private boolean comprobarEntradaNickname(String nickname){
-        return (nickname.length() <= 12);
+        return (nickname.length() <= 12 && nickname.length() > 0);
     }
 
     private boolean comprobarEntradaTamanioMapa(String fila, String columna){
@@ -208,7 +208,7 @@ public class JuegoView implements Observer {
         movimientosTextView = new MovimientosTextView(juego.obtenerVehiculo(),layout);
         rankingView = new RankingView(juego.obtenerRanking(),layout);
 
-            dibujarComoJugar();
+        dibujarComoJugar();
 
         Scene sceneActual = mostrarPantalla(layout, true);
 
