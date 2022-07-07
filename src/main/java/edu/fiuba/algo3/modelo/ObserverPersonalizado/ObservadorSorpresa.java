@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.ObserverPersonalizado;
 
 import edu.fiuba.algo3.modelo.efectos.sorpresas.CambioDeVehiculo;
 import edu.fiuba.algo3.modelo.efectos.sorpresas.SorpresaDesfavorable;

@@ -1,11 +1,11 @@
 package edu.fiuba.algo3.modelo.vehiculos;
 
-import edu.fiuba.algo3.modelo.ManejadorDeObservables;
-import edu.fiuba.algo3.modelo.ObservadorTipoVehiculo;
+import edu.fiuba.algo3.modelo.ObserverPersonalizado.ManejadorDeObservablesTipoVehiculo;
+import edu.fiuba.algo3.modelo.ObserverPersonalizado.ObservadorTipoVehiculo;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.Obstaculo;
 import edu.fiuba.algo3.modelo.efectos.sorpresas.Sorpresa;
 
-public class CuatroPorCuatro extends ManejadorDeObservables implements TipoVehiculo {
+public class CuatroPorCuatro extends ManejadorDeObservablesTipoVehiculo implements TipoVehiculo {
     int pozosPisados = 0;
 
     public void sumarPozoPisado(){

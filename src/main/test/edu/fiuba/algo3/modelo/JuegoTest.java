@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Direcciones.Derecha;
+import edu.fiuba.algo3.modelo.GeneradoresRandom.GeneradorRandomObstaculos;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.Pozo;
-import edu.fiuba.algo3.modelo.efectos.sorpresas.CambioDeVehiculo;
 import edu.fiuba.algo3.modelo.vehiculos.Moto;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 import org.junit.jupiter.api.Assertions;
@@ -30,9 +30,9 @@ public class JuegoTest {
         Juego juego = new Juego();
         Camino camino = new Camino(new Esquina(1, 5), new Derecha());
 
-        GeneradorRandom randomDeCamino = Mockito.mock(GeneradorRandom.class);
-        camino.setRandom(randomDeCamino);
+        GeneradorRandomObstaculos randomDeCamino = Mockito.mock(GeneradorRandomObstaculos.class);
         Mockito.when(randomDeCamino.generarObstaculo()).thenReturn(new Pozo());
+        camino.setRandomObstaculos(randomDeCamino);
 
         juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Vehiculo(new Moto(), new Esquina(1, 6)));
         juego.agregarCamino(camino);

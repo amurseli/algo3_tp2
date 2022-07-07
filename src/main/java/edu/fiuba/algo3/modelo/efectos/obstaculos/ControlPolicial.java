@@ -1,12 +1,14 @@
 package edu.fiuba.algo3.modelo.efectos.obstaculos;
 
-import edu.fiuba.algo3.modelo.GeneradorRandom;
+import edu.fiuba.algo3.modelo.GeneradoresRandom.GeneradorRandom;
+import edu.fiuba.algo3.modelo.ObserverPersonalizado.ManejadorDeObservablesObstaculos;
+import edu.fiuba.algo3.modelo.ObserverPersonalizado.ObservadorObstaculo;
 import edu.fiuba.algo3.modelo.vehiculos.Auto;
 import edu.fiuba.algo3.modelo.vehiculos.CuatroPorCuatro;
 import edu.fiuba.algo3.modelo.vehiculos.Moto;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 
-public class ControlPolicial implements Obstaculo {
+public class ControlPolicial extends ManejadorDeObservablesObstaculos implements Obstaculo {
     GeneradorRandom generadorRandom;
 
     public ControlPolicial(GeneradorRandom generadorRandom) {
@@ -31,6 +33,12 @@ public class ControlPolicial implements Obstaculo {
             vehiculo.sumarMovimientos(3);
         }
     }
+
+    @Override
+    public void observar(ObservadorObstaculo unObservador) {
+        addObservador(unObservador);
+    }
+
 
 }
 

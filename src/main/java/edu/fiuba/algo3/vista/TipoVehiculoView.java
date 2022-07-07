@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.modelo.ObservadorTipoVehiculo;
+import edu.fiuba.algo3.modelo.ObserverPersonalizado.ObservadorTipoVehiculo;
 import edu.fiuba.algo3.modelo.vehiculos.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

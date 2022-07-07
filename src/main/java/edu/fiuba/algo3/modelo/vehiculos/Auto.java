@@ -1,11 +1,11 @@
 package edu.fiuba.algo3.modelo.vehiculos;
 
-import edu.fiuba.algo3.modelo.ManejadorDeObservables;
-import edu.fiuba.algo3.modelo.ObservadorTipoVehiculo;
+import edu.fiuba.algo3.modelo.ObserverPersonalizado.ManejadorDeObservablesTipoVehiculo;
+import edu.fiuba.algo3.modelo.ObserverPersonalizado.ObservadorTipoVehiculo;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.Obstaculo;
 import edu.fiuba.algo3.modelo.efectos.sorpresas.Sorpresa;
 
-public class Auto extends ManejadorDeObservables implements TipoVehiculo {
+public class Auto extends ManejadorDeObservablesTipoVehiculo implements TipoVehiculo {
     @Override
     public TipoVehiculo cambiarVehiculo(){
         CuatroPorCuatro cuatroPorCuatro = new CuatroPorCuatro();

@@ -1,15 +1,16 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.ObserverPersonalizado;
 
+import edu.fiuba.algo3.modelo.ObserverPersonalizado.ObservadorTipoVehiculo;
 import edu.fiuba.algo3.modelo.vehiculos.Auto;
 import edu.fiuba.algo3.modelo.vehiculos.CuatroPorCuatro;
 import edu.fiuba.algo3.modelo.vehiculos.Moto;
 import java.util.ArrayList;
 
-public class ManejadorDeObservables {
+public class ManejadorDeObservablesTipoVehiculo {
 
     public ArrayList<ObservadorTipoVehiculo> observadores;
 
-    public ManejadorDeObservables(){
+    public ManejadorDeObservablesTipoVehiculo(){
         observadores = new ArrayList<ObservadorTipoVehiculo>();
     }
 

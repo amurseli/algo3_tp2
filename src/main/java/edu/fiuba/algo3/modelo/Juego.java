@@ -1,8 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Direcciones.Direccion;
-import edu.fiuba.algo3.modelo.efectos.obstaculos.Obstaculo;
-import edu.fiuba.algo3.modelo.efectos.sorpresas.Sorpresa;
+import edu.fiuba.algo3.modelo.GeneradoresRandom.GeneradorRandom;
 import edu.fiuba.algo3.modelo.vehiculos.Auto;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 
@@ -81,7 +80,7 @@ public class Juego extends Observable {
         Esquina comienzo = new Esquina(0,0);
         this.crearCiudad(limite,limite,new Vehiculo(new Auto(), comienzo));
 
-        Integer cantidadDeCaminos = (limite.fila + limite.columna) / 2 * 3;
+        Integer cantidadDeCaminos = (limite.fila + limite.columna) * 2;
 
         //agrego los caminos
         for (int i = 0; i < (cantidadDeCaminos); i++){

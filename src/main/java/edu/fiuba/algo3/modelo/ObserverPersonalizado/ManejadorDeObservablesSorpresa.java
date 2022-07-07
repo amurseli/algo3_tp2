@@ -1,12 +1,9 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.ObserverPersonalizado;
 
 import edu.fiuba.algo3.modelo.efectos.sorpresas.CambioDeVehiculo;
 import edu.fiuba.algo3.modelo.efectos.sorpresas.SorpresaDesfavorable;
 import edu.fiuba.algo3.modelo.efectos.sorpresas.SorpresaFavorable;
 import edu.fiuba.algo3.modelo.efectos.sorpresas.SorpresaNull;
-import edu.fiuba.algo3.modelo.vehiculos.Auto;
-import edu.fiuba.algo3.modelo.vehiculos.CuatroPorCuatro;
-import edu.fiuba.algo3.modelo.vehiculos.Moto;
 
 import java.util.ArrayList;
 
