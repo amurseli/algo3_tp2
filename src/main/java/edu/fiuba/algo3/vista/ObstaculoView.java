@@ -17,6 +17,11 @@ import static edu.fiuba.algo3.App.MULTIPLICADOR;
 public class ObstaculoView implements ObservadorObstaculo {
 
 
+    public static final int ANCHO_PANTALLA = 1620;
+    public static final int ALTO_PANTALLA = 720;
+    public static final int DESFASE = 5;
+    public static final int ANCHO_OBSTACULO = 20;
+    public static final int ALTO_OBSTACULO = 40;
     Image imagen;
 
     ImageView obstaculoImageView;
@@ -24,35 +29,35 @@ public class ObstaculoView implements ObservadorObstaculo {
     ObstaculoView(Camino unCamino, Group layout, Rectangle mapa){
         GeneradorRandomObstaculos generadorRandomObstaculos = unCamino.obtenerGeneradorRandomObstaculos();
         generadorRandomObstaculos.addObservador(this);
-        imagen = new Image("/vacio.png", 20, 40,true,false);
+        imagen = new Image("/vacio.png", ANCHO_OBSTACULO, ALTO_OBSTACULO,true,false);
         obstaculoImageView = new ImageView(imagen);
-        obstaculoImageView.setX(1620/2 - mapa.getWidth()/2 - 5 +  (unCamino.esquinaInicial.columna * MULTIPLICADOR + unCamino.esquinaFinal.columna*MULTIPLICADOR) / 2);
-        obstaculoImageView.setY(720/2 - mapa.getHeight()/2 - 5 + (unCamino.esquinaInicial.fila * MULTIPLICADOR + unCamino.esquinaFinal.fila*MULTIPLICADOR) / 2);
+        obstaculoImageView.setX(ANCHO_PANTALLA /2 - mapa.getWidth()/2 - DESFASE +  (unCamino.esquinaInicial.columna * MULTIPLICADOR + unCamino.esquinaFinal.columna*MULTIPLICADOR) / 2);
+        obstaculoImageView.setY(ALTO_PANTALLA /2 - mapa.getHeight()/2 - DESFASE + (unCamino.esquinaInicial.fila * MULTIPLICADOR + unCamino.esquinaFinal.fila*MULTIPLICADOR) / 2);
         layout.getChildren().add(obstaculoImageView);
         unCamino.agregrarObstaculo();
 
     }
     @Override
     public void actualizar(Piquete piquete) {
-        imagen =  new Image("/piquete.png", 20, 40,true,false);
+        imagen =  new Image("/piquete.png", ANCHO_OBSTACULO, ALTO_OBSTACULO,true,false);
         setImagen();
     }
 
     @Override
     public void actualizar(ControlPolicial controlPolicial) {
-        imagen =  new Image("/policia.png", 20, 40,true,false);
+        imagen =  new Image("/policia.png", ANCHO_OBSTACULO, ALTO_OBSTACULO,true,false);
         setImagen();
     }
 
     @Override
     public void actualizar(Pozo pozo) {
-        imagen =  new Image("/pozo.png", 20, 40,true,false);
+        imagen =  new Image("/pozo.png", ANCHO_OBSTACULO, ALTO_OBSTACULO,true,false);
         setImagen();
     }
 
     @Override
     public void actualizar(ObstaculoNull obstaculoNull) {
-        imagen =  new Image("/vacio.png", 20, 40,true,false);
+        imagen =  new Image("/vacio.png", ANCHO_OBSTACULO, ALTO_OBSTACULO,true,false);
         setImagen();
     }
 

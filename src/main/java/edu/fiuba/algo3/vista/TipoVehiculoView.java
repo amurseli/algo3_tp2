@@ -7,6 +7,9 @@ import javafx.scene.image.ImageView;
 
 public class TipoVehiculoView implements ObservadorTipoVehiculo {
 
+    public static final int VEHICULO_ANCHO = 20;
+    public static final int VEHICULO_ALTO = 40;
+    public static final int ROTACION = 270;
     Image imagen;
     VehiculoView paraAcceder;
 
@@ -14,23 +17,23 @@ public class TipoVehiculoView implements ObservadorTipoVehiculo {
         TipoVehiculo estado = vehiculo.obtenerEstadoVehiculo();
         estado.observar(this);
         paraAcceder = view;
-        imagen = new Image("/auto.png", 20, 40,true,false);
+        imagen = new Image("/auto.png", VEHICULO_ANCHO, VEHICULO_ALTO,true,false);
         paraAcceder.vehiculoView = new ImageView(imagen);
-        paraAcceder.vehiculoView.setRotate(270);
+        paraAcceder.vehiculoView.setRotate(ROTACION);
     }
     @Override
     public void actualizar(Moto unaMoto) {
-        imagen = new Image("/moto.png", 20, 40,true,false);
+        imagen = new Image("/moto.png", VEHICULO_ANCHO, VEHICULO_ALTO,true,false);
         unaMoto.observar(this);
         agregarAciew();
     }
     public void actualizar(Auto unAuto) {
-        imagen = new Image("/auto.png", 20, 40,true,false);
+        imagen = new Image("/auto.png", VEHICULO_ANCHO, VEHICULO_ALTO,true,false);
         unAuto.observar(this);
         agregarAciew();
     }
     public void actualizar(CuatroPorCuatro unCuatroPorCuatro) {
-        imagen = new Image("/cuatroPorCuatro.png", 20, 40,true,false);
+        imagen = new Image("/cuatroPorCuatro.png", VEHICULO_ANCHO, VEHICULO_ALTO,true,false);
         unCuatroPorCuatro.observar(this);
         agregarAciew();
     }

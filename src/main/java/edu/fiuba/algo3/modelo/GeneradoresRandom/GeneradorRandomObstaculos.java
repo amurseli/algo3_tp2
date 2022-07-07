@@ -5,9 +5,12 @@ import edu.fiuba.algo3.modelo.efectos.obstaculos.*;
 
 public class GeneradorRandomObstaculos extends ManejadorDeObservablesObstaculos {
 
+    public static final int MIN_CANTIDAD_DE_OBSTACULOS = 1;
+    public static final int CANTIDAD_DE_OBSTACULOS = 4;
+
     public Obstaculo generarObstaculo() {
         GeneradorRandom generadorRandom = new GeneradorRandom();
-        int numero = generadorRandom.generarRandomInt(1, 4);
+        int numero = generadorRandom.generarRandomInt(MIN_CANTIDAD_DE_OBSTACULOS, CANTIDAD_DE_OBSTACULOS);
         switch (numero) {
             case 1:
                 Pozo pozo = new Pozo();

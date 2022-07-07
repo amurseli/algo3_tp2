@@ -5,9 +5,12 @@ import edu.fiuba.algo3.modelo.efectos.sorpresas.*;
 
 public class GeneradorRandomSorpresas extends ManejadorDeObservablesSorpresa {
 
+    public static final int MINIMA_CANTIDAD_SORPRESAS = 1;
+    public static final int MAXIMA_CANTIDAD_SORPRESAS = 4;
+
     public Sorpresa generarSorpresa() {
         GeneradorRandom generadorRandom = new GeneradorRandom();
-        int numero = generadorRandom.generarRandomInt(1, 4);
+        int numero = generadorRandom.generarRandomInt(MINIMA_CANTIDAD_SORPRESAS, MAXIMA_CANTIDAD_SORPRESAS);
         switch (numero) {
             case 1:
                 CambioDeVehiculo unCambio = new CambioDeVehiculo();

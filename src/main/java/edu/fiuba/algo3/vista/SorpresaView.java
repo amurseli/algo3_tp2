@@ -16,41 +16,46 @@ import static edu.fiuba.algo3.App.MULTIPLICADOR;
 
 public class SorpresaView implements ObservadorSorpresa {
 
+    public static final int ANCHO_PANTALLA = 1620;
+    public static final int ALTO_PANTALLA = 720;
+    public static final int DESFASE = 5;
+    public static final int ANCHO_SORPRESA = 20;
+    public static final int ALTO_SORPRESA = 40;
     Image imagen;
 
     ImageView sorpresaImageView;
     SorpresaView(Camino unCamino, Group layout, Rectangle mapa){
         GeneradorRandomSorpresas generadorRandomObservar = unCamino.obtenerGeneradorDeRandomSorpresas();
         generadorRandomObservar.addObservador(this);
-        imagen = new Image("/vacio.png", 20, 40,true,false);
+        imagen = new Image("/vacio.png", ANCHO_SORPRESA, ALTO_SORPRESA,true,false);
         sorpresaImageView = new ImageView(imagen);
-        sorpresaImageView.setX(1620/2 - mapa.getWidth()/2 - 5 +  (unCamino.esquinaInicial.columna * MULTIPLICADOR + unCamino.esquinaFinal.columna*MULTIPLICADOR) / 2);
-        sorpresaImageView.setY(720/2 - mapa.getHeight()/2 - 5 + (unCamino.esquinaInicial.fila * MULTIPLICADOR + unCamino.esquinaFinal.fila*MULTIPLICADOR) / 2);
+        sorpresaImageView.setX(ANCHO_PANTALLA /2 - mapa.getWidth()/2 - DESFASE +  (unCamino.esquinaInicial.columna * MULTIPLICADOR + unCamino.esquinaFinal.columna*MULTIPLICADOR) / 2);
+        sorpresaImageView.setY(ALTO_PANTALLA /2 - mapa.getHeight()/2 - DESFASE + (unCamino.esquinaInicial.fila * MULTIPLICADOR + unCamino.esquinaFinal.fila*MULTIPLICADOR) / 2);
         layout.getChildren().add(sorpresaImageView);
         unCamino.agregrarSorpresa();
 
     }
     @Override
     public void actualizar(SorpresaFavorable unSorpresaFavorable) {
-        imagen =  new Image("/sorpresa.png", 20, 40,true,false);
+        imagen =  new Image("/sorpresa.png", ANCHO_SORPRESA, ALTO_SORPRESA,true,false);
         setImagen();
     }
 
     @Override
     public void actualizar(SorpresaDesfavorable unSorpresaDesfavorable) {
-        imagen =  new Image("/sorpresa.png", 20, 40,true,false);
+        imagen =  new Image("/sorpresa.png", ANCHO_SORPRESA, ALTO_SORPRESA,true,false);
         setImagen();
     }
 
     @Override
     public void actualizar(CambioDeVehiculo unCambioDeVehiculo) {
-        imagen =  new Image("/sorpresa.png", 20, 40,true,false);
+        imagen =  new Image("/sorpresa.png", ANCHO_SORPRESA, ALTO_SORPRESA,true,false);
         setImagen();
     }
 
     @Override
     public void actualizar(SorpresaNull unSorpresaNull) {
-        imagen =  new Image("/vacio.png", 20, 40,true,false);
+        imagen =  new Image("/vacio.png", ANCHO_SORPRESA, ALTO_SORPRESA,true,false);
         setImagen();
     }
 
@@ -59,7 +64,7 @@ public class SorpresaView implements ObservadorSorpresa {
     }
 
     public void sorpresaUsada(){
-        imagen =  new Image("/vacio.png", 20, 40,true,false);
+        imagen =  new Image("/vacio.png", ANCHO_SORPRESA, ALTO_SORPRESA,true,false);
         setImagen();
     }
 }

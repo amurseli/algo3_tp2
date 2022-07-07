@@ -2,12 +2,13 @@ package edu.fiuba.algo3.modelo.GeneradoresRandom;
 
 import edu.fiuba.algo3.modelo.Direcciones.*;
 import edu.fiuba.algo3.modelo.Esquina;
-import edu.fiuba.algo3.modelo.ObserverPersonalizado.ManejadorDeObservablesSorpresa;
-import edu.fiuba.algo3.modelo.efectos.sorpresas.*;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 public class GeneradorRandom {
+
+    public static final int MINIMA_CANTIDAD_DIRECCIONES = 1;
+    public static final int MAXIMA_CANTIDAD_DIRECCIONES = 4;
 
     public int generarRandomInt(int min, int max) {
 
@@ -18,7 +19,7 @@ public class GeneradorRandom {
     }
 
     public Direccion generarDireccion(){
-        int numero = generarRandomInt(1,4);
+        int numero = generarRandomInt(MINIMA_CANTIDAD_DIRECCIONES, MAXIMA_CANTIDAD_DIRECCIONES);
         switch (numero){
             case 2: return new Izquierda();
             case 3: return new Arriba();

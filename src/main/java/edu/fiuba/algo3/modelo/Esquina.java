@@ -7,8 +7,6 @@ public class Esquina {
         this.fila = fila;
         this.columna = columna;
     }
-
-    // TODO: validar que la proxima esquina exista
     public Esquina obtenerEsquinaArriba() {
         return new Esquina(this.fila - 1, this.columna);
     }

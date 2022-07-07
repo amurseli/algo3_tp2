@@ -12,17 +12,25 @@ import java.util.Observer;
 
 public class MovimientosTextView implements Observer {
 
+    public static final int FONDO_MOVIMIENTOS_X = 100;
+    public static final int FONDO_MOVIMIENTOS_Y = 40;
+    public static final int FONDO_MOVIMIENTOS_ANCHO = 210;
+    public static final int FONDO_MOVIENTOS_ALTO = 45;
+    public static final int MOVIMIENTOS_X = 110;
+    public static final int MOVIMIENTOS_Y = 70;
+    public static final int SIZE_FONT_MOVIENTOS = 20;
+    public static final int TAMANIO_STROKE = 5;
     Vehiculo vehiculo;
     Text movimientos;
 
     public MovimientosTextView(Vehiculo vehiculo, Group layout){
-        Rectangle fondoMovimientos = new Rectangle(100,40,210,45);
+        Rectangle fondoMovimientos = new Rectangle(FONDO_MOVIMIENTOS_X, FONDO_MOVIMIENTOS_Y, FONDO_MOVIMIENTOS_ANCHO, FONDO_MOVIENTOS_ALTO);
         fondoMovimientos.setFill(Color.WHITE);
         fondoMovimientos.setStroke(Color.BLUE);
-        fondoMovimientos.setStrokeWidth(5);
+        fondoMovimientos.setStrokeWidth(TAMANIO_STROKE);
 
-        movimientos = new Text(110,70,"Movimientos: " + vehiculo.obtenerMovimientosRealizados());
-        movimientos.setFont(Font.font(20));
+        movimientos = new Text(MOVIMIENTOS_X, MOVIMIENTOS_Y,"Movimientos: " + vehiculo.obtenerMovimientosRealizados());
+        movimientos.setFont(Font.font(SIZE_FONT_MOVIENTOS));
         movimientos.setFill(Color.BLACK);
 
         this.vehiculo = vehiculo;

@@ -8,6 +8,7 @@ import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 import java.util.Observable;
 
 public class Juego extends Observable {
+    public static final int MULTIPLICADOR = 3;
     Ciudad ciudad;
     Ranking listaDePuntajes;
     String nickname;
@@ -80,7 +81,7 @@ public class Juego extends Observable {
         Esquina comienzo = new Esquina(0,0);
         this.crearCiudad(limite,limite,new Vehiculo(new Auto(), comienzo));
 
-        Integer cantidadDeCaminos = (limite.fila + limite.columna) * 2;
+        Integer cantidadDeCaminos = (limite.fila + limite.columna) * MULTIPLICADOR;
 
         //agrego los caminos
         for (int i = 0; i < (cantidadDeCaminos); i++){

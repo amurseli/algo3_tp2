@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.ObserverPersonalizado;
+package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Localize;
 

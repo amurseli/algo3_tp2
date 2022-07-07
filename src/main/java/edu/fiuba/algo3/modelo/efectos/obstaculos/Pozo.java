@@ -9,19 +9,22 @@ import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 
 public class Pozo extends ManejadorDeObservablesObstaculos implements Obstaculo {
 
+    public static final int PENALIZACION_NORMAL = 3;
+    public static final int PENALIZACION_CUATRO_POR_CUATRO = 2;
+
     public void aplicarEfecto(Vehiculo vehiculo, Auto auto) {
-        vehiculo.sumarMovimientos(3);
+        vehiculo.sumarMovimientos(PENALIZACION_NORMAL);
     }
 
     public void aplicarEfecto(Vehiculo vehiculo, Moto moto) {
-        vehiculo.sumarMovimientos(3);
+        vehiculo.sumarMovimientos(PENALIZACION_NORMAL);
     }
 
 
     public void aplicarEfecto(Vehiculo vehiculo, CuatroPorCuatro cuatroPorCuatro) {
         cuatroPorCuatro.sumarPozoPisado();
         if(cuatroPorCuatro.elProximoPozoEsPenalizable()){
-            vehiculo.sumarMovimientos(2);
+            vehiculo.sumarMovimientos(PENALIZACION_CUATRO_POR_CUATRO);
             cuatroPorCuatro.reinciarPozosPizados();
         }
     }

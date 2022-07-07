@@ -13,6 +13,18 @@ import java.util.Observer;
 
 public class RankingView implements Observer {
 
+    public static final int FONDO_RANKING_X = 100;
+    public static final int FONDO_RANKING_Y = 100;
+    public static final int FONDO_RANKING_ANCHO = 210;
+    public static final int FONDO_RANKING_ALTO = 320;
+    public static final int STROKE_WIDTH = 5;
+    public static final int TITULO_X = 110;
+    public static final int TITULO_Y = 140;
+    public static final int SIZE_FONT = 30;
+    public static final int SIZE_FONT_PUNTAJE = 20;
+    public static final int PUNTAJE_X = 110;
+    public static final int PUNTAJE_Y = 160;
+    public static final int SEPARACION = 20;
     Ranking ranking;
     Group layout;
 
@@ -25,25 +37,25 @@ public class RankingView implements Observer {
     }
 
     private void dibujarFondoRanking(Group layout){
-        Rectangle fondoRanking = new Rectangle(100,100,210,320);
+        Rectangle fondoRanking = new Rectangle(FONDO_RANKING_X, FONDO_RANKING_Y, FONDO_RANKING_ANCHO, FONDO_RANKING_ALTO);
         fondoRanking.setFill(Color.WHITE);
         fondoRanking.setStroke(Color.SALMON);
-        fondoRanking.setStrokeWidth(5);
+        fondoRanking.setStrokeWidth(STROKE_WIDTH);
         layout.getChildren().add(fondoRanking);
 
-        Text titulo = new Text(110,140,"Highscores: ");
-        titulo.setFont(Font.font(30));
+        Text titulo = new Text(TITULO_X, TITULO_Y,"Highscores: ");
+        titulo.setFont(Font.font(SIZE_FONT));
         layout.getChildren().add(titulo);
     }
     private void actualizarRanking(Group layout){
-        int i = 20;
+        int i = SEPARACION;
 
         for (Puntaje puntaje : ranking.puntajes){
-            Text nuevoPuntajeTexto = new Text(110,160 + i,puntaje.getNombre()+": " + puntaje.getMovimientos() + "\n");
-            nuevoPuntajeTexto.setFont(Font.font(20));
+            Text nuevoPuntajeTexto = new Text(PUNTAJE_X, PUNTAJE_Y + i,puntaje.getNombre()+": " + puntaje.getMovimientos() + "\n");
+            nuevoPuntajeTexto.setFont(Font.font(SIZE_FONT_PUNTAJE));
             nuevoPuntajeTexto.setFill(Color.BLACK);
             layout.getChildren().add(nuevoPuntajeTexto);
-            i+= 20;
+            i+= SEPARACION;
         }
     }
 
