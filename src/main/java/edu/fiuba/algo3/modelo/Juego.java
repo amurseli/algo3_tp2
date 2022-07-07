@@ -29,6 +29,7 @@ public class Juego extends Observable {
     public void agregarCamino(Camino nuevoCamino){
         ciudad.agregarCamino(nuevoCamino);
     }
+
     public void mover(Direccion unaDireccion) {
         if(ciudad.mover(unaDireccion)){
             finDelJuego();
@@ -80,23 +81,14 @@ public class Juego extends Observable {
         Esquina comienzo = new Esquina(0,0);
         this.crearCiudad(limite,limite,new Vehiculo(new Auto(), comienzo));
 
-        Integer cantidadDeEfectos = (limite.fila + limite.columna) / 2 * 3;
+        Integer cantidadDeCaminos = (limite.fila + limite.columna) / 2 * 3;
 
-        //agrego obstaculos
-        for (int i = 0; i < (cantidadDeEfectos); i++){
+        //agrego los caminos
+        for (int i = 0; i < (cantidadDeCaminos); i++){
 
             Camino camino = new Camino(generadorRandom.generarEsquina(this.obtenerLimite()), generadorRandom.generarDireccion());
-            Obstaculo obtaculo = generadorRandom.generarObstaculo();
-            camino.agregrarEfecto(obtaculo);
             this.agregarCamino(camino);
         }
 
-        //agrego sorpresas
-        for (int i = 0; i < cantidadDeEfectos; i++){
-            Camino camino = new Camino(generadorRandom.generarEsquina(this.obtenerLimite()), generadorRandom.generarDireccion());
-            Sorpresa sorpresa = generadorRandom.generarSorpresa();
-            camino.agregrarEfecto(sorpresa);
-            this.agregarCamino(camino);
-        }
     }
 }

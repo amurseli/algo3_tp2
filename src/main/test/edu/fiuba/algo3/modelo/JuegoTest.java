@@ -2,10 +2,12 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Direcciones.Derecha;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.Pozo;
+import edu.fiuba.algo3.modelo.efectos.sorpresas.CambioDeVehiculo;
 import edu.fiuba.algo3.modelo.vehiculos.Moto;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -27,7 +29,11 @@ public class JuegoTest {
     public void seAgregaUnCaminoCorrectamente() {
         Juego juego = new Juego();
         Camino camino = new Camino(new Esquina(1, 5), new Derecha());
-        camino.agregrarEfecto(new Pozo());
+
+        GeneradorRandom randomDeCamino = Mockito.mock(GeneradorRandom.class);
+        camino.setRandom(randomDeCamino);
+        Mockito.when(randomDeCamino.generarObstaculo()).thenReturn(new Pozo());
+
         juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Vehiculo(new Moto(), new Esquina(1, 6)));
         juego.agregarCamino(camino);
         ListadoCaminos caminos = juego.obtenerCaminosConEfectos();

@@ -2,20 +2,24 @@ package edu.fiuba.algo3.modelo.Entrega_2_;
 
 import edu.fiuba.algo3.modelo.Camino;
 import edu.fiuba.algo3.modelo.Esquina;
+import edu.fiuba.algo3.modelo.GeneradorRandom;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Direcciones.Derecha;
 import edu.fiuba.algo3.modelo.Direcciones.Izquierda;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.ControlPolicial;
+import edu.fiuba.algo3.modelo.efectos.obstaculos.ObstaculoNull;
 import edu.fiuba.algo3.modelo.efectos.obstaculos.Piquete;
 import edu.fiuba.algo3.modelo.efectos.sorpresas.CambioDeVehiculo;
 import edu.fiuba.algo3.modelo.efectos.sorpresas.SorpresaDesfavorable;
 import edu.fiuba.algo3.modelo.efectos.sorpresas.SorpresaFavorable;
+import edu.fiuba.algo3.modelo.efectos.sorpresas.SorpresaNull;
 import edu.fiuba.algo3.modelo.vehiculos.Auto;
 import edu.fiuba.algo3.modelo.vehiculos.CuatroPorCuatro;
 import edu.fiuba.algo3.modelo.vehiculos.Moto;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 public class CasosDeUso2 {
     @Test
@@ -23,7 +27,11 @@ public class CasosDeUso2 {
         Juego juego = new Juego();
         juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Vehiculo(new Moto(), new Esquina(1,1)));
         Camino camino = new Camino(new Esquina(1,5),new Derecha());
-        camino.agregrarEfecto(new SorpresaFavorable());
+
+        GeneradorRandom randomDeCamino1 = Mockito.mock(GeneradorRandom.class);
+        Mockito.when(randomDeCamino1.generarObstaculo()).thenReturn(new ObstaculoNull());
+        Mockito.when(randomDeCamino1.generarSorpresa()).thenReturn(new SorpresaFavorable());
+        camino.setRandom(randomDeCamino1);
 
         juego.agregarCamino(camino);
         juego.mover(new Derecha());
@@ -41,7 +49,11 @@ public class CasosDeUso2 {
         Juego juego = new Juego();
         juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Vehiculo(new Moto(), new Esquina(1,1)));
         Camino camino = new Camino(new Esquina(1,5), new Derecha());
-        camino.agregrarEfecto(new SorpresaDesfavorable());
+
+        GeneradorRandom randomDeCamino1 = Mockito.mock(GeneradorRandom.class);
+        Mockito.when(randomDeCamino1.generarObstaculo()).thenReturn(new ObstaculoNull());
+        Mockito.when(randomDeCamino1.generarSorpresa()).thenReturn(new SorpresaDesfavorable());
+        camino.setRandom(randomDeCamino1);
 
         juego.agregarCamino(camino);
 
@@ -59,7 +71,11 @@ public class CasosDeUso2 {
         Juego juego = new Juego();
         juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Vehiculo(new Moto(), new Esquina(1,5)));
         Camino camino = new Camino(new Esquina(1,5), new Derecha());
-        camino.agregrarEfecto(new CambioDeVehiculo());
+
+        GeneradorRandom randomDeCamino1 = Mockito.mock(GeneradorRandom.class);
+        Mockito.when(randomDeCamino1.generarObstaculo()).thenReturn(new ObstaculoNull());
+        Mockito.when(randomDeCamino1.generarSorpresa()).thenReturn(new CambioDeVehiculo());
+        camino.setRandom(randomDeCamino1);
 
         juego.agregarCamino(camino);
 
@@ -75,7 +91,12 @@ public class CasosDeUso2 {
         Juego juego = new Juego();
         juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Vehiculo(new Auto(), new Esquina(1,5)));
         Camino camino = new Camino(new Esquina(1,5), new Derecha());
-        camino.agregrarEfecto(new Piquete());
+
+        GeneradorRandom randomDeCamino1 = Mockito.mock(GeneradorRandom.class);
+        Mockito.when(randomDeCamino1.generarObstaculo()).thenReturn(new Piquete());
+        Mockito.when(randomDeCamino1.generarSorpresa()).thenReturn(new SorpresaNull());
+        camino.setRandom(randomDeCamino1);
+
         juego.agregarCamino(camino);
 
         juego.mover(new Derecha());
@@ -88,7 +109,12 @@ public class CasosDeUso2 {
         Juego juego = new Juego();
         juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Vehiculo(new Moto(), new Esquina(1,5)));
         Camino camino = new Camino(new Esquina(1,5), new Derecha());
-        camino.agregrarEfecto(new Piquete());
+
+        GeneradorRandom randomDeCamino1 = Mockito.mock(GeneradorRandom.class);
+        Mockito.when(randomDeCamino1.generarObstaculo()).thenReturn(new Piquete());
+        Mockito.when(randomDeCamino1.generarSorpresa()).thenReturn(new SorpresaNull());
+        camino.setRandom(randomDeCamino1);
+
         juego.agregarCamino(camino);
 
         juego.mover(new Derecha());
@@ -101,7 +127,12 @@ public class CasosDeUso2 {
         Juego juego = new Juego();
         juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Vehiculo(new CuatroPorCuatro(), new Esquina(1,5)));
         Camino camino = new Camino(new Esquina(1,5), new Derecha());
-        camino.agregrarEfecto(new Piquete());
+
+        GeneradorRandom randomDeCamino1 = Mockito.mock(GeneradorRandom.class);
+        Mockito.when(randomDeCamino1.generarObstaculo()).thenReturn(new Piquete());
+        Mockito.when(randomDeCamino1.generarSorpresa()).thenReturn(new SorpresaNull());
+        camino.setRandom(randomDeCamino1);
+
         juego.agregarCamino(camino);
 
         juego.mover(new Derecha());
@@ -114,7 +145,11 @@ public class CasosDeUso2 {
         Juego juego = new Juego();
         juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Vehiculo(new Auto(), new Esquina(1,5)));
         Camino camino = new Camino(new Esquina(1,5), new Derecha());
-        camino.agregrarEfecto(new CambioDeVehiculo());
+
+        GeneradorRandom randomDeCamino1 = Mockito.mock(GeneradorRandom.class);
+        Mockito.when(randomDeCamino1.generarObstaculo()).thenReturn(new ObstaculoNull());
+        Mockito.when(randomDeCamino1.generarSorpresa()).thenReturn(new CambioDeVehiculo());
+        camino.setRandom(randomDeCamino1);
 
         juego.agregarCamino(camino);
 
@@ -129,7 +164,11 @@ public class CasosDeUso2 {
         Juego juego = new Juego();
         juego.crearCiudad(new Esquina(10, 10), new Esquina(1, 10), new Vehiculo(new CuatroPorCuatro(), new Esquina(1,5)));
         Camino camino = new Camino(new Esquina(1,5), new Derecha());
-        camino.agregrarEfecto(new CambioDeVehiculo());
+
+        GeneradorRandom randomDeCamino1 = Mockito.mock(GeneradorRandom.class);
+        Mockito.when(randomDeCamino1.generarObstaculo()).thenReturn(new ObstaculoNull());
+        Mockito.when(randomDeCamino1.generarSorpresa()).thenReturn(new CambioDeVehiculo());
+        camino.setRandom(randomDeCamino1);
 
         juego.agregarCamino(camino);
 

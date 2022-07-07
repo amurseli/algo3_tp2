@@ -15,26 +15,30 @@ public class Camino extends Observable {
     public Esquina esquinaInicial, esquinaFinal;
     public Sorpresa sorpresa;
     public Obstaculo obstaculo;
+    public GeneradorRandom generadorRandom;
+
 
     public Camino(Esquina esquinaInicial, Direccion unaDireccion) {
         this.esquinaInicial = esquinaInicial;
         esquinaFinal = unaDireccion.siguiente(esquinaInicial);
+        generadorRandom = new GeneradorRandom();
         sorpresa = new SorpresaNull();
         obstaculo = new ObstaculoNull();
     }
-    public void agregrarEfecto(Sorpresa nuevaSorpresa){
 
-        //TODO: SUPUESTO, EL AGRAR EFECTO REMPLAZA
-        sorpresa = nuevaSorpresa;
-        setChanged();
-        this.notifyObservers();
+    public void generarEfectos(){
+        agregrarSorpresa();
+        agregrarObstaculo();
     }
 
-    public void agregrarEfecto(Obstaculo nuevoObstaculo){
+    public void agregrarSorpresa(){
 
-        obstaculo = nuevoObstaculo;
-        setChanged();
-        this.notifyObservers();
+        sorpresa = generadorRandom.generarSorpresa();
+    }
+
+    public void agregrarObstaculo(){
+
+        obstaculo = generadorRandom.generarObstaculo();
     }
 
     @Override
@@ -52,7 +56,17 @@ public class Camino extends Observable {
 
         sorpresa = new SorpresaNull();
 
+        //Este sera sin metodo para que solo sepa que sorpresaPasoANull
         setChanged();
         this.notifyObservers();
+    }
+
+    public GeneradorRandom obtenerGeneradorDeRandom(){
+        return generadorRandom;
+    }
+
+    public void setRandom(GeneradorRandom unRandom){
+        generadorRandom = unRandom;
+        generarEfectos();
     }
 }

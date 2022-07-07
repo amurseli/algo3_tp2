@@ -25,7 +25,7 @@ public class CaminoView implements Observer {
     Image sorpresaImage;
     Image obstaculoImage;
 
-    ImageView sorpresaImageView;
+    SorpresaView sorpresaView;
 
     ImageView obstaculoImageView;
 
@@ -35,11 +35,7 @@ public class CaminoView implements Observer {
         this.camino = camino;
         this.camino.addObserver(this);
 
-        sorpresaImage = new Image("/vacio.png", 20, 40,true,false);
-        sorpresaImageView = new ImageView(sorpresaImage);
-        sorpresaImageView.setX(1620/2 - mapa.getWidth()/2 - 5 +  (camino.esquinaInicial.columna * MULTIPLICADOR + camino.esquinaFinal.columna*MULTIPLICADOR) / 2);
-        sorpresaImageView.setY(720/2 - mapa.getHeight()/2 - 5 + (camino.esquinaInicial.fila * MULTIPLICADOR + camino.esquinaFinal.fila*MULTIPLICADOR) / 2);
-        layout.getChildren().add(sorpresaImageView);
+        sorpresaView = new SorpresaView(camino,layout,mapa);
 
         obstaculoImage =  new Image("/vacio.png", 20, 40,true,false);
         obstaculoImageView = new ImageView(obstaculoImage);
@@ -48,33 +44,12 @@ public class CaminoView implements Observer {
         layout.getChildren().add(obstaculoImageView);
 
         actualizarObstaculo(camino.obstaculo);
-        actualizarSorpresa(camino.sorpresa);
-
-
     }
 
     @Override
     public void update(Observable o, Object arg) {
         actualizarObstaculo(camino.obstaculo);
-        actualizarSorpresa(camino.sorpresa);
-    }
-
-    private void actualizarSorpresa(Sorpresa sorpresa){
-
-        if (sorpresa.getClass() == SorpresaFavorable.class){
-            sorpresaImage =  new Image("/sorpresa.png", 20, 40,true,false);
-        }
-        if (sorpresa.getClass() == SorpresaFavorable.class){
-            sorpresaImage =  new Image("/sorpresa.png", 20, 40,true,false);
-        }
-        if (sorpresa.getClass() == CambioDeVehiculo.class){
-            sorpresaImage =  new Image("/sorpresa.png", 20, 40,true,false);
-        }
-        if (sorpresa.getClass() == SorpresaNull.class){
-            sorpresaImage =  new Image("/vacio.png", 20, 40,true,false);
-        }
-
-        sorpresaImageView.setImage(sorpresaImage);
+        sorpresaView.sorpresaUsada();
     }
 
     private void actualizarObstaculo(Obstaculo obstaculo){

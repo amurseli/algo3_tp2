@@ -4,7 +4,7 @@ import edu.fiuba.algo3.modelo.vehiculos.Auto;
 import edu.fiuba.algo3.modelo.vehiculos.CuatroPorCuatro;
 import edu.fiuba.algo3.modelo.vehiculos.Moto;
 
-public interface Observador {
+public interface ObservadorTipoVehiculo {
 
      void actualizar(Moto unamoto);
      void actualizar(Auto unaAuto);

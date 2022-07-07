@@ -8,6 +8,7 @@ public class ListadoCaminos {
     public ArrayList<Camino> caminosConEfectos;
 
     public ListadoCaminos(){
+
         caminosConEfectos = new ArrayList<>();
     }
 
@@ -17,6 +18,7 @@ public class ListadoCaminos {
             caminosConEfectos.add(nuevoCamino);
         }
     }
+
 
     // publico para testeo
     public boolean caminoExiste(Camino nuevoCamino){

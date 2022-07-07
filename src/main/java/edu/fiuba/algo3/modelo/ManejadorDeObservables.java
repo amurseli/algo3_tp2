@@ -3,24 +3,22 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.vehiculos.Auto;
 import edu.fiuba.algo3.modelo.vehiculos.CuatroPorCuatro;
 import edu.fiuba.algo3.modelo.vehiculos.Moto;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class ManejadorDeObservables {
 
-    public ArrayList<Observador> observadores;
+    public ArrayList<ObservadorTipoVehiculo> observadores;
 
     public ManejadorDeObservables(){
-        observadores = new ArrayList<Observador>();
+        observadores = new ArrayList<ObservadorTipoVehiculo>();
     }
 
-    public void addObservador(Observador o){
+    public void addObservador(ObservadorTipoVehiculo o){
         observadores.add(o);
     };
 
     public void notificar(Auto unAuto){
-        for (Observador unObservador:
+        for (ObservadorTipoVehiculo unObservador:
              observadores)
         {
             unObservador.actualizar(unAuto);
@@ -28,7 +26,7 @@ public class ManejadorDeObservables {
     }
 
     public void notificar(Moto unaAuto){
-        for (Observador unObservador:
+        for (ObservadorTipoVehiculo unObservador:
                 observadores)
         {
             unObservador.actualizar(unaAuto);
@@ -36,7 +34,7 @@ public class ManejadorDeObservables {
     }
 
     public void notificar(CuatroPorCuatro una4x4){
-        for (Observador unObservador:
+        for (ObservadorTipoVehiculo unObservador:
                 observadores)
         {
             unObservador.actualizar(una4x4);

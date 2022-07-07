@@ -1,18 +1,12 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Direcciones.*;
-import edu.fiuba.algo3.modelo.efectos.obstaculos.ControlPolicial;
-import edu.fiuba.algo3.modelo.efectos.obstaculos.Obstaculo;
-import edu.fiuba.algo3.modelo.efectos.obstaculos.Piquete;
-import edu.fiuba.algo3.modelo.efectos.obstaculos.Pozo;
-import edu.fiuba.algo3.modelo.efectos.sorpresas.CambioDeVehiculo;
-import edu.fiuba.algo3.modelo.efectos.sorpresas.Sorpresa;
-import edu.fiuba.algo3.modelo.efectos.sorpresas.SorpresaDesfavorable;
-import edu.fiuba.algo3.modelo.efectos.sorpresas.SorpresaFavorable;
+import edu.fiuba.algo3.modelo.efectos.obstaculos.*;
+import edu.fiuba.algo3.modelo.efectos.sorpresas.*;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class GeneradorRandom {
+public class GeneradorRandom extends ManejadorDeObservablesSorpresa {
 
     public int generarRandomInt(int min, int max) {
 
@@ -39,60 +33,74 @@ public class GeneradorRandom {
     public Obstaculo generarObstaculo(){
         int numero = generarRandomInt(1,3);
         switch (numero){
+            case 1: return new Pozo();
             case 2: return new ControlPolicial(new GeneradorRandom());
             case 3: return new Piquete();
-            default: return new Pozo();
+            default: return new ObstaculoNull();
         }
     }
 
-    public Sorpresa generarSorpresa(){
-        int numero = generarRandomInt(1,3);
-        switch (numero){
-            case 2: return new SorpresaFavorable();
-            case 3: return new SorpresaDesfavorable();
-            default: return new CambioDeVehiculo();
+    public Sorpresa generarSorpresa() {
+        int numero = generarRandomInt(1, 4);
+        switch (numero) {
+            case 1:
+                CambioDeVehiculo unCambio = new CambioDeVehiculo();
+                notificar(unCambio);
+                return unCambio;
+            case 2:
+                SorpresaFavorable unaFavorable = new SorpresaFavorable();
+                notificar(unaFavorable);
+                return unaFavorable;
+            case 3:
+                SorpresaDesfavorable unaDesfavorable = new SorpresaDesfavorable();
+                notificar(unaDesfavorable);
+                return unaDesfavorable;
+            default:
+                SorpresaNull unaVacia = new SorpresaNull();
+                notificar(unaVacia);
+                return unaVacia;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

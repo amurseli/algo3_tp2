@@ -1,14 +1,11 @@
 package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.modelo.Observador;
+import edu.fiuba.algo3.modelo.ObservadorTipoVehiculo;
 import edu.fiuba.algo3.modelo.vehiculos.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.util.Observable;
-import java.util.Observer;
-
-public class TipoVehiculoView implements Observador{
+public class TipoVehiculoView implements ObservadorTipoVehiculo {
 
     Image imagen;
     VehiculoView paraAcceder;
