@@ -7,8 +7,6 @@ public class Esquina {
         this.fila = fila;
         this.columna = columna;
     }
-
-    // TODO: validar que la proxima esquina exista
     public Esquina obtenerEsquinaArriba() {
         return new Esquina(this.fila - 1, this.columna);
     }
@@ -39,4 +37,7 @@ public class Esquina {
         return this.fila == e.fila && this.columna == e.columna;
     }
 
+    public boolean estaDentroDelLimite(Esquina limite) {
+        return (this.columna < limite.columna && this.fila < limite.fila);
+    }
 }

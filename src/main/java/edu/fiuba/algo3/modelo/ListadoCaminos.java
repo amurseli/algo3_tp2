@@ -8,11 +8,28 @@ public class ListadoCaminos {
     public ArrayList<Camino> caminosConEfectos;
 
     public ListadoCaminos(){
+
         caminosConEfectos = new ArrayList<>();
     }
 
     public void agregarCamino(Camino nuevoCamino){
-        caminosConEfectos.add(nuevoCamino);
+
+        if (!caminoExiste(nuevoCamino)){
+            caminosConEfectos.add(nuevoCamino);
+        }
+    }
+
+
+    // publico para testeo
+    public boolean caminoExiste(Camino nuevoCamino){
+
+        for (Camino camino:caminosConEfectos) {
+            if(camino.equals(nuevoCamino)){
+                return true;
+            }
+        }
+        return false;
+
     }
     public Camino obtenerCaminoRecorrido(Camino caminoRecorrido){
         Camino caminoConEfecto = null;

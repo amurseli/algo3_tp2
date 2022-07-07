@@ -1,16 +1,25 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.App;
 import edu.fiuba.algo3.modelo.Direcciones.Direccion;
+import edu.fiuba.algo3.modelo.GeneradoresRandom.GeneradorRandom;
+import edu.fiuba.algo3.modelo.vehiculos.Auto;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 
-public class Juego {
+import java.util.Observable;
+
+public class Juego extends Observable {
+    public static final int MULTIPLICADOR = 3;
     Ciudad ciudad;
     Ranking listaDePuntajes;
+    String nickname;
 
-    public boolean finDeJuego = false;
+
     public Juego(){
         this.listaDePuntajes = new Ranking();
+    }
+
+    public void asignarNickname(String nickname){
+        this.nickname = nickname;
     }
 
     public void crearCiudad(Esquina limite, Esquina meta, Vehiculo vehiculo) {
@@ -20,6 +29,7 @@ public class Juego {
     public void agregarCamino(Camino nuevoCamino){
         ciudad.agregarCamino(nuevoCamino);
     }
+
     public void mover(Direccion unaDireccion) {
         if(ciudad.mover(unaDireccion)){
             finDelJuego();
@@ -31,10 +41,9 @@ public class Juego {
     }
 
     private void finDelJuego(){
-        System.out.println("SE TERMINO EL JUEGO. HAS GANADO");
-        ciudad.datosDePartida(listaDePuntajes,"JUANCITO");//harcodeo el nikname porque eso habria que pasarlo cuando se gane como un input
-        finDeJuego = true;
-        listaDePuntajes.mostrarRanking();
+        ciudad.datosDePartida(listaDePuntajes,nickname);
+        setChanged();
+        notifyObservers();
 
     }
 
@@ -54,8 +63,8 @@ public class Juego {
         return this.ciudad.obtenerMovimientosRealizados();
     }
 
-    public ListadoCaminos obtenerCaminos() {
-        return  ciudad.obtenerEfectos();
+    public ListadoCaminos obtenerCaminosConEfectos() {
+        return  ciudad.obtenerCaminosConEfectos();
     }
 
     public Esquina obtenerMeta() {
@@ -64,5 +73,22 @@ public class Juego {
 
     public Vehiculo obtenerVehiculo(){
         return ciudad.obtenerVehiculo();
+    }
+
+    public void nuevaPartida(Esquina limite){
+        GeneradorRandom generadorRandom = new GeneradorRandom();
+
+        Esquina comienzo = new Esquina(0,0);
+        this.crearCiudad(limite,limite,new Vehiculo(new Auto(), comienzo));
+
+        Integer cantidadDeCaminos = (limite.fila + limite.columna) * MULTIPLICADOR;
+
+        //agrego los caminos
+        for (int i = 0; i < (cantidadDeCaminos); i++){
+
+            Camino camino = new Camino(generadorRandom.generarEsquina(this.obtenerLimite()), generadorRandom.generarDireccion());
+            this.agregarCamino(camino);
+        }
+
     }
 }

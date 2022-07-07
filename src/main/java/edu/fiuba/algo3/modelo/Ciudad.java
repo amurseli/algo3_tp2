@@ -40,12 +40,11 @@ public class Ciudad {
         caminos.agregarCamino(camino);
     }
 
-
     public Esquina obtenerLimite() {
         return limite;
     }
 
-    public ListadoCaminos obtenerEfectos() {
+    public ListadoCaminos obtenerCaminosConEfectos() {
         return caminos;
     }
 

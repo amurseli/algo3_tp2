@@ -4,7 +4,9 @@ import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Direcciones.Direccion;
 import edu.fiuba.algo3.modelo.Puntaje;
 
-public class Vehiculo {
+import java.util.Observable;
+
+public class Vehiculo extends Observable{
     private Esquina posicion;
     private Esquina posicionAnterior;
     private int movimientos;
@@ -27,6 +29,10 @@ public class Vehiculo {
         return (estado.getClass());
     }
 
+    public TipoVehiculo obtenerEstadoVehiculo() {//METODO USADO SOLO EN PRUEBAS
+        return (estado);
+    }
+
     public Esquina mover(Direccion unaDireccion, ListadoCaminos caminos, Esquina limite) {
         Esquina nuevaEsquina = unaDireccion.siguiente(posicion);
 
@@ -37,6 +43,9 @@ public class Vehiculo {
             Camino caminoRecorrido = caminos.obtenerCaminoRecorrido(new Camino(posicionAnterior, unaDireccion));
             caminoRecorrido.aplicarEfecto(this,estado);
         }
+
+        setChanged();
+        this.notifyObservers();
 
         return posicion;
     }
@@ -59,6 +68,8 @@ public class Vehiculo {
     }
 
     public void cambiarTipo() {
+        setChanged();
+        this.notifyObservers();
         estado = estado.cambiarVehiculo();
     }
 

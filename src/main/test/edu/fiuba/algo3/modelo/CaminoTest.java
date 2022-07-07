@@ -36,7 +36,7 @@ public class CaminoTest {
 
         assertNotEquals(camino1, camino2);
     }
-
+/*
     @Test
     public void Test02UnCaminoTieneDosEfectosSePasaPorLosEfectosSeEliminaLaSorpresaQuedaElObstaculo() {
         ListadoCaminos lista = new ListadoCaminos();
@@ -50,8 +50,8 @@ public class CaminoTest {
 
         camino.aplicarEfecto(unVehiculo,estado);
 
-        Assertions.assertEquals(camino.obtenerCantidadEfectos(), 1);
-    }
+        Assertions.assertTrue(camino.obtenerCantidadEfectos(new SorpresaNull()));
+    }*/
     /*@Test
     public void  Test04seCrean2SorpresasYSeAgreganEnUnCaminoGeneraUnError() throws LimiteAlcanzado {
         Sorpresa sorpresa1 = new SorpresaDesfavorable();
