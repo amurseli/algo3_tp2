@@ -1,24 +1,21 @@
 package edu.fiuba.algo3.modelo.vehiculos;
 
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.Movimientos.Direccion;
-import edu.fiuba.algo3.modelo.efectos.Efecto;
+import edu.fiuba.algo3.modelo.Direcciones.Direccion;
+import edu.fiuba.algo3.modelo.Puntaje;
 
-public abstract class Vehiculo {
-    public Esquina posicion;
-    public Esquina posicionAnterior;
+import java.util.Observable;
 
-    protected int movimientos;
+public class Vehiculo extends Observable{
+    private Esquina posicion;
+    private Esquina posicionAnterior;
+    private int movimientos;
+    private TipoVehiculo estado;
 
-    public Vehiculo(Esquina posicion) {
+    public Vehiculo(TipoVehiculo tipo, Esquina posicion) {
+        this.estado = tipo;
         this.posicion = posicion;
         movimientos = 0;
-    }
-
-    public Vehiculo(Esquina posicion, Esquina posicionAnterior, int movimientos){
-        this.posicion = posicion;
-        this.posicionAnterior = posicionAnterior;
-        this.movimientos = movimientos;
     }
 
     public int obtenerMovimientosRealizados() {
@@ -28,15 +25,32 @@ public abstract class Vehiculo {
     public Esquina obtenerPosicion(){
         return posicion;
     }
-
-    public Camino mover(Direccion unaDireccion) {
-        Esquina nuevaEsquina = unaDireccion.siguiente(posicion);
-        sumarMovimientos(1);
-        asignarPosicion(nuevaEsquina);
-        return (new Camino(posicionAnterior, unaDireccion));
+    public Object obtenerTipoVehiculo() {//METODO USADO SOLO EN PRUEBAS
+        return (estado.getClass());
     }
 
-    public void asignarPosicion(Esquina nuevaPosicion) {
+    public TipoVehiculo obtenerEstadoVehiculo() {//METODO USADO SOLO EN PRUEBAS
+        return (estado);
+    }
+
+    public Esquina mover(Direccion unaDireccion, ListadoCaminos caminos, Esquina limite) {
+        Esquina nuevaEsquina = unaDireccion.siguiente(posicion);
+
+        if(!validarPosicion(limite,nuevaEsquina)){
+
+            sumarMovimientos(1);
+            asignarPosicion(nuevaEsquina);
+            Camino caminoRecorrido = caminos.obtenerCaminoRecorrido(new Camino(posicionAnterior, unaDireccion));
+            caminoRecorrido.aplicarEfecto(this,estado);
+        }
+
+        setChanged();
+        this.notifyObservers();
+
+        return posicion;
+    }
+
+    private void asignarPosicion(Esquina nuevaPosicion) {
         posicionAnterior = posicion;
         posicion = nuevaPosicion;
     }
@@ -45,19 +59,31 @@ public abstract class Vehiculo {
         posicion = posicionAnterior;
     }
 
-    public void sumarMovimientos(int m) {
-        this.movimientos += m;
-    }
-
-    public void setMovimientos(int nuevosMovimientos){
-        movimientos = nuevosMovimientos;
+    public void sumarMovimientos(int movimientos) {
+        this.movimientos += movimientos;
     }
 
     public void aplicarPorcentaje(double porcentaje){
         movimientos = movimientos + (int)(movimientos * porcentaje);
     }
 
-    public abstract void aplicarEfecto(Jugador jugador, Efecto efecto);
+    public void cambiarTipo() {
+        setChanged();
+        this.notifyObservers();
+        estado = estado.cambiarVehiculo();
+    }
 
-    public abstract Vehiculo cambiarVehiculo();
+    public boolean validarPosicion(Esquina limite, Esquina nuevaEsquina){
+        return nuevaEsquina.getFila() < 0 || nuevaEsquina.getColumna() < 0 ||
+                nuevaEsquina.getFila() > limite.getFila() || nuevaEsquina.getColumna() > limite.getColumna();
+    }
+
+    public void datosDePartida(Ranking listaDePuntajes, String nickname){
+        Puntaje nuevoPuntaje = new Puntaje(movimientos,nickname);
+        listaDePuntajes.agregarPuntaje(nuevoPuntaje);
+    }
+
+    public Boolean enEsquina(Esquina unaEsquina){
+        return (posicion.equals(unaEsquina));
+    } //Solo para test
 }

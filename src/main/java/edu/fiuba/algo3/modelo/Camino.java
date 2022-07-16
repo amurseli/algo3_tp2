@@ -1,30 +1,44 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.Movimientos.Direccion;
-import edu.fiuba.algo3.modelo.efectos.Efecto;
+import edu.fiuba.algo3.modelo.Direcciones.Direccion;
+import edu.fiuba.algo3.modelo.GeneradoresRandom.GeneradorRandomObstaculos;
+import edu.fiuba.algo3.modelo.GeneradoresRandom.GeneradorRandomSorpresas;
+import edu.fiuba.algo3.modelo.efectos.obstaculos.Obstaculo;
+import edu.fiuba.algo3.modelo.efectos.obstaculos.ObstaculoNull;
+import edu.fiuba.algo3.modelo.efectos.sorpresas.Sorpresa;
+import edu.fiuba.algo3.modelo.efectos.sorpresas.SorpresaNull;
+import edu.fiuba.algo3.modelo.vehiculos.TipoVehiculo;
 import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
 
-import java.util.ArrayList;
+import java.util.Observable;
 
-public class Camino {
+
+public class Camino extends Observable {
     public Esquina esquinaInicial, esquinaFinal;
-    private ArrayList<Efecto> efectos;
+    public Sorpresa sorpresa;
+    public Obstaculo obstaculo;
+    public GeneradorRandomSorpresas generadorRandomSorpresas;
+    public GeneradorRandomObstaculos generadorRandomObstaculos;
+
 
     public Camino(Esquina esquinaInicial, Direccion unaDireccion) {
         this.esquinaInicial = esquinaInicial;
         esquinaFinal = unaDireccion.siguiente(esquinaInicial);
-        efectos = new ArrayList<>();
+        generadorRandomSorpresas = new GeneradorRandomSorpresas();
+        generadorRandomObstaculos = new GeneradorRandomObstaculos();
+        sorpresa = new SorpresaNull();
+        obstaculo = new ObstaculoNull();
     }
-    public void agregrarEfecto(Efecto nuevoEfecto){
-        // TODO: excepciones en los controles
-        if (efectos.size() >= 2) {
-            return;
-        }
-        if (efectos.size() == 1 && efectos.get(0).getClass().equals(nuevoEfecto.getClass())) {
-            // TODO: ver de mejorar la logica para que solo acepte como máximo 1 Obstaculo y 1 Sorpresa
-            return;
-        }
-        efectos.add(nuevoEfecto);
+
+
+    public void agregrarSorpresa(){
+
+        sorpresa = generadorRandomSorpresas.generarSorpresa();
+    }
+
+    public void agregrarObstaculo(){
+
+        obstaculo = generadorRandomObstaculos.generarObstaculo();
     }
 
     @Override
@@ -34,18 +48,31 @@ public class Camino {
         return this.esquinaInicial.equals(c.esquinaFinal) && this.esquinaFinal.equals(c.esquinaInicial);
     }
 
-    public void aplicarEfecto(Jugador jugador, Vehiculo vehiculo){
-        for (Efecto efecto: efectos) {
-            vehiculo.aplicarEfecto(jugador, efecto);
-        }
+    public void aplicarEfecto(Vehiculo vehiculo, TipoVehiculo estadoVehiculo){
+
+        estadoVehiculo.aplicarEfecto(vehiculo,obstaculo);
+
+        estadoVehiculo.aplicarEfecto(vehiculo,sorpresa);
+
+        sorpresa = new SorpresaNull();
+
+        //Este sera sin metodo para que solo sepa que sorpresaPasoANull
+        setChanged();
+        this.notifyObservers();
     }
 
-    //TODO: UNA VEZ ESTE CLARO COMO USAR EXEPCION SE ACTIVA
-    /*public boolean validarEntradaDeEfecto(Efecto efecto) throws LimiteAlcanzado{
-        if (efectos.size() == 1 && efectos.get(0).getClass().equals(efecto.getClass())) {
-            throw new LimiteAlcanzado();
-        }
-        return false;
-    }*/
+    public GeneradorRandomSorpresas obtenerGeneradorDeRandomSorpresas(){
+        return generadorRandomSorpresas;
+    }
 
+    public GeneradorRandomObstaculos obtenerGeneradorRandomObstaculos(){return generadorRandomObstaculos;}
+
+    public void setRandomSorpresa(GeneradorRandomSorpresas unRandom){
+        generadorRandomSorpresas = unRandom;
+        agregrarSorpresa();
+    }
+    public void setRandomObstaculos(GeneradorRandomObstaculos generadorRandomObstaculos){
+        this.generadorRandomObstaculos = generadorRandomObstaculos;
+        agregrarObstaculo();
+    }
 }

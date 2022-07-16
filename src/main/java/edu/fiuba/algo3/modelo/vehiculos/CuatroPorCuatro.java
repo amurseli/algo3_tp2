@@ -1,23 +1,12 @@
 package edu.fiuba.algo3.modelo.vehiculos;
 
-import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.efectos.Efecto;
+import edu.fiuba.algo3.modelo.ObserverPersonalizado.ManejadorDeObservablesTipoVehiculo;
+import edu.fiuba.algo3.modelo.ObserverPersonalizado.ObservadorTipoVehiculo;
+import edu.fiuba.algo3.modelo.efectos.obstaculos.Obstaculo;
+import edu.fiuba.algo3.modelo.efectos.sorpresas.Sorpresa;
 
-public class CuatroPorCuatro extends Vehiculo {
+public class CuatroPorCuatro extends ManejadorDeObservablesTipoVehiculo implements TipoVehiculo {
     int pozosPisados = 0;
-
-    public CuatroPorCuatro(Esquina posicion) {
-        super(posicion);
-    }
-
-    @Override
-    public void aplicarEfecto(Jugador jugador, Efecto efecto) {
-        efecto.aplicarEfecto(jugador,this);
-    }
-
-    public CuatroPorCuatro(Esquina posicion, Esquina posicionAnterior, int movimientos) {
-        super(posicion, posicionAnterior, movimientos);
-    }
 
     public void sumarPozoPisado(){
         pozosPisados += 1;
@@ -27,23 +16,31 @@ public class CuatroPorCuatro extends Vehiculo {
         pozosPisados = 0;
     }
 
-    public int getPozosPisados(){
-        return pozosPisados;
-    }
-
     public boolean elProximoPozoEsPenalizable(){
         boolean esPenalizable;
-
-
-        //Forma rara de hacer el if
         esPenalizable = pozosPisados > 2;
-
-
         return esPenalizable;
     }
 
-    public Vehiculo cambiarVehiculo(){
-        return new Moto(posicion,posicionAnterior,movimientos);
+    public TipoVehiculo cambiarVehiculo(){
+        Moto moto = new Moto();
+        notificar(moto);
+        return moto;
     }
+
+    public void aplicarEfecto(Vehiculo vehiculo, Sorpresa sorpresas) {
+        sorpresas.aplicarEfecto(vehiculo);
+    }
+
+    @Override
+    public void aplicarEfecto(Vehiculo vehiculo, Obstaculo obstaculos) {
+        obstaculos.aplicarEfecto(vehiculo, this);
+    }
+
+    @Override
+    public void observar(ObservadorTipoVehiculo unObservador) {
+        addObservador(unObservador);
+    }
+
 
 }

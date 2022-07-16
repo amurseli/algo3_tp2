@@ -1,22 +1,16 @@
 package edu.fiuba.algo3.modelo.efectos.sorpresas;
 
-import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.vehiculos.Auto;
-import edu.fiuba.algo3.modelo.vehiculos.CuatroPorCuatro;
-import edu.fiuba.algo3.modelo.vehiculos.Moto;
-import edu.fiuba.algo3.modelo.vehiculos.Vehiculo;
+import edu.fiuba.algo3.modelo.ObserverPersonalizado.ManejadorDeObservablesSorpresa;
+import edu.fiuba.algo3.modelo.ObserverPersonalizado.ObservadorSorpresa;
+import edu.fiuba.algo3.modelo.vehiculos.*;
 
-public class CambioDeVehiculo extends Sorpresa {
-
-    public void aplicarEfecto(Jugador jugador, Auto auto) {
-        jugador.setVehiculo(auto.cambiarVehiculo());
+public class CambioDeVehiculo extends ManejadorDeObservablesSorpresa implements Sorpresa {
+    public void aplicarEfecto(Vehiculo vehiculo){
+        vehiculo.cambiarTipo();
     }
 
-    public void aplicarEfecto(Jugador jugador, Moto moto) {
-        jugador.setVehiculo(moto.cambiarVehiculo());
-    }
-
-    public void aplicarEfecto(Jugador jugador, CuatroPorCuatro cuatroPorCuatro){
-        jugador.setVehiculo(cuatroPorCuatro.cambiarVehiculo());
+    @Override
+    public void observar(ObservadorSorpresa unObservador) {
+        addObservador(unObservador);
     }
 }

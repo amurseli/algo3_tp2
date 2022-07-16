@@ -1,21 +1,17 @@
 package edu.fiuba.algo3.modelo.efectos.sorpresas;
 
-import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.vehiculos.Auto;
-import edu.fiuba.algo3.modelo.vehiculos.CuatroPorCuatro;
-import edu.fiuba.algo3.modelo.vehiculos.Moto;
+import edu.fiuba.algo3.modelo.ObserverPersonalizado.ManejadorDeObservablesSorpresa;
+import edu.fiuba.algo3.modelo.ObserverPersonalizado.ObservadorSorpresa;
+import edu.fiuba.algo3.modelo.vehiculos.*;
 
-public class SorpresaDesfavorable extends Sorpresa {
+public class SorpresaDesfavorable extends ManejadorDeObservablesSorpresa implements Sorpresa {
     final double porcentaje = 0.25;
-    public void aplicarEfecto(Jugador jugador, Auto auto) {
-        auto.aplicarPorcentaje(porcentaje);
+    public void aplicarEfecto(Vehiculo vehiculo) {
+        vehiculo.aplicarPorcentaje(porcentaje);
     }
 
-    public void aplicarEfecto(Jugador jugador,Moto moto) {
-        moto.aplicarPorcentaje(porcentaje);
-    }
-
-    public void aplicarEfecto(Jugador jugador,CuatroPorCuatro cuatroPorCuatro) {
-        cuatroPorCuatro.aplicarPorcentaje(porcentaje);
+    @Override
+    public void observar(ObservadorSorpresa unObservador) {
+        addObservador(unObservador);
     }
 }
