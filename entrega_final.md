@@ -39,6 +39,27 @@ Aprobada: :heavy_check_mark:
 
 :heavy_check_mark:
 
+1. Violan *Dependency inversion principle (DIP)* . Dificulta la escritura de tests:
+
+```java
+public class Camino extends Observable {
+    // ...
+    public Camino(Esquina esquinaInicial, Direccion unaDireccion) {
+        this.esquinaInicial = esquinaInicial;
+        esquinaFinal = unaDireccion.siguiente(esquinaInicial);
+
+        // DIP
+        generadorRandomSorpresas = new GeneradorRandomSorpresas();
+
+        // DIP
+        generadorRandomObstaculos = new GeneradorRandomObstaculos();
+        sorpresa = new SorpresaNull();
+        obstaculo = new ObstaculoNull();
+    }
+    // ...
+}
+```
+
 ### Tell don’t ask
 
 :heavy_check_mark:
